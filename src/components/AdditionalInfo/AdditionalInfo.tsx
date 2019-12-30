@@ -158,7 +158,7 @@ const AdditionalInfo = () => {
                 <Typography className={classes.title}>Дополнительно</Typography>
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                <Tab onHandleChanged={(i: number)=>swipeTab(i)} menuTitle={["Условия", "Тарифы"]} pans={[<Conditions />, <Tarifs />]} />
+                <Tab onHandleChanged={(i: number)=>swipeTab(i)} menuTitle={["Тарифы"]} pans={[<Tarifs />]} />
             </Grid>
         </Grid>);
 }

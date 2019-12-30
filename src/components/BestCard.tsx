@@ -181,8 +181,8 @@ const BestCard = (props: any) => {
                                 <img src="card-small.svg" className={classes.icon} alt="card" />
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Cashback лимит в мес</Typography>
-                                <Typography className={classes.description}>100 000 KZT</Typography>
+                                <Typography className={classes.title}>Бесплатные переводы между картами любых банков</Typography>
+                                <Typography className={classes.description}>· РК - безлимитно<br/>· зарубеж - до 1 000 000 ₸</Typography>
                             </Grid>
                         </Grid>
                     </Grid>

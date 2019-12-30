@@ -3,6 +3,7 @@ import {Button, Grid, Typography} from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { paddingDownSm, rootSmXl } from './helper/DefaultStyle';
+import { Link, animateScroll as scroll } from 'react-scroll';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -124,7 +125,7 @@ const CardConditions = () => {
                             <Grid item xl={4} lg={4} md={4} sm={12} xs={12} className={classes.cardText}>
                                 <h1>Пользуйтесь картой бесплатно, если выполнено одно из условий:</h1>
                                 <p>1. Транзакции по карте в месяц от 1 000 000 ₸<br/>2. Депозит/Остаток на карте от 15 000 000 ₸</p>
-                                    <Button className={classes.resultOrderCard}>Заказать карту</Button>
+                                <Link smooth={true} to="order"><Button className={classes.resultOrderCard}>Заказать карту</Button></Link>
                             </Grid>
                         </Grid>
                     </Grid>

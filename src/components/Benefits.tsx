@@ -208,17 +208,6 @@ const Benefits = (props: any) => {
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <Grid container spacing={2}>
-                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                        <Grid className={classes.paper} container alignItems="center">
-                            <Grid item className={classes.iconWrap} xl={false} lg={false} md={false} sm={false} xs={false}>
-                                <img src="medal.svg" className={classes.icon} alt="medal" />
-                            </Grid>
-                            <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Повсеместное признание</Typography>
-                                <Typography className={classes.description}>Чувствуйте себя желанным гостем. Ваша карта Visa Infinite принимается в десятках миллионов торговых точек во всем мире.</Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
                     <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
                         <Grid className={classes.paper} container alignItems="center">
                             <Grid item className={classes.iconWrap} xl={false} lg={false} md={false} sm={false} xs={false}>

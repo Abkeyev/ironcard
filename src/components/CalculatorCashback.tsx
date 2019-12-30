@@ -4,6 +4,7 @@ import { makeStyles, createStyles, Theme, withStyles } from '@material-ui/core/s
 import NumberFormat from 'react-number-format'; 
 import { paddingDownSm, rootSmXl } from './helper/DefaultStyle';
 import ReactGA from 'react-ga';
+import { Link, animateScroll as scroll } from 'react-scroll';
 
 const PrettoSlider = withStyles({
     root: {
@@ -307,7 +308,9 @@ const CaclulatorCashBack = (props: any) => {
                             <Typography align="center" className={classes.resultTitle}>Ваш кешбэк с картой #IronCard</Typography>
                             <Typography align="center" className={classes.resultSum}>{cashback} ₸</Typography>
                             <Typography align="center">
-                                <Button onClick={() => onClickIssue()} className={classes.resultOrderCard}>Заказать карту</Button>
+                                <Link smooth={true} to="order">
+                                    <Button onClick={() => onClickIssue()} className={classes.resultOrderCard}>Заказать карту</Button>
+                                </Link>
                             </Typography>                    
                         </Paper>
                     </Grid>

@@ -10,6 +10,7 @@ import MaskedInput from 'react-text-mask';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ReactGA from 'react-ga';
 import api from "../api/Api";
+import Timer from "./Timer";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -192,6 +193,13 @@ const useStyles = makeStyles((theme: Theme) =>
                 padding: '36px 24px'
             }
 
+        },
+        focused: {
+            root: {
+                "&$focused": {
+                    border: "2px solid #27AE60"
+                }
+            }
         }
     })
 )
@@ -216,22 +224,6 @@ interface TextMaskCustomProps {
     );
   }
 
-const calculateTimeLeft = () => {
-    const difference = +new Date('2020-02-01') - +new Date()
-    let timeLeft: any = {}
-
-    if(difference > 0) {
-        timeLeft = {
-            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-            minutes: Math.floor((difference / 1000 / 60) % 60),
-            seconds: Math.floor((difference / 1000) % 60)
-        }
-    }
-
-    return timeLeft;
-}
-
 const CardOrder = (props: any) => {
     const classes = useStyles({});
 
@@ -249,64 +241,15 @@ const CardOrder = (props: any) => {
         checked: {}
       })((props: any) => <Checkbox checked value="remember" {...props} />);
 
-      const BccInputText = withStyles({
-          root: {
-            "&$focused": {
-                backgroundColor: "#fff",
-                border: "2px solid #27AE60"
-            }
-          }
-        })((props: TextFieldProps) => 
-            <CssTextField
-                {...props}
-                size={isXS ? "small" : "medium"}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-            />
-        );
-    const CssTextField = withStyles({
-        root: {
-            '& label.Mui-focused': {
-                color: 'green',
-            },
-            '& .MuiInput-underline:after': {
-                borderBottomColor: 'green',
-            },
-            '& .MuiOutlinedInput-root': {
-                '&.Mui-focused fieldset': {
-                    borderColor: '#27AE60',
-                },
-            },
-        },
-    })(TextField);
-
-    const [, setTimeLeft] = useState(calculateTimeLeft());
-
-    useEffect(() => {
-        setTimeout(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000)
-    })
-
-    const date = calculateTimeLeft();
-    const days = date.days
-    const hours = date.hours
-    const minutes = date.minutes
-    const seconds = date.seconds
-
     const [name, setName] = React.useState('');
     const [phone, setPhone] = React.useState('');
 
-    const handleNameChange = (e: any) => {
-        const { value } = e.target
-        setName(value)
+    const handleNameChange = (name: string) => {
+        setName(name)
     }
 
-    const handlePhoneChange = (e: any) => {
-        const { value } = e.target
-        setPhone(value)
+    const handlePhoneChange = (phone: string) => {
+        setPhone(phone)
     }
 
     const handleSubmit = (e: any) => {
@@ -322,35 +265,49 @@ const CardOrder = (props: any) => {
         }
     }
 
-    const onClickApplyApp = () => {
-        ReactGA.event({
-            category: 'BccCard',
-            action: 'Preorder_successful'
-        });
-    }
+    // const onClickApplyApp = () => {
+    //     ReactGA.event({
+    //         category: 'BccCard',
+    //         action: 'Preorder_successful'
+    //     });
+    // }
 
     return (
         <Grid container className={classes.root} spacing={4} id="order" direction="column" justify="center">
             <Paper elevation={0} className={classes.paper}>
                 <Typography className={classes.box}>Заполните заявку и получите металлическую карту с 50% скидкой</Typography>
-                <div className={classes.timerBox}>
-                    <h1>Дней до завершения акции</h1>
-                    <span>{days}  :  {hours}  :  {minutes}  :  {seconds}</span>
-                </div>
+                <Timer/>
                 <form onSubmit={handleSubmit}>
-                    <BccInputText
-                        id="name"
-                        label="Фамилия, имя и отчество"
-                        name="name"
-                        value={name}
-                        onChange={handleNameChange}/>
-                    <BccInputText
-                        name="phone"
-                        value={phone}
-                        onChange={handlePhoneChange}
-                        label="Номер телефона"
-                        id="phone"
-                    />
+                <TextField
+                    size={isXS ? "small" : "medium"}
+                    variant="outlined"
+                    margin="normal"
+                    className={classes.focused}
+                    required
+                    fullWidth
+                    id="name"
+                    label="Имя"
+                    name="name"
+                    value={name}
+                    onChange={(e: any) => handleNameChange(e.target.value)}
+                />
+                <TextField
+                    size={isXS ? "small" : "medium"}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="phone"
+                    value={phone}
+                    onChange={(e: any) => handlePhoneChange(e.target.value)}
+                    label="Номер телефона"
+                    id="phone"
+                    InputProps={{
+                        classes: {
+                            focused: classes.focused
+                        }
+                    }}
+                />
                     <FormControlLabel
                         control={<BccCheckbox/>}
                         label={<Typography className={classes.checkBoxLabel}>Я согласен(а) с условиями</Typography> }
@@ -375,7 +332,6 @@ const CardOrder = (props: any) => {
                                 fullWidth
                                 variant="contained"
                                 className={classes.submit}
-                                onClick={() => onClickApplyApp()}
                                 >
                                 Подать заявку
                             </Button>

@@ -70,9 +70,9 @@ const FixedHeader = (props: any) => {
                         <img src="iconcardsmall.svg" />
                     </Grid>
                     <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                        <Link smooth={true} to="order" >
+                        <Link smooth={true} to="order">
                             <Button variant="contained" className={classes.buttonOrderCard}>
-                                Предзаказ
+                                Заказать карту
                             </Button>
                         </Link>
                     </Grid>       

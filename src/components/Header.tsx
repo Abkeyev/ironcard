@@ -531,14 +531,14 @@ const Header = (props: any) => {
                                         <img className={classes.cardShadow} src="card-shadow.svg"/>
                                     </Grid>
                                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12} style={{zIndex: 4}}>
-                                        <Typography className={classes.saleText}>Успейте оформить со скидкой 50% для первых 100 клиентов</Typography>
+                                        <Typography className={classes.saleText}>Успейте оформить со скидкой 50% до конца января</Typography>
                                     </Grid>
                                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12} style={{zIndex: 3}}>
                                         <Typography className={classes.timer}>{days}  :  {hours}  :  {minutes}  :  {seconds}</Typography>
                                     </Grid>
                                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12} style={{zIndex: 3}}>
 
-                                            <Link smooth={true} to="order" > <Button onClick={(e) => eventGAOrderCard(e)} variant="contained" className={classes.buttonOrderCard}>Заказать карту</Button></Link>
+                                            <Link smooth={true} to="order" > <Button onClick={(e: any) => eventGAOrderCard(e)} variant="contained" className={classes.buttonOrderCard}>Заказать карту</Button></Link>
 
                                     </Grid>
                                 </Grid>
@@ -549,7 +549,7 @@ const Header = (props: any) => {
                 <Grid container>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                         <Typography className={classes.ironCard}>
-                            <span>#IronCard</span> - мы объединили наши традиций и<br/>инновационные технологии
+                            <span>#IronCard</span> - мы объединили наши традиции и<br/>инновационные технологии
                         </Typography>
                     </Grid>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
