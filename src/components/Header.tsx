@@ -546,7 +546,7 @@ const Header = (props: any) => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid container>
+                <Grid container id="secondHeader">
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                         <Typography className={classes.ironCard}>
                             <span>#IronCard</span> - мы объединили наши традиции и<br/>инновационные технологии
