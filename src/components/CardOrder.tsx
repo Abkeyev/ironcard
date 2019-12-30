@@ -310,7 +310,7 @@ const CardOrder = (props: any) => {
                 />
                     <FormControlLabel
                         control={<BccCheckbox/>}
-                        label={<Typography className={classes.checkBoxLabel}>Я согласен(а) с условиями</Typography> }
+                        label={<Typography className={classes.checkBoxLabel}>Я согласен(-а) на сбор и обработку персональных данных</Typography> }
                     />
                     <Grid container style={{marginTop: '15px'}} spacing={4}>
                         <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>

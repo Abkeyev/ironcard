@@ -52,8 +52,7 @@ const SnackBarBottom = (props: any) => {
         aria-describedby="client-snackbar"
         message={
           <span id="client-snackbar" className={classes.message}>
-            Заявка успешно отправлена. Ваш менеджер перезвонит Вам в течение 15
-            минут.
+            Заявка принята. Мы перезвоним вам в течение 15 минут.
           </span>
         }
         action={[

@@ -26,6 +26,19 @@ const useStyles = makeStyles((theme: Theme) =>
                     width: '100%'
                 }
             },
+            resultOrderCard: {
+                width:'324px',
+                height: '64px',
+                backgroundColor: 'transparent',
+                borderRadius: '8px',
+                fontStyle: 'normal',
+                fontWeight: 500,
+                fontSize: '20px',
+                border: '1px solid',
+                textTransform: 'none',
+                color: '#27AE60',
+                letterSpacing: '0'
+            },
             cardText: {
                 '& > h1': {
                     fontWeight: 'bold',

@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 boxShadow: '0px 7px 25px rgba(29, 29, 29, 0.15)',
                 transition: 'all ease-in-out .3s'
             },
+            small: {
+                display: 'none'
+            },
             buttonOrderCard: {
                 background: '#27AE60',
                 minWidth: 230,
@@ -47,6 +50,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 opacity: 0,
                 transition: 'all ease-in-out .3s'
             },
+            small: {
+                display: 'none'
+            },
             header: {
                 position: 'fixed',
                 zIndex: 99,
@@ -57,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 height: 100,
                 width: '100%',
                 boxSizing: 'border-box',
-                padding: '21px 52px',
+                padding: '16px 26px',
                 backgroundColor: '#ffffff',
                 boxShadow: '0px 7px 25px rgba(29, 29, 29, 0.15)',
                 transition: 'all ease-in-out .3s'
@@ -77,6 +83,26 @@ const useStyles = makeStyles((theme: Theme) =>
                     backgroundColor: '#7DCEA0'
                 },
                 overflow: 'hidden'
+            },
+            smallcard: {
+                marginRight: 20
+            }
+        },
+        [theme.breakpoints.down('xs')]: {
+            header: {
+                padding: '16px 26px',
+            },
+            logo: {
+                display: 'none'
+            },
+            small: {
+                display: 'block'
+            },
+            smallcard: {
+                marginRight: 20,
+                '& > img': {
+                    width: '100%'
+                }
             }
         }
     })
@@ -99,12 +125,13 @@ const FixedHeader = (props: any) => {
 
     return(
         <Grid container justify="space-between" alignContent="center" alignItems="center" className={hide ? classes.hide : classes.header}>
-            <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                <img src="green-logo.svg" />
+            <Grid item xl={6} lg={6} md={6} sm={4} xs={4}>
+                <img src="green-logo.svg" className={classes.logo} />
+                <img src="logo-bcc-small.svg" className={classes.small} />
             </Grid>
-            <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
+            <Grid item xl={6} lg={6} md={6} sm={8} xs={8}>
                 <Grid justify="flex-end" alignContent="center" alignItems="center" container>
-                    <Grid item xl={3} lg={3} md={6} sm={6} xs={6}>
+                    <Grid item xl={3} lg={3} md={4} sm={4} xs={4} className={classes.smallcard}>
                         <img src="iconcardsmall.svg" />
                     </Grid>
                     <Grid item xl={3} lg={3} md={6} sm={6} xs={6}>
