@@ -527,8 +527,8 @@ const Header = (props: any) => {
                             <Grid container className={classes.orderWrap}>
                                 <Grid item container className={classes.orderInner}>
                                     <Grid item>
-                                        <img className={classes.card} src="card.svg"/>
-                                        <img className={classes.cardShadow} src="card-shadow.svg"/>
+                                        <img className={classes.card} src="card.png"/>
+                                        <img className={classes.cardShadow} src="card-shadow.png"/>
                                     </Grid>
                                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12} style={{zIndex: 4}}>
                                         <Typography className={classes.saleText}>Успейте оформить со скидкой 50% до конца января</Typography>
