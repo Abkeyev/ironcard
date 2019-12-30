@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Grid, Typography } from '@material-ui/core';
-import { makeStyles, createStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, createStyles, withStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import TextField, { TextFieldProps } from "@material-ui/core/TextField";
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
@@ -12,69 +12,19 @@ import ReactGA from 'react-ga';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        [theme.breakpoints.down('sm')]: {
-            root: {
-                marginTop: '8px',
-                padding: '36px 20px 36px 20px',
-                alignItems: 'center'
-            },
-            icon: {
-                width: '18px',
-                height: '19px',
-            },
-            paper: {
-                padding: '12px 8px 12px 8px',
-                backgroundColor: 'white',
-                border: '1px solid #E8E8E8',
-                boxSizing: 'border-box',
-                borderRadius: 8  
-            },
-            box: {
-                textAlign: 'center',
-                fontWeight: 'fontWeightBold',
-                fontSize: '20px',
-                lineHeight: '40px'
-            },
-            checkBoxLabel: {
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: 12,
-                color: 'black'
-            },
-            garant: {
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: 12
-            },
-            submit: {
-                background: '#FFCF87',
-                borderRadius: 4,
-                fontSize: 10,
-                fontWeight: 500,
-                fontStyle: 'normal',
-                boxShadow: 'none',
-                textTransform: 'none',
-                height: 31,
-                '&:hover, &:active': {
-                    backgroundColor: '#3F0259',
-                    borderColor: '#3F0259',
-                    boxShadow: 'none',
-                    color: '#FFFFFF'
-                }
-            }
-        },
-        [theme.breakpoints.between('sm', 'xl')]: {
+        [theme.breakpoints.down('md')]: {
             root: {
                 marginTop: '34px',
-                padding: '72px 52px 72px 52px',
+                padding: '27px 19px 52px 52px',
                 alignItems: 'center'
             },
             paper: {
-                padding: '48px 32px 48px 32px',
+                padding: '64px 72px',
                 background: '#FFFFFF',
-                border: '2px solid #FAFAFA',
+                border: '1px solid #E8e8e8',
                 boxSizing: 'border-box',
-                borderRadius: '8px'
+                borderRadius: '8px',
+                width: '100%'
             },
             icon: {
                 width: '18px',
@@ -82,8 +32,8 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             box: {
                 textAlign: 'center',
-                fontWeight: 'fontWeightBold',
-                fontSize: '40px',
+                fontWeight: 'bold',
+                fontSize: '36px',
                 lineHeight: '40px'
             },
             checkBoxLabel: {
@@ -98,23 +48,149 @@ const useStyles = makeStyles((theme: Theme) =>
                 fontSize: 14
             },
             submit: {
-                background: '#FFCF87',
+                background: '#27AE60',
                 borderRadius: '8px',
                 fontSize: '20px',
                 lineHeight: '28px',
                 fontWeight: '500',
                 fontStyle: 'normal',
                 textTransform: 'none',
-                boxShadow: 'none',
+                color: 'white',
+                letterSpacing: '0',
+                boxShadow: '0px 6px 25px rgba(39, 174, 96, 0.24)',
                 height: '62px',
                 '&:hover, &:active': {
-                    backgroundColor: '#3F0259',
-                    borderColor: '#3F0259',
-                    opacity: 0.8,
-                    boxShadow: 'none',
-                    color: '#FFFFFF'
+                    backgroundColor: '#7DCEA0',
+                    boxShadow: 'none'
+                }
+            },
+            timerBox: {
+                padding: '24px',
+                backgroundColor: 'black',
+                color: 'white',
+                textAlign: 'center',
+                borderRadius: 8,
+                margin: '32px 0 42px',
+                '& > h1': {
+                    margin: '0 0 17px',
+                    fontWeight: 'normal',
+                    padding: 0,
+                    fontSize: 16,
+                    lineHeight: '24px'
+                },
+                '& > span': {
+                    fontWeight: 'bold',
+                    fontSize: 48,
+                    lineHeight: '56px'
                 }
             }
+        },
+        [theme.breakpoints.between('md', 'xl')]: {
+            root: {
+                marginTop: '34px',
+                padding: '27px 19px 52px 52px',
+                alignItems: 'center'
+            },
+            paper: {
+                padding: '64px 72px',
+                background: '#FFFFFF',
+                border: '1px solid #E8e8e8',
+                boxSizing: 'border-box',
+                borderRadius: '8px',
+                width: '70%'
+            },
+            icon: {
+                width: '18px',
+                height: '19px',
+            },
+            box: {
+                textAlign: 'center',
+                fontWeight: 'bold',
+                fontSize: '36px',
+                lineHeight: '40px'
+            },
+            checkBoxLabel: {
+                fontStyle: 'normal',
+                fontWeight: 'normal',
+                fontSize: 16,
+                color: 'black'
+            },
+            garant: {
+                fontStyle: 'normal',
+                fontWeight: 'normal',
+                fontSize: 14
+            },
+            submit: {
+                background: '#27AE60',
+                borderRadius: '8px',
+                fontSize: '20px',
+                lineHeight: '28px',
+                fontWeight: '500',
+                fontStyle: 'normal',
+                textTransform: 'none',
+                color: 'white',
+                letterSpacing: '0',
+                boxShadow: '0px 6px 25px rgba(39, 174, 96, 0.24)',
+                height: '62px',
+                '&:hover, &:active': {
+                    backgroundColor: '#7DCEA0',
+                    boxShadow: 'none'
+                }
+            },
+            timerBox: {
+                padding: '24px',
+                backgroundColor: 'black',
+                color: 'white',
+                textAlign: 'center',
+                borderRadius: 8,
+                margin: '32px 0 42px',
+                '& > h1': {
+                    margin: '0 0 17px',
+                    fontWeight: 'normal',
+                    padding: 0,
+                    fontSize: 16,
+                    lineHeight: '24px'
+                },
+                '& > span': {
+                    fontWeight: 'bold',
+                    fontSize: 48,
+                    lineHeight: '56px'
+                }
+            }
+        },
+        [theme.breakpoints.down('xs')]: {
+            root: {
+                marginTop: '34px',
+                padding: '27px 19px 52px 19px',
+            },
+            box: {
+                fontSize: '24px',
+                lineHeight: '40px'
+            },
+            timerBox: {
+                padding: '24px',
+                backgroundColor: 'black',
+                color: 'white',
+                textAlign: 'center',
+                borderRadius: 8,
+                margin: '32px 0 42px',
+                '& > h1': {
+                    margin: '0 0 17px',
+                    fontWeight: 'normal',
+                    padding: 0,
+                    fontSize: 16,
+                    lineHeight: '24px'
+                },
+                '& > span': {
+                    fontWeight: 'bold',
+                    fontSize: 36,
+                    lineHeight: '56px'
+                }
+            },
+            paper: {
+                padding: '36px 24px'
+            }
+
         }
     })
 )
@@ -139,10 +215,88 @@ interface TextMaskCustomProps {
     );
   }
 
+const calculateTimeLeft = () => {
+    const difference = +new Date('2020-02-01') - +new Date()
+    let timeLeft: any = {}
+
+    if(difference > 0) {
+        timeLeft = {
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((difference / 1000 / 60) % 60),
+            seconds: Math.floor((difference / 1000) % 60)
+        }
+    }
+
+    return timeLeft;
+}
+
 const CardOrder = () => {
+    const classes = useStyles({});
+
+    const theme = useTheme();
+
+    const isXS = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const BccCheckbox = withStyles({
+        root: {
+          color: "#D8D8D8",
+          "&$checked": {
+            color: "#27AE60"
+          }
+        },
+        checked: {}
+      })(props => <Checkbox checked value="remember" {...props} />);
+
+      const BccInputText = withStyles({
+          root: {
+            "&$focused": {
+                backgroundColor: "#fff",
+                border: "2px solid #27AE60"
+            }
+          }
+        })((props: TextFieldProps) => 
+            <CssTextField
+                {...props}
+                size={isXS ? "small" : "medium"}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+            />
+        );
+    const CssTextField = withStyles({
+        root: {
+            '& label.Mui-focused': {
+                color: 'green',
+            },
+            '& .MuiInput-underline:after': {
+                borderBottomColor: 'green',
+            },
+            '& .MuiOutlinedInput-root': {
+                '&.Mui-focused fieldset': {
+                    borderColor: '#27AE60',
+                },
+            },
+        },
+    })(TextField);
+
+    const [, setTimeLeft] = useState(calculateTimeLeft());
+
+    useEffect(() => {
+        setTimeout(() => {
+            setTimeLeft(calculateTimeLeft());
+        }, 1000)
+    })
+
+    const date = calculateTimeLeft();
+    const days = date.days
+    const hours = date.hours
+    const minutes = date.minutes
+    const seconds = date.seconds
 
     const [name, setName] = React.useState('');
-    const [phone, setPhone] = React.useState('7');
+    const [phone, setPhone] = React.useState('');
 
     const handleNameChange = (e: any) => {
         const { value } = e.target
@@ -160,53 +314,38 @@ const CardOrder = () => {
         if (name && phone) {
         }
     }
-    const classes = useStyles({});
-
-    const theme = useTheme();
-    const isXS = useMediaQuery(theme.breakpoints.down('sm'));
 
     const onClickApplyApp = () => {
         ReactGA.event({
             category: 'BccCard',
-            action: 'kartakarta_Apply_Success'
+            action: 'Preorder_successful'
         });
     }
 
     return (
-        <Grid container className={classes.root} spacing={4} direction="column" justify="center">
+        <Grid container className={classes.root} spacing={4} id="order" direction="column" justify="center">
             <Paper elevation={0} className={classes.paper}>
-                <Typography className={classes.box}>Закажите #картукарту</Typography>
-                <Typography className={classes.box}>прямо сейчас</Typography>
+                <Typography className={classes.box}>Заполните заявку и получите металлическую карту с 50% скидкой</Typography>
+                <div className={classes.timerBox}>
+                    <h1>Дней до завершения акции</h1>
+                    <span>{days}  :  {hours}  :  {minutes}  :  {seconds}</span>
+                </div>
                 <form onSubmit={handleSubmit}>
-                    <TextField
-                        size={isXS ? "small" : "medium"}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
+                    <BccInputText
                         id="name"
                         label="Фамилия, имя и отчество"
                         name="name"
                         value={name}
-                        onChange={handleNameChange}
-                    />
-                    <TextField
-                        size={isXS ? "small" : "medium"}
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
+                        onChange={handleNameChange}/>
+                    <BccInputText
                         name="phone"
                         value={phone}
                         onChange={handlePhoneChange}
                         label="Номер телефона"
                         id="phone"
-                        InputProps={{
-                            inputComponent: TextMaskCustom as any,
-                          }}
                     />
                     <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
+                        control={<BccCheckbox/>}
                         label={<Typography className={classes.checkBoxLabel}>Я согласен(а) с условиями</Typography> }
                     />
                     <Grid container style={{marginTop: '15px'}} spacing={4}>
@@ -219,7 +358,7 @@ const CardOrder = () => {
                                     <Typography className={classes.garant}>
                                         Мы гарантируем безопасность
                                         и сохранность ваших данных
-                            </Typography>
+                                    </Typography>
                                 </Grid>
                             </Grid>
                         </Grid>

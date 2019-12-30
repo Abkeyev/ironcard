@@ -1,9 +1,8 @@
 import React from 'react';
 import { 
-        Header, BestCard, CardOrder, 
-        CalculatorCashback, HowToGetCard, HelpYou, 
-        MobileBanking, AdditionalInfo, GoodAnyTimeWhere,
-        Footer } from './components';
+        Header, BestCard, CardOrder, FixedHeader,
+        CalculatorCashback, HelpYou, AdditionalInfo,
+        Footer, Benefits, CardConditions, MobileBanking } from './components';
 
 import { YMInitializer } from 'react-yandex-metrika';
 
@@ -13,15 +12,16 @@ function App() {
   return (
     <div>
       <YMInitializer accounts={[56638654]} />
-      <Header />      
+      <Header />
+      <FixedHeader />
       <BestCard />
-      <GoodAnyTimeWhere />
+      <Benefits />
+      <CardConditions />
       <CalculatorCashback />
-      <HowToGetCard />
       <CardOrder />
-      <HelpYou />
       <MobileBanking />
       <AdditionalInfo />
+      <HelpYou />
       <Footer />
     </div>
   );

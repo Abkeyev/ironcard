@@ -1,10 +1,9 @@
-export const paddingSmXl = '72px 52px 72px 52px';
+export const paddingSmXl = '27px 42px 52px 52px';
 
 export const rootSmXl = {
     root: {
         padding: paddingSmXl,
-        maxWidth: 1176,
-        margin: 'auto'
+        width: '100%',
     }
 }
 

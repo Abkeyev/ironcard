@@ -54,13 +54,16 @@ interface StyledTabsProps {
 }
 
 const StyledTabs = withStyles({
+    root: {
+      borderBottom: '1px solid #C4C4C4'
+    },
     indicator: {
       display: 'flex',
       justifyContent: 'center',
-      backgroundColor: 'transparent',
+      backgroundColor: '#FFFFFF',
       '& > div': {
         width: '100%',
-        backgroundColor: '#FFCF87',
+        backgroundColor: '#27AE60',
       },
     },
   })((props: StyledTabsProps) => <Tabs {...props} TabIndicatorProps={{ children: <div /> }} />);

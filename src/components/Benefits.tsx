@@ -2,21 +2,23 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { paddingDownSm, rootSmXl } from './helper/DefaultStyle';
+import ReactGA from "react-ga";
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
         [theme.breakpoints.down('sm')]: {
             root: {
-                padding: paddingDownSm
+                backgroundColor: '#FAFAFA',
+                padding: '27px 42px 52px 52px'
             },
             mainTitle: {                  
                 fontStyle: 'normal',
+                marginTop: 30,
                 textAlign: 'center',
                 marginBottom: 30,
                 fontWeight: 'bold',
                 fontSize: '36px',
                 lineHeight: '40px',
-                marginTop: 30,
                 color: '#141414'
             },
             mainDescription: {
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             paper: {
                 padding: '24px',
-                background: '#FAFAFA',
+                background: '#ffffff',
                 boxSizing: 'border-box',
                 borderRadius: '8px',
                 minHeight: 160
@@ -54,26 +56,52 @@ const useStyles = makeStyles((theme: Theme) =>
                 fontWeight: 'bold',
                 fontSize: '18px',
                 color: '#141414',
-                lineHeight: '20px',
-                marginBottom: 10
+                marginBottom: 20,
+                lineHeight: '20px'
             },
             description: {            
                 fontStyle: 'normal',
                 fontWeight: 'normal',
                 fontSize: '16px',
                 color: '#5B5B5B'
+            },
+            seeMore: {
+                fontWeight: 'bold',
+                fontSize: 18,
+                marginTop: '0',
+                textAlign: 'center',
+                '&:hover': {
+                    textDecoration: 'underline'
+                },
+                '& > a': {
+                    textDecoration: 'none',
+                    color: 'inherit'
+                },
+                '&::after': {
+                    content: '""',
+                    display: 'inline-block',
+                    width: 11,
+                    height: 21,
+                    marginLeft: 13,
+                    background: "url('seeMoreArrow.svg') #fff no-repeat",
+                    backgroundSize: 'contain',
+                    position: 'absolute'
+                }
             }
         },
         [theme.breakpoints.between('sm', 'xl')]: {
-            ...rootSmXl,
+            root: {
+                backgroundColor: '#FAFAFA',
+                padding: '27px 42px 52px 52px'
+            },
             mainTitle: {                  
                 fontStyle: 'normal',
+                marginTop: 30,
                 textAlign: 'center',
                 marginBottom: 30,
                 fontWeight: 'bold',
                 fontSize: '36px',
                 lineHeight: '40px',
-                marginTop: 30,
                 color: '#141414'
             },
             mainDescription: {
@@ -84,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             paper: {
                 padding: '24px',
-                background: '#FAFAFA',
+                background: '#ffffff',
                 boxSizing: 'border-box',
                 borderRadius: '8px',
                 minHeight: 160
@@ -111,17 +139,44 @@ const useStyles = makeStyles((theme: Theme) =>
                 fontWeight: 'bold',
                 fontSize: '18px',
                 color: '#141414',
-                lineHeight: '20px',
-                margin: '10px 0'
+                marginBottom: 20,
+                lineHeight: '20px'
             },
             description: {            
                 fontStyle: 'normal',
                 fontWeight: 'normal',
                 fontSize: '16px',
                 color: '#5B5B5B'
+            },
+            seeMore: {
+                fontWeight: 'bold',
+                fontSize: 18,
+                marginTop: '0',
+                textAlign: 'center',
+                '&:hover': {
+                    textDecoration: 'underline'
+                },
+                '& > a': {
+                    textDecoration: 'none',
+                    color: 'inherit'
+                },
+                '&::after': {
+                    content: '""',
+                    display: 'inline-block',
+                    width: 11,
+                    height: 21,
+                    marginLeft: 13,
+                    background: "url('seeMoreArrow.svg') #fff no-repeat",
+                    backgroundSize: 'contain',
+                    position: 'absolute'
+                }
             }
         },
         [theme.breakpoints.down('xs')]: {
+            root: {
+                backgroundColor: '#FAFAFA',
+                padding: '27px 24px 27px 24px'
+            },
             iconWrap: {
                 padding: 24,
                 width: 20,
@@ -131,58 +186,47 @@ const useStyles = makeStyles((theme: Theme) =>
             icon: {
                 width: '15px',
                 height: '15px'
-            },
-            title: {
-                marginBottom: 10
             }
         }
     })
 )
 
-const BestCard = (props: any) => {
+const Benefits = (props: any) => {
 
     const classes = useStyles({});
+    const onClickIssue = () => {
+        ReactGA.event({
+            category: 'BccCard',
+            action: 'all_benefits_visa'
+        });
+    }
 
     return(
         <Grid container className={classes.root}>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                <Typography className={classes.mainTitle}>Лучшее для вас</Typography>
+                <Typography className={classes.mainTitle}>Преимущества VISA Infinite</Typography>
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <Grid container spacing={2}>
-                    <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                         <Grid className={classes.paper} container alignItems="center">
                             <Grid item className={classes.iconWrap} xl={false} lg={false} md={false} sm={false} xs={false}>
-                                <img src="percent.svg" className={classes.icon} alt="percent" />
+                                <img src="medal.svg" className={classes.icon} alt="medal" />
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Кэшбэк с покупок</Typography>
-                                <Typography className={classes.description}>· 2% за все операции<br/>
-· +1% при наличии вклада от 1 000 000 до 6 000 000 ₸<br/>
-· +2% при наличии вклада от 6 000 000 ₸</Typography>
+                                <Typography className={classes.title}>Повсеместное признание</Typography>
+                                <Typography className={classes.description}>Чувствуйте себя желанным гостем. Ваша карта Visa Infinite принимается в десятках миллионов торговых точек во всем мире.</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
                     <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
                         <Grid className={classes.paper} container alignItems="center">
                             <Grid item className={classes.iconWrap} xl={false} lg={false} md={false} sm={false} xs={false}>
-                                <img src="repeat.svg" className={classes.icon} alt="repeat" />
+                                <img src="headphone.svg" className={classes.icon} alt="headphone" />
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Бесплатное посещение бизнес-залов по всему миру</Typography>
-                                <Typography className={classes.description}>· 6 проходов в бизнес-зал аэропорта г. Нур-Султан<br/>
-                                    · Более 1000 бизнес-залов во всем мире</Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-                        <Grid className={classes.paper} container alignItems="center">
-                            <Grid item className={classes.iconWrap} xl={false} lg={false} md={false} sm={false} xs={false}>
-                                <img src="card-small.svg" className={classes.icon} alt="card" />
-                            </Grid>
-                            <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Cashback лимит в мес</Typography>
-                                <Typography className={classes.description}>100 000 KZT</Typography>
+                                <Typography className={classes.title}>Консьерж-служба</Typography>
+                                <Typography className={classes.description}>Воспользуйтесь множеством услуг, доступных круглосуточно в телефонном режиме или онлайн с любой точки мира.</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -192,17 +236,30 @@ const BestCard = (props: any) => {
                                 <img src="guard.svg" className={classes.icon} alt="guard" />
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Страхование до 1 000 000 $ для владельцев и членов семьи</Typography>
-                                <Grid container xl={true} lg={true} md={true} sm={12} xs={12}>
-                                    <Grid item xl={true} lg={true} md={true} sm={12} xs={12}>
-                                        <Typography className={classes.description}>·  медицинская помощь</Typography>
-                                        <Typography className={classes.description}>·  отмена рейса</Typography>
-                                    </Grid>
-                                    <Grid item xl={true} lg={true} md={true} sm={12} xs={12}>
-                                        <Typography className={classes.description}>·  потеря багажа</Typography>
-                                        <Typography className={classes.description}>·  защита покупок</Typography>
-                                    </Grid>
-                                </Grid>
+                                <Typography className={classes.title}>Страхование поездок</Typography>
+                                <Typography className={classes.description}>Оплачивая поездку картой Visa Infinite, вы обеспечиваете себе полное страхование на время путешествий.</Typography>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                        <Grid className={classes.paper} container alignItems="center">
+                            <Grid item className={classes.iconWrap} xl={false} lg={false} md={false} sm={false} xs={false}>
+                                <img src="phone.svg" className={classes.icon} alt="phone" />
+                            </Grid>
+                            <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
+                                <Typography className={classes.title}>Служба Поддержки</Typography>
+                                <Typography className={classes.description}>Круглосуточная помощь в случае потери вашей карты Visa, мы можем помочь в блокировании счета, отправке временной карты.</Typography>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                        <Grid className={classes.paper} container alignItems="center">
+                            <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                                <div className={classes.seeMore}>
+                                    <a onClick={() => onClickIssue()} href="https://www.visa.com.kz/ru_KZ/pay-with-visa/find-a-card/infinite.html" target="_blank">
+                                        Все преимущества VISA
+                                    </a>
+                                </div>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -212,4 +269,4 @@ const BestCard = (props: any) => {
     )
 }
 
-export default BestCard;
+export default Benefits;

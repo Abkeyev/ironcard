@@ -19,6 +19,9 @@ const useStylesTarifs = makeStyles((theme: Theme) =>
                 fontWeight: 'normal',
                 fontSize: 10,
                 color: 'black'
+            },
+            TableW: {
+               widthh: '100%'
             }
         },
         [theme.breakpoints.between('sm', 'xl')]: {
@@ -32,13 +35,54 @@ const useStylesTarifs = makeStyles((theme: Theme) =>
                 fontStyle: 'normal',
                 fontWeight: 'normal',
                 fontSize: 16,
-                color: 'black'
+                color: 'black',
+                '& span': {
+                    fontSize: 14,
+                    color: '#5B5B5B'
+                }
+            },
+            TableW: {
+                widthh: '70%'
             }
         }
     })
 )
 
 const Tarifs = () => {
+
+    const classes = useStylesTarifs({});
+
+    const rows = [
+                    {code: 'Тип карты', value: 'Visa Infinite #IRonCard'},
+                    {code: 'Стоимость выпуска', value: '30 000 скидка 50% в течение января'},
+                    {code: 'Стоимость обслуживания, мес', value: 'Бесплатно в случае: <br/>1. Транзакции по карте в месяц от 1 000 000 ₸ <br/>2. Депозит/Остаток на карте от 15 000 000 ₸ <br/><span>В прочих случаях - 10 000 KZT в месяц</span>'},
+                    {code: 'Cashback', value: '2% базовый<br/>+1% при наличии вклада от 1 000 000 до 6 000 000 ₸<br/>+2% при наличии вклада от 6 000 000 ₸'},
+                    {code: 'Cashback лимит в мес', value: '100 000 ₸'},
+                    {code: 'Получение наличных<br/>(сторонние банкоматы РК)<br/><br/>Получение наличных<br/>(сторонние банкоматы мир)',
+                    value: 'от 5 000 ₸ - 0 ₸<br/>до 5 000 ₸ - 100 ₸<br/>лимит в мес 3 000 000 ₸, свыше - 1% мин 250 ₸'},
+                    {code: 'Переводы на карту в зарубежный банк', value: 'Бесплатно'},
+                    {code: 'Переводы на карту в зарубежный банк', value: '1 000 000 - бесплатно<br/>свыше 1%, мин 250 ₸'},
+                    {code: 'Смс-обслуживание', value: 'Бесплатно'},
+                    {code: 'Перевыпуск по утере', value: '80 000 ₸'}
+    ];
+
+    return(
+        <Box className={classes.TableW}>
+            <Table>
+                <TableBody>
+                    {rows.map((m, i) => 
+                        <TableRow key={i}>
+                            <TableCell className={classes.th}><div dangerouslySetInnerHTML={{__html: m.code}}/></TableCell>
+                            <TableCell className={classes.td}><div dangerouslySetInnerHTML={{__html: m.value}}/></TableCell>
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+        </Box>
+    )
+}
+
+const Conditions = () => {
 
     const classes = useStylesTarifs({});
 
@@ -54,7 +98,7 @@ const Tarifs = () => {
     ];
 
     return(
-        <Box width={0.7}>
+        <Box className={classes.TableW}>
             <Table>
                 <TableBody>
                     {rows.map((m, i) => 
@@ -83,7 +127,10 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         [theme.breakpoints.between('sm', 'xl')]: {
-            ...rootSmXl,
+            root: {
+                padding: '60px 42px 52px 52px',
+                width: '100%'
+            },
             title: {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
@@ -101,7 +148,7 @@ const AdditionalInfo = () => {
     const swipeTab = (index: number) => {
         ReactGA.event({
             category: 'BccCard',
-            action: index === 0 ? 'Additional_Rates' : 'Additionally_FAQ'
+            action: index === 0 ? 'Iron_Additionally_Conditions' : 'Iron_Additionally_Rates'
         });
     }
 
@@ -111,7 +158,7 @@ const AdditionalInfo = () => {
                 <Typography className={classes.title}>Дополнительно</Typography>
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                <Tab onHandleChanged={(i: number)=>swipeTab(i)} menuTitle={["Тарифы", "Часто задаваемые вопросы"]} pans={[<Tarifs />, <Tarifs />]} />
+                <Tab onHandleChanged={(i: number)=>swipeTab(i)} menuTitle={["Условия", "Тарифы"]} pans={[<Conditions />, <Tarifs />]} />
             </Grid>
         </Grid>);
 }
