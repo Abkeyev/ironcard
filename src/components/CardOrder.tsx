@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import MaskedInput from 'react-text-mask';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ReactGA from 'react-ga';
+import api from "../api/Api";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -231,7 +232,7 @@ const calculateTimeLeft = () => {
     return timeLeft;
 }
 
-const CardOrder = () => {
+const CardOrder = (props: any) => {
     const classes = useStyles({});
 
     const theme = useTheme();
@@ -246,7 +247,7 @@ const CardOrder = () => {
           }
         },
         checked: {}
-      })(props => <Checkbox checked value="remember" {...props} />);
+      })((props: any) => <Checkbox checked value="remember" {...props} />);
 
       const BccInputText = withStyles({
           root: {
@@ -312,6 +313,12 @@ const CardOrder = () => {
         e.preventDefault();
 
         if (name && phone) {
+            api.card
+        .order({fio: name, phoneNumber: phone })
+        .then((m: any) => {
+          props.send();
+        })
+        .catch((e: any) => console.warn(e));
         }
     }
 
