@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 import {
   makeStyles,
@@ -8,11 +8,11 @@ import {
   useTheme
 } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import TextField, { TextFieldProps } from "@material-ui/core/TextField";
+import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
-import MaskedInput from "react-text-mask";
+import MaskedInput from "react-maskedinput";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ReactGA from "react-ga";
 import api from "../api/Api";
@@ -70,6 +70,11 @@ const useStyles = makeStyles((theme: Theme) =>
         "&:hover, &:active": {
           backgroundColor: "#7DCEA0",
           boxShadow: "none"
+        },
+        "&:disabled": {
+          backgroundColor: "#7DCEA0",
+          color: "white",
+          opacity: 0.8
         }
       },
       timerBox: {
@@ -143,6 +148,11 @@ const useStyles = makeStyles((theme: Theme) =>
         "&:hover, &:active": {
           backgroundColor: "#7DCEA0",
           boxShadow: "none"
+        },
+        "&:disabled": {
+          backgroundColor: "#7DCEA0",
+          color: "white",
+          opacity: 0.8
         }
       },
       timerBox: {
@@ -213,7 +223,7 @@ interface TextMaskCustomProps {
   inputRef: (ref: HTMLInputElement | null) => void;
 }
 
-function TextMaskCustom(props: TextMaskCustomProps) {
+const TextMaskCustom = (props: TextMaskCustomProps) => {
   const { inputRef, ...other } = props;
 
   return (
@@ -222,30 +232,11 @@ function TextMaskCustom(props: TextMaskCustomProps) {
       ref={(ref: any) => {
         inputRef(ref ? ref.inputElement : null);
       }}
-      mask={[
-        "+",
-        /[1-9]/,
-        " ",
-        "(",
-        /\d/,
-        /\d/,
-        /\d/,
-        ")",
-        " ",
-        /\d/,
-        /\d/,
-        /\d/,
-        " ",
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/
-      ]}
-      placeholderChar={"\u2000"}
-      showMask
+      mask="1(111) 111 11 11"
+      placeholder={"7(707) 707 77 77"}
     />
   );
-}
+};
 
 const CardOrder = (props: any) => {
   const classes = useStyles({});
@@ -295,6 +286,8 @@ const CardOrder = (props: any) => {
     }
   };
 
+  const isValid = () => name.length > 1 && phone.replace("_", "").length === 16;
+
   return (
     <Grid
       ref={props.refProp}
@@ -338,7 +331,8 @@ const CardOrder = (props: any) => {
             InputProps={{
               classes: {
                 focused: classes.focused
-              }
+              },
+              inputComponent: TextMaskCustom as any
             }}
           />
           <FormControlLabel
@@ -375,6 +369,7 @@ const CardOrder = (props: any) => {
             </Grid>
             <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
               <Button
+                disabled={!isValid()}
                 type="submit"
                 fullWidth
                 variant="contained"
