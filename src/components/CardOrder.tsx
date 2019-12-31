@@ -255,22 +255,22 @@ const CardOrder = (props: any) => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
+        ReactGA.event({
+            category: 'BccCard',
+            action: 'Preorder_successful'
+        });
+
         if (name && phone) {
             api.card
         .order({fio: name, phoneNumber: phone })
         .then((m: any) => {
           props.send();
+          handleNameChange('')
+          handlePhoneChange('')
         })
         .catch((e: any) => console.warn(e));
         }
     }
-
-    // const onClickApplyApp = () => {
-    //     ReactGA.event({
-    //         category: 'BccCard',
-    //         action: 'Preorder_successful'
-    //     });
-    // }
 
     return (
         <Grid container className={classes.root} spacing={4} id="order" direction="column" justify="center">
