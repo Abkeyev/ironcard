@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div>
-      <YMInitializer accounts={[56638654]} />
+      <YMInitializer accounts={[56824144]} />
       <Header />
       <FixedHeader />
       <BestCard />
