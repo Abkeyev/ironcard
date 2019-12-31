@@ -13,6 +13,14 @@ export interface OrderRequest {
   phoneNumber?: string;
 }
 
+function uuid() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    var r = (Math.random() * 16) | 0,
+      v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 export class CardController {
   order(request: OrderRequest) {
     const config: any = {};
@@ -38,7 +46,7 @@ export class CardController {
 
     const data = {
       system: "EXTERNALSITE",
-      requestId: "c274fb89-0d53-4304-95e9-130b267cd326",
+      requestId: uuid(),
       responseId: "c274fb89-0d53-4304-95e9-130b267cd326",
       route: "DeltaM",
       object: "ClaimAddRequest",
