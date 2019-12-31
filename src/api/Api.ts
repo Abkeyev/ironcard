@@ -1,8 +1,6 @@
 import axios from "axios";
-import api from "../api/Api";
 
-
-const baseURL = "https://api.bcc.kz/bcc/production/v1";
+const baseURL = process.env.REACT_APP_SERVER_URL || "";
 
 export class Api {
   card = new CardController();
