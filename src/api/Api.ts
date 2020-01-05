@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 const baseURL = process.env.REACT_APP_SERVER_URL || "";
 
@@ -28,20 +29,6 @@ export class CardController {
     };
     config.baseURL = baseURL;
 
-    const date = new Date();
-
-    const callTimeString =
-      (date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()) +
-      ":" +
-      date.getMinutes();
-
-    const dateString =
-      (date.getDay() < 10 ? `0${date.getDay()}` : date.getDay()) +
-      "-" +
-      date.getMonth() +
-      "-" +
-      date.getFullYear();
-
     const data = {
       system: "EXTERNALSITE",
       requestId: uuid(),
@@ -59,8 +46,8 @@ export class CardController {
           iinBin: null,
           organizationName: null,
           email: null,
-          callTime: callTimeString, //--------------CallTime
-          date: dateString, //----------------------DateTime
+          callTime: moment().format("HH:mm"), //--------------CallTime
+          date: moment().format("DD-MM-YYYY"), //----------------------DateTime
           productService: {
             productName: "металлическая карта",
             productCode: "0.300.1400.10",
