@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import ReactGA from "react-ga";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -125,6 +126,10 @@ const FixedHeader = (props: any) => {
   const classes = useStyles({});
 
   const onClickOrder = () => {
+    ReactGA.event({
+      category: "BccCard_order_card",
+      action: "order_card"
+    });
     props.scrollToOrder();
   };
 
