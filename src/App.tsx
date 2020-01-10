@@ -14,7 +14,6 @@ import {
 } from "./components";
 import { animateScroll } from "react-scroll";
 
-import { YMInitializer } from "react-yandex-metrika";
 import SnackBarBottom from "./components/SnackBar";
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
 
   return (
     <div>
-      <YMInitializer accounts={[56824144]} />
       <Header scrollToOrder={scrollToOrderRef} />
       <FixedHeader scrollToOrder={scrollToOrderRef} />
       <BestCard />
