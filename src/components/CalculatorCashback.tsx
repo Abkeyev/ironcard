@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme: Theme) =>
       resultSum: {
         fontStyle: "normal",
         fontWeight: "normal",
-        fontSize: "76px",
+        fontSize: "60px",
         color: "#141414"
       },
       resultOrderCard: {
@@ -185,7 +185,7 @@ const useStyles = makeStyles((theme: Theme) =>
       resultSum: {
         fontStyle: "normal",
         fontWeight: "normal",
-        fontSize: "96px",
+        fontSize: "80px",
         color: "#141414"
       },
       resultOrderCard: {
@@ -232,7 +232,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     [theme.breakpoints.down("xs")]: {
       resultSum: {
-        fontSize: "50px"
+        fontSize: "40px"
       },
       resultOrderCard: {
         width: "100%"

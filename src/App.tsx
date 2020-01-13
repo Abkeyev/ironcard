@@ -21,7 +21,7 @@ function App() {
   const orderRef: any = React.useRef(null);
 
   const scrollToOrderRef = () =>
-    animateScroll.scrollTo(orderRef.current.offsetTop);
+    animateScroll.scrollTo(orderRef.current.offsetTop - 72);
 
   const [isSend, setSend] = React.useState<boolean>(false);
 

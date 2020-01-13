@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -77,7 +77,7 @@ const calculateTimeLeft = () => {
     const difference = +new Date('2020-02-01') - +new Date()
     let timeLeft: any = {}
 
-    if(difference > 0) {
+    if (difference > 0) {
         timeLeft = {
             days: Math.floor(difference / (1000 * 60 * 60 * 24)),
             hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
@@ -108,9 +108,9 @@ const Timer = (props: any) => {
 
     return (
         <div className={classes.timerBox}>
-                    <h1>Дней до завершения акции</h1>
-                    <span>{days}  :  {hours}  :  {minutes}  :  {seconds}</span>
-                </div>
+            <h1>Дней до завершения акции</h1>
+            <span>{days}  :  {hours}  :  {minutes}  :  {seconds}</span>
+        </div>
     )
 }
 

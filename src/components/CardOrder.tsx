@@ -1,5 +1,5 @@
-import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Grid, Typography, MenuItem } from "@material-ui/core";
 import {
   makeStyles,
   createStyles,
@@ -7,8 +7,8 @@ import {
   Theme,
   useTheme
 } from "@material-ui/core/styles";
+import moment from "moment";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
@@ -17,6 +17,16 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ReactGA from "react-ga";
 import api from "../api/Api";
 import Timer from "./Timer";
+import { BccInputText } from './CustomComponents';
+import axios from "axios";
+
+interface Branch {
+  code: string;
+  address: string;
+}
+
+const jsSHA = require('jssha');
+const CityList = require('../city_list.json');
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -209,12 +219,82 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: "36px 24px"
       }
     },
-    focused: {
-      root: {
-        "&$focused": {
-          border: "2px solid #27AE60"
-        }
+    progress: {
+    },
+    progressBar: {
+      background: '#E0E0E0',
+      borderRadius: 5,
+      display: 'block',
+      margin: '12px 0 32px',
+      height: 36,
+      lineHeight: '36px',
+      textAlign: 'center',
+      position: 'relative',
+      fontSize: 16,
+      '& > span': {
+        zIndex: 5,
+        fontWeight: 'bold',
+        position: 'relative'
       }
+    },
+    progressBarInner: {
+      position: 'absolute',
+      transition: 'width .5s ease-out',
+      top: 0,
+      height: 36,
+      borderRadius: 5,
+      bottom: 0,
+      background: "url('progress.svg') #27AE60",
+      zIndex: 4
+    },
+    consult: {
+      height: 62,
+      color: '#27AE60',
+      border: '1px solid #27AE60',
+      borderRadius: 8,
+      width: '100%',
+      fontSize: 14,
+      "&:hover, &:active": {
+        backgroundColor: "#27AE60",
+        color: 'white'
+      }
+    },
+    timerSMS: {
+      lineHeight: '62px',
+      color: '#5B5B5B',
+      fontSize: 14
+    },
+    sendSMSAgain: {
+      color: '#27AE60',
+      fontSize: 16,
+      lineHeight: '62px',
+      height: 62,
+      padding: 0,
+      border: 'none',
+      textTransform: 'none',
+      '&:hover': {
+        backgroundColor: 'transparent',
+        color: '#2eca70'
+      }
+    },
+    chip: {
+      backgroundColor: 'rgba(125, 206, 160, 0.2)',
+      color: '#1F7042',
+      marginRight: 16,
+      marginBottom: 8,
+      display: 'inline-block',
+      borderRadius: 16,
+      padding: '6px 32px',
+      cursor: 'pointer'
+    },
+    activeChip: {
+      backgroundColor: '#27AE60',
+      color: 'white',
+      marginRight: 16,
+      display: 'inline-block',
+      borderRadius: 16,
+      padding: '6px 32px',
+      cursor: 'pointer'
     }
   })
 );
@@ -245,6 +325,149 @@ const CardOrder = (props: any) => {
 
   const isXS = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const stepText = ["Заполнение данных", "Заполнение общих данных", "Оплата", "Подтверждение номера телефона", "Ожидайте звонка"];
+  const buttonText = ["Далее", "Перейти к оплате", "Оплатить", "Подтвердить", "Купить онлайн"];
+  const emailPrefix = [{ label: "gmail.com", value: '@gmail.com' },
+  { label: "mail.ru", value: '@mail.ru' },
+  { label: "yandex.ru", value: '@yandex.ru' }];
+
+  const [name, setName] = React.useState("");
+  const [src, setSrc] = React.useState("");
+  const [selectedEmail, setSelectEmail] = React.useState();
+  const [phone, setPhone] = React.useState("");
+  const [iin, setIin] = React.useState("");
+  const [code, setCode] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [branchName, setBranchName] = React.useState("");
+  const [branchList, setBranchList] = React.useState<Branch[]>([]);
+  const [checkbox, setCheckbox] = React.useState(true);
+  const [flag, setFlag] = React.useState(false);
+  const [step, setStep] = React.useState(0);
+  const [nameSurname, setNameSurname] = React.useState("");
+  const [cardName, setCardName] = React.useState("");
+  const [timer, setTimer] = React.useState(5);
+
+  useEffect(() => {
+    if (step === 1) {
+      const tim = setTimeout(() => {
+        timer > 0 ? setTimer(timer - 1) : clearTimeout(tim)
+      }, 1000)
+    }
+  })
+
+  const handleIinChange = (iin: string) => {
+    setIin(iin);
+  };
+
+  const handleNameChange = (name: string) => {
+    setName(name);
+  };
+
+  const handleSelectEmailChange = (index: number, emailValue: string) => {
+    setSelectEmail(index);
+    let e = email.indexOf("@") !== -1 ? email.substring(email.indexOf("@"), -1) : email;
+    setEmail(e + emailValue);
+  };
+
+  const handleEmailChange = (email: string) => {
+    setEmail(email);
+  };
+
+  function uuid() {
+    return "xxxxxxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+      var r = (Math.random() * 16) | 0,
+        v = c === "x" ? r : (r & 0x3) | 0x8;
+      return v.toString();
+    });
+  }
+
+  function XOR_hex(a: string, b: string) {
+    var res = "",
+      l = Math.max(a.length, b.length);
+    for (var i = 0; i < l; i += 4)
+      res = ("000" + (parseInt(a.slice(-i - 4, -i || a.length), 16) ^ parseInt(b.slice(-i - 4, -i || b.length), 16)).toString(16)).slice(-4) + res;
+    return res;
+  }
+  const generateUrl = () => {
+    // const hex1 = "690B5589573ACB3608DB7395A319B175";
+    // const hex2 = "02BBF98BB3411445D15498E2DC22E3E1";
+    // const xor = XOR_hex(hex1, hex2);
+    const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
+    const uid = uuid();
+    let desc = encodeURIComponent(`${cardName.replace(/ /g, '_')}-${iin}-${city}-${branchName}`).substring(0, 80);
+    const merchant = "ironcardpromo";
+    const terminal = "90030556";
+    const timestamp = moment().add(-6, 'hours').format('YYYYMMDDHHmmss');
+    const backref = "";
+    const value = `5150003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`
+    var shaObj = new jsSHA("SHA-1", "TEXT");
+    shaObj.setHMACKey(xor, "HEX");
+    shaObj.update(value);
+    const pSign = shaObj.getHMAC("HEX").toUpperCase()
+    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&BACKREF=${backref}&P_SIGN=${pSign}&LANG=RU`
+    window.location.replace(url)
+    setSrc(url)
+  }
+
+  const handleCityChange = (city: string) => {
+    setCity(city)
+    axios.get(`https://www.bcc.kz/local/tmpl/ajax/getmap.php?type=F&city=${city}&lang=s1`)
+      .then((e: any) => {
+        let branches: Branch[] = []
+        e && e.data && e.data.markers && e.data.markers.map((mark: any) => {
+          let res = mark.name + ', ' + mark.address.substring(8).replace(/&quot;/g, '"')
+          let temp = mark.address.split(',')
+          temp[0] && branches.push({
+            code: temp[0],
+            address: res
+          })
+        })
+        setBranchList(branches)
+      })
+      .catch((e: any) => console.log(e))
+  };
+
+  const handleBranchChange = (branchName: string) => {
+    setBranchName(branchName);
+  };
+
+  const handlePhoneChange = (phone: string) => {
+    setPhone(phone);
+  };
+
+  const handleCodeChange = (code: string) => {
+    setCode(code);
+  };
+
+  const handleNameSurnameChange = (nameSurname: string) => {
+    setNameSurname(nameSurname);
+  };
+
+  const handleCardNameChange = (cardName: string) => {
+    setCardName(cardName);
+  };
+
+  const handleCheckboxChange = (checkbox: boolean) => {
+    setCheckbox(checkbox);
+  };
+
+  const handleStepChange = (step: number, flag: boolean = false) => {
+    if (step === 0 && flag) {
+      setFlag(flag);
+      setStep(3);
+    } else if (step === 3 && flag) {
+      setStep(4);
+      setFlag(false);
+    } else if (step === 4) {
+      setStep(1);
+    } else if (step === 1) generateUrl();
+    else {
+      step++;
+      setStep(step);
+    }
+  };
+
   const BccCheckbox = withStyles({
     root: {
       color: "#D8D8D8",
@@ -253,18 +476,7 @@ const CardOrder = (props: any) => {
       }
     },
     checked: {}
-  })((props: any) => <Checkbox checked value="remember" {...props} />);
-
-  const [name, setName] = React.useState("");
-  const [phone, setPhone] = React.useState("");
-
-  const handleNameChange = (name: string) => {
-    setName(name);
-  };
-
-  const handlePhoneChange = (phone: string) => {
-    setPhone(phone);
-  };
+  })((props: any) => <Checkbox name="remember" defaultChecked={true} value={checkbox} onChange={(e: any) => handleCheckboxChange(e.target.value)} {...props} />);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -286,7 +498,228 @@ const CardOrder = (props: any) => {
     }
   };
 
-  const isValid = () => name.length > 1 && phone.replace("_", "").length === 16;
+  const nextButton = (flag: boolean) => {
+    handleStepChange(step, flag)
+  }
+
+  const isValid = () => {
+    if (step === 0) {
+      return name.length > 1 && phone.replace("_", "").length === 16
+    } else if (step === 3) {
+      return code.length > 1
+    } else if (step === 1) {
+      return nameSurname.length > 1 && cardName.length > 1
+        && city.length > 1 && branchName.length > 1
+        && phone.replace("_", "").length === 16 && email.length > 1
+    } else {
+      return true
+    }
+  };
+
+  const generateForm = (step: number) => {
+    switch (step) {
+      case 0:
+        return <>
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="name"
+            value={name}
+            onChange={(e: any) => handleNameChange(e.target.value)}
+            label="Фамилия, имя и отчество"
+            id="name"
+          />
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="phone"
+            value={phone}
+            onChange={(e: any) => handlePhoneChange(e.target.value)}
+            label="Номер телефона"
+            InputLabelProps={{
+              shrink: true
+            }}
+            InputProps={{
+              inputComponent: TextMaskCustom as any
+            }}
+          />
+        </>
+      case 1:
+        return <>
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="nameSurname"
+            value={nameSurname}
+            onChange={(e: any) => handleNameSurnameChange(e.target.value)}
+            label="Фамилия и имя"
+            id="nameSurname"
+          />
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="cardName"
+            value={cardName}
+            onChange={(e: any) => handleCardNameChange(e.target.value)}
+            label="Имя и фамилия на карте"
+            id="cardName"
+          />
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="iin"
+            value={iin}
+            onChange={(e: any) => handleIinChange(e.target.value)}
+            label="ИИН"
+            id="iin"
+          />
+          <Grid container spacing={2}>
+            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+              <BccInputText
+                fullWidth={true}
+                label="Город"
+                id="city"
+                name="city"
+                value={city}
+                onChange={(e: any) => handleCityChange(e.target.value)}
+                variant="outlined"
+                margin="normal"
+                required
+                select
+              >
+                {
+                  CityList.map((c: any) => {
+                    return <MenuItem key={c.code} value={c.code}>
+                      {c.value}
+                    </MenuItem>
+                  })
+                }
+              </BccInputText>
+            </Grid>
+            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+              <BccInputText
+                fullWidth={true}
+                label="Отделение для доставки"
+                id="branchName"
+                name="branchName"
+                value={branchName}
+                onChange={(e: any) => handleBranchChange(e.target.value)}
+                variant="outlined"
+                margin="normal"
+                required
+                select
+              >
+                {
+                  branchList.map((b: any) => {
+                    return <MenuItem key={b.code} value={b.code}>
+                      {b.address}
+                    </MenuItem>
+                  })
+                }
+              </BccInputText>
+            </Grid>
+            <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+              <BccInputText
+                size={isXS ? "small" : "medium"}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="phone"
+                value={phone}
+                disabled
+                onChange={(e: any) => handlePhoneChange(e.target.value)}
+                label="Номер телефона"
+                InputLabelProps={{
+                  shrink: true
+                }}
+                InputProps={{
+                  inputComponent: TextMaskCustom as any
+                }}
+              />
+            </Grid>
+            <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+              <BccInputText
+                size={isXS ? "small" : "medium"}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="email"
+                value={email}
+                onChange={(e: any) => handleEmailChange(e.target.value)}
+                label="Email"
+                id="email"
+              />
+            </Grid>
+            <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+              {emailPrefix.map((mail, index) => {
+                return <div
+                  key={mail.value}
+                  onClick={() => handleSelectEmailChange(index, mail.value)}
+                  className={index === selectedEmail ? classes.activeChip : classes.chip}
+                >{mail.label}</div>
+              }
+              )}
+            </Grid>
+          </Grid>
+        </>
+      case 2:
+        return <>
+          Загрузка...
+        </>
+      case 3:
+        return <>
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="code"
+            value={code}
+            onChange={(e: any) => handleCodeChange(e.target.value)}
+            label="Код подтверждения"
+            id="code"
+            type="number"
+          />
+        </>
+      case 4:
+        return <>
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            disabled
+            name="code"
+            value={code}
+            onChange={(e: any) => handleCodeChange(e.target.value)}
+            label="Код подтверждения"
+            id="code"
+            type="number"
+          />
+        </>
+      default:
+        return <div>nihuya</div>
+    }
+  }
 
   return (
     <Grid
@@ -303,48 +736,22 @@ const CardOrder = (props: any) => {
           Заполните заявку и получите металлическую карту с 50% скидкой
         </Typography>
         <Timer />
+        <div className={classes.progress}>
+          <span>{step === 3 ? `Шаг 2: ${stepText[step]}` : step === 4 ? `Успешно! ${stepText[step]}` : `Шаг ${step + 1}: ${stepText[step]}`}</span>
+          <div className={classes.progressBar}><span>{step === 3 ? '50' : step === 4 ? '100' : step * 50}%</span><div style={{ width: `${step === 3 ? '50' : step === 4 ? '100' : step * 50}%` }} className={classes.progressBarInner}></div></div>
+        </div>
         <form onSubmit={handleSubmit}>
-          <TextField
-            size={isXS ? "small" : "medium"}
-            variant="outlined"
-            margin="normal"
-            className={classes.focused}
-            required
-            fullWidth
-            id="name"
-            label="Имя"
-            name="name"
-            value={name}
-            onChange={(e: any) => handleNameChange(e.target.value)}
-          />
-          <TextField
-            size={isXS ? "small" : "medium"}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="phone"
-            value={phone}
-            onChange={(e: any) => handlePhoneChange(e.target.value)}
-            label="Номер телефона"
-            id="phone"
-            InputProps={{
-              classes: {
-                focused: classes.focused
-              },
-              inputComponent: TextMaskCustom as any
-            }}
-          />
-          <FormControlLabel
+          {generateForm(step)}
+          {step === 0 || step === 1 ? <FormControlLabel
             control={<BccCheckbox />}
             label={
               <Typography className={classes.checkBoxLabel}>
                 Я согласен(-а) на сбор и обработку персональных данных
               </Typography>
             }
-          />
+          /> : ''}
           <Grid container style={{ marginTop: "15px" }} spacing={4}>
-            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+            {step !== 2 ? <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
               <Grid container spacing={2}>
                 <Grid
                   item
@@ -366,16 +773,32 @@ const CardOrder = (props: any) => {
                   </Typography>
                 </Grid>
               </Grid>
-            </Grid>
-            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-              <Button
+            </Grid> : ''}
+            <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
+              {step === 0 ? <Button
+                variant="outlined"
+                className={classes.consult}
                 disabled={!isValid()}
                 type="submit"
+              >
+                Получить консультацию
+              </Button> : (step === 3 && timer >= 1) ? <span className={classes.timerSMS}>Отправить еще через ({timer})</span> : step === 3 && timer < 1 ? <Button
+                  variant="outlined"
+                  className={classes.sendSMSAgain}
+                >
+                  Отправить повторно
+              </Button> : ''}
+            </Grid>
+            <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
+              <Button
+                disabled={!isValid()}
+                type="button"
                 fullWidth
                 variant="contained"
                 className={classes.submit}
+                onClick={() => nextButton(false)}
               >
-                Подать заявку
+                {buttonText[step]}
               </Button>
             </Grid>
           </Grid>

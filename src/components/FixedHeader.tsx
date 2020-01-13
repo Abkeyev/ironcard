@@ -167,7 +167,7 @@ const FixedHeader = (props: any) => {
           >
             <img src="iconcardsmall.svg" alt="iconcardsmall" />
           </Grid>
-          <Grid item xl={3} lg={3} md={6} sm={6} xs={6}>
+          <Grid item xl={4} lg={4} md={6} sm={6} xs={6}>
             <Button
               variant="contained"
               className={classes.buttonOrderCard}
