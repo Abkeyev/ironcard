@@ -436,9 +436,11 @@ const CardOrder = (props: any) => {
     // const xor = XOR_hex(hex1, hex2);
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
     const uid = uuid();
-    let desc = encodeURIComponent(`${cardName.replace(/ /g, '_')}-${iin}-${city}-${branchName}`).substring(0, 80);
+    let desc = encodeURIComponent(`${phone.replace(/\(|\)| /g, '')}-${iin}-${city}-${branchName}`).substring(0, 80);
     const merchant = "ironcardpromo";
     const terminal = "90030556";
+    // const terminal = "88888881";
+    const nameOnCard = cardName.replace(/ /g, '-')
     const timestamp = moment().add(-6, 'hours').format('YYYYMMDDHHmmss');
     const backref = "https://www.bcc.kz";
     const value = `5150003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`
@@ -446,7 +448,8 @@ const CardOrder = (props: any) => {
     shaObj.setHMACKey(xor, "HEX");
     shaObj.update(value);
     const pSign = shaObj.getHMAC("HEX").toUpperCase()
-    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
+    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
+    // let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
     window.location.replace(url)
     setSrc(url)
   }
@@ -460,7 +463,7 @@ const CardOrder = (props: any) => {
           let res = mark.name + ', ' + mark.address.substring(8).replace(/&quot;/g, '"')
           let temp = mark.address.split(',')
           temp[0] && branches.push({
-            code: temp[0],
+            code: isNaN(+temp[0]) ? '000000' : temp[0],
             address: res
           })
         })
