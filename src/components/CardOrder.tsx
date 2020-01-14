@@ -219,7 +219,48 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: "36px 24px"
       }
     },
-    progress: {
+    progressBarSuccess: {
+      background: '#27AE60',
+      borderRadius: 5,
+      display: 'block',
+      margin: '12px 0 32px',
+      height: 36,
+      lineHeight: '36px',
+      textAlign: 'center',
+      position: 'relative',
+      fontSize: 16,
+      '& > span': {
+        zIndex: 5,
+        color: 'white',
+        fontWeight: 'bold',
+        position: 'relative'
+      }
+    },
+    progressBarInnerSuccess: {
+      position: 'absolute',
+      transition: 'width .5s ease-out',
+      top: 0,
+      height: 36,
+      borderRadius: 5,
+      bottom: 0,
+      zIndex: 4
+    },
+    successForm: {
+      padding: '30px',
+      borderRadius: 8,
+      backgroundColor: 'rgba(125, 206, 160, 0.2)',
+      textAlign: 'center',
+      '& > img': {
+        display: 'block',
+        margin: '0 auto',
+        marginBottom: 23
+      },
+      '& > span': {
+        display: 'block',
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#1F7042'
+      }
     },
     progressBar: {
       background: '#E0E0E0',
@@ -399,13 +440,13 @@ const CardOrder = (props: any) => {
     const merchant = "ironcardpromo";
     const terminal = "90030556";
     const timestamp = moment().add(-6, 'hours').format('YYYYMMDDHHmmss');
-    const backref = "";
+    const backref = "https://www.bcc.kz";
     const value = `5150003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`
     var shaObj = new jsSHA("SHA-1", "TEXT");
     shaObj.setHMACKey(xor, "HEX");
     shaObj.update(value);
     const pSign = shaObj.getHMAC("HEX").toUpperCase()
-    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&BACKREF=${backref}&P_SIGN=${pSign}&LANG=RU`
+    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
     window.location.replace(url)
     setSrc(url)
   }
@@ -736,73 +777,82 @@ const CardOrder = (props: any) => {
           Заполните заявку и получите металлическую карту с 50% скидкой
         </Typography>
         <Timer />
-        <div className={classes.progress}>
-          <span>{step === 3 ? `Шаг 2: ${stepText[step]}` : step === 4 ? `Успешно! ${stepText[step]}` : `Шаг ${step + 1}: ${stepText[step]}`}</span>
-          <div className={classes.progressBar}><span>{step === 3 ? '50' : step === 4 ? '100' : step * 50}%</span><div style={{ width: `${step === 3 ? '50' : step === 4 ? '100' : step * 50}%` }} className={classes.progressBarInner}></div></div>
-        </div>
-        <form onSubmit={handleSubmit}>
-          {generateForm(step)}
-          {step === 0 || step === 1 ? <FormControlLabel
-            control={<BccCheckbox />}
-            label={
-              <Typography className={classes.checkBoxLabel}>
-                Я согласен(-а) на сбор и обработку персональных данных
+        {window.document.location.search === "?success=true" ?
+          <div className={classes.progress}>
+            <div className={classes.progressBarSuccess}><span>Готово!</span><div style={{ width: `100%` }} className={classes.progressBarInnerSuccess}></div></div>
+          </div>
+          : <div className={classes.progress}>
+            <span>{step === 3 ? `Шаг 2: ${stepText[step]}` : step === 4 ? `Успешно! ${stepText[step]}` : `Шаг ${step + 1}: ${stepText[step]}`}</span>
+            <div className={classes.progressBar}><span>{step === 3 ? '50' : step === 4 ? '100' : step * 50}%</span><div style={{ width: `${step === 3 ? '50' : step === 4 ? '100' : step * 50}%` }} className={classes.progressBarInner}></div></div>
+          </div>}
+        {window.document.location.search === "?success=true" ?
+          <div className={classes.successForm}>
+            <img src="success.svg" alt="" />
+            <span>Оплата прошла успешно</span>
+          </div>
+          : <form onSubmit={handleSubmit}>
+            {generateForm(step)}
+            {step === 0 || step === 1 ? <FormControlLabel
+              control={<BccCheckbox />}
+              label={
+                <Typography className={classes.checkBoxLabel}>
+                  Я согласен(-а) на сбор и обработку персональных данных
               </Typography>
-            }
-          /> : ''}
-          <Grid container style={{ marginTop: "15px" }} spacing={4}>
-            {step !== 2 ? <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-              <Grid container spacing={2}>
-                <Grid
-                  item
-                  xl={false}
-                  lg={false}
-                  md={false}
-                  sm={false}
-                  xs={false}
-                >
-                  <img
-                    src="card_order_security.svg"
-                    className={classes.icon}
-                    alt="order_security"
-                  />
-                </Grid>
-                <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                  <Typography className={classes.garant}>
-                    Мы гарантируем безопасность и сохранность ваших данных
+              }
+            /> : ''}
+            <Grid container style={{ marginTop: "15px" }} spacing={4}>
+              {step !== 2 ? <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                <Grid container spacing={2}>
+                  <Grid
+                    item
+                    xl={false}
+                    lg={false}
+                    md={false}
+                    sm={false}
+                    xs={false}
+                  >
+                    <img
+                      src="card_order_security.svg"
+                      className={classes.icon}
+                      alt="order_security"
+                    />
+                  </Grid>
+                  <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
+                    <Typography className={classes.garant}>
+                      Мы гарантируем безопасность и сохранность ваших данных
                   </Typography>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Grid> : ''}
-            <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
-              {step === 0 ? <Button
-                variant="outlined"
-                className={classes.consult}
-                disabled={!isValid()}
-                type="submit"
-              >
-                Получить консультацию
-              </Button> : (step === 3 && timer >= 1) ? <span className={classes.timerSMS}>Отправить еще через ({timer})</span> : step === 3 && timer < 1 ? <Button
+              </Grid> : ''}
+              <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
+                {step === 0 ? <Button
                   variant="outlined"
-                  className={classes.sendSMSAgain}
+                  className={classes.consult}
+                  disabled={!isValid()}
+                  type="submit"
                 >
-                  Отправить повторно
+                  Получить консультацию
+              </Button> : (step === 3 && timer >= 1) ? <span className={classes.timerSMS}>Отправить еще через ({timer})</span> : step === 3 && timer < 1 ? <Button
+                    variant="outlined"
+                    className={classes.sendSMSAgain}
+                  >
+                    Отправить повторно
               </Button> : ''}
+              </Grid>
+              <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
+                <Button
+                  disabled={!isValid()}
+                  type="button"
+                  fullWidth
+                  variant="contained"
+                  className={classes.submit}
+                  onClick={() => nextButton(false)}
+                >
+                  {buttonText[step]}
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
-              <Button
-                disabled={!isValid()}
-                type="button"
-                fullWidth
-                variant="contained"
-                className={classes.submit}
-                onClick={() => nextButton(false)}
-              >
-                {buttonText[step]}
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
+          </form>}
       </Paper>
     </Grid>
   );
