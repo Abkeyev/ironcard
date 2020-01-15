@@ -345,6 +345,11 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 16,
       padding: '6px 32px',
       cursor: 'pointer'
+    },
+    hintText: {
+      fontSize: 12,
+      color: '#898989',
+      lineHeight: '16px'
     }
   })
 );
@@ -362,7 +367,7 @@ const TextMaskCustom = (props: TextMaskCustomProps) => {
       ref={(ref: any) => {
         inputRef(ref ? ref.inputElement : null);
       }}
-      mask="+7(111) 111 11 11"
+      mask="+7(711) 111 11 11"
       placeholder={"+7(707) 707 77 77"}
     />
   );
@@ -406,12 +411,12 @@ const CardOrder = (props: any) => {
   })
 
   const handleIinChange = (iin: string) => {
-    setIin(iin);
+    iin.length <= 12 && setIin(iin);
   };
 
   const handleNameChange = (name: string) => {
     setName(name);
-    setCardName(rus_to_latin(name));
+    // setCardName(rus_to_latin(name));
   };
 
   const handleSelectEmailChange = (index: number, emailValue: string) => {
@@ -498,31 +503,31 @@ const CardOrder = (props: any) => {
     setCardName(cardName);
   };
 
-  function rus_to_latin(str: string) {
+  // function rus_to_latin(str: string) {
 
-    var ru: any = {
-      'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
-      'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i',
-      'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
-      'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
-      'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
-      'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya'
-    }, resultString: string[] = [];
+  //   var ru: any = {
+  //     'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+  //     'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i',
+  //     'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+  //     'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+  //     'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+  //     'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya'
+  //   }, resultString: string[] = [];
 
-    str = str.replace(/[ъь]+/g, '').replace(/й/g, 'i');
+  //   str = str.replace(/[ъь]+/g, '').replace(/й/g, 'i');
 
-    for (var i = 0; i < str.length; ++i) {
-      resultString.push(
-        ru[str[i]] || ru[str[i].toLowerCase()] == undefined && str[i]
-        || ru[str[i].toLowerCase()].replace(/^(.)/, function (match: any) { return match.toUpperCase() })
-      );
-    }
+  //   for (var i = 0; i < str.length; ++i) {
+  //     resultString.push(
+  //       ru[str[i]] || ru[str[i].toLowerCase()] == undefined && str[i]
+  //       || ru[str[i].toLowerCase()].replace(/^(.)/, function (match: any) { return match.toUpperCase() })
+  //     );
+  //   }
 
-    return resultString.join('').toUpperCase();
-  }
+  //   return resultString.join('').toUpperCase();
+  // }
 
-  const handleCheckboxChange = (checkbox: boolean) => {
-    setCheckbox(checkbox);
+  const handleCheckboxChange = () => {
+    setCheckbox(!checkbox);
   };
 
   const handleStepChange = (step: number, flag: boolean = false) => {
@@ -549,7 +554,7 @@ const CardOrder = (props: any) => {
       }
     },
     checked: {}
-  })((props: any) => <Checkbox name="remember" defaultChecked={true} value={checkbox} onChange={(e: any) => handleCheckboxChange(e.target.value)} {...props} />);
+  })((props: any) => <Checkbox {...props} />);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -597,7 +602,7 @@ const CardOrder = (props: any) => {
       return code.length > 1
     } else if (step === 1) {
       return checkbox && cardName.length > 1
-        && city.length > 1 && branchName.length > 1
+        && city.length > 1 && branchName.length > 1 && iin.length === 12
         && phone.replace("_", "").length === 17 && email.length > 1
     } else {
       return true
@@ -654,12 +659,14 @@ const CardOrder = (props: any) => {
             variant="outlined"
             margin="normal"
             fullWidth
+            style={{ marginBottom: 0 }}
             name="cardName"
             value={cardName}
             onChange={(e: any) => handleCardNameChange(e.target.value)}
-            label="Имя и фамилия на карте"
+            label="Имя и фамилия на латинице"
             id="cardName"
           />
+          <span className={classes.hintText}>Укажите точно так же, как и у вас в удостоверении личности на обратной стороне</span>
           <BccInputText
             size={isXS ? "small" : "medium"}
             variant="outlined"
@@ -669,6 +676,7 @@ const CardOrder = (props: any) => {
             value={iin}
             onChange={(e: any) => handleIinChange(e.target.value)}
             label="ИИН"
+            type="number"
             id="iin"
           />
           <Grid container spacing={2}>
@@ -830,7 +838,7 @@ const CardOrder = (props: any) => {
           : <form onSubmit={handleSubmit}>
             {generateForm(step)}
             {step === 0 || step === 1 ? <FormControlLabel
-              control={<BccCheckbox />}
+              control={<BccCheckbox name="checkbox" defaultChecked={true} checked={checkbox} onChange={() => handleCheckboxChange()} />}
               label={
                 <Typography className={classes.checkBoxLabel}>
                   Я согласен(-а) на сбор и <a href="agreement.docx" download>обработку персональных данных</a>
