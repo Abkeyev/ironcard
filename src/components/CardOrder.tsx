@@ -219,6 +219,14 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: "36px 24px"
       }
     },
+    checkBoxLabel: {
+      '& > a': {
+        color: '#27AE60',
+        '&:hover': {
+          color: '#7DCEA0'
+        }
+      }
+    },
     progressBarSuccess: {
       background: '#27AE60',
       borderRadius: 5,
@@ -353,8 +361,8 @@ const TextMaskCustom = (props: TextMaskCustomProps) => {
       ref={(ref: any) => {
         inputRef(ref ? ref.inputElement : null);
       }}
-      mask="1(111) 111 11 11"
-      placeholder={"7(707) 707 77 77"}
+      mask="+7(111) 111 11 11"
+      placeholder={"+7(707) 707 77 77"}
     />
   );
 };
@@ -367,7 +375,7 @@ const CardOrder = (props: any) => {
   const isXS = useMediaQuery(theme.breakpoints.down("sm"));
 
   const stepText = ["Заполнение данных", "Заполнение общих данных", "Оплата", "Подтверждение номера телефона", "Ожидайте звонка"];
-  const buttonText = ["Далее", "Перейти к оплате", "Оплатить", "Подтвердить", "Купить онлайн"];
+  const buttonText = ["Оформить карту", "Перейти к оплате", "Оплатить", "Подтвердить", "Купить онлайн"];
   const emailPrefix = [{ label: "gmail.com", value: '@gmail.com' },
   { label: "mail.ru", value: '@mail.ru' },
   { label: "yandex.ru", value: '@yandex.ru' }];
@@ -385,7 +393,6 @@ const CardOrder = (props: any) => {
   const [checkbox, setCheckbox] = React.useState(true);
   const [flag, setFlag] = React.useState(false);
   const [step, setStep] = React.useState(0);
-  const [nameSurname, setNameSurname] = React.useState("");
   const [cardName, setCardName] = React.useState("");
   const [timer, setTimer] = React.useState(5);
 
@@ -403,6 +410,7 @@ const CardOrder = (props: any) => {
 
   const handleNameChange = (name: string) => {
     setName(name);
+    setCardName(rus_to_latin(name));
   };
 
   const handleSelectEmailChange = (index: number, emailValue: string) => {
@@ -436,7 +444,7 @@ const CardOrder = (props: any) => {
     // const xor = XOR_hex(hex1, hex2);
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
     const uid = uuid();
-    let desc = encodeURIComponent(`${phone.replace(/\(|\)| /g, '')}-${iin}-${city}-${branchName}`).substring(0, 80);
+    let desc = encodeURIComponent(`${phone.replace(/\+|\(|\)| /g, '')}-${iin}-${city}-${branchName}`).substring(0, 80);
     const merchant = "ironcardpromo";
     const terminal = "90030556";
     // const terminal = "88888881";
@@ -484,13 +492,33 @@ const CardOrder = (props: any) => {
     setCode(code);
   };
 
-  const handleNameSurnameChange = (nameSurname: string) => {
-    setNameSurname(nameSurname);
-  };
-
   const handleCardNameChange = (cardName: string) => {
+    cardName = cardName.replace(/[^A-Za-z ]/ig, '').toUpperCase()
     setCardName(cardName);
   };
+
+  function rus_to_latin(str: string) {
+
+    var ru: any = {
+      'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+      'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i',
+      'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+      'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+      'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+      'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya'
+    }, resultString: string[] = [];
+
+    str = str.replace(/[ъь]+/g, '').replace(/й/g, 'i');
+
+    for (var i = 0; i < str.length; ++i) {
+      resultString.push(
+        ru[str[i]] || ru[str[i].toLowerCase()] == undefined && str[i]
+        || ru[str[i].toLowerCase()].replace(/^(.)/, function (match: any) { return match.toUpperCase() })
+      );
+    }
+
+    return resultString.join('').toUpperCase();
+  }
 
   const handleCheckboxChange = (checkbox: boolean) => {
     setCheckbox(checkbox);
@@ -543,18 +571,29 @@ const CardOrder = (props: any) => {
   };
 
   const nextButton = (flag: boolean) => {
+    if (step === 0) {
+      ReactGA.event({
+        category: "BccIronCard_Go_to_the_payment",
+        action: "Go_to_the_payment"
+      });
+    } else if (step === 1) {
+      ReactGA.event({
+        category: "BccIronCard_To_Pay",
+        action: "To_Pay"
+      });
+    }
     handleStepChange(step, flag)
   }
 
   const isValid = () => {
     if (step === 0) {
-      return name.length > 1 && phone.replace("_", "").length === 16
+      return checkbox && name.length > 1 && phone.replace("_", "").length === 17
     } else if (step === 3) {
       return code.length > 1
     } else if (step === 1) {
-      return nameSurname.length > 1 && cardName.length > 1
+      return checkbox && cardName.length > 1
         && city.length > 1 && branchName.length > 1
-        && phone.replace("_", "").length === 16 && email.length > 1
+        && phone.replace("_", "").length === 17 && email.length > 1
     } else {
       return true
     }
@@ -568,7 +607,6 @@ const CardOrder = (props: any) => {
             size={isXS ? "small" : "medium"}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="name"
             value={name}
@@ -580,7 +618,6 @@ const CardOrder = (props: any) => {
             size={isXS ? "small" : "medium"}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="phone"
             value={phone}
@@ -600,19 +637,17 @@ const CardOrder = (props: any) => {
             size={isXS ? "small" : "medium"}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
-            name="nameSurname"
-            value={nameSurname}
-            onChange={(e: any) => handleNameSurnameChange(e.target.value)}
-            label="Фамилия и имя"
-            id="nameSurname"
+            name="name"
+            value={name}
+            onChange={(e: any) => handleNameChange(e.target.value)}
+            label="Фамилия, имя и отчество"
+            id="name"
           />
           <BccInputText
             size={isXS ? "small" : "medium"}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="cardName"
             value={cardName}
@@ -624,7 +659,6 @@ const CardOrder = (props: any) => {
             size={isXS ? "small" : "medium"}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="iin"
             value={iin}
@@ -643,7 +677,6 @@ const CardOrder = (props: any) => {
                 onChange={(e: any) => handleCityChange(e.target.value)}
                 variant="outlined"
                 margin="normal"
-                required
                 select
               >
                 {
@@ -665,15 +698,16 @@ const CardOrder = (props: any) => {
                 onChange={(e: any) => handleBranchChange(e.target.value)}
                 variant="outlined"
                 margin="normal"
-                required
                 select
               >
                 {
-                  branchList.map((b: any) => {
+                  branchList.length > 0 ? branchList.map((b: any) => {
                     return <MenuItem key={b.code} value={b.code}>
                       {b.address}
                     </MenuItem>
-                  })
+                  }) : <MenuItem key='000000' value='000000'>
+                      -
+                    </MenuItem>
                 }
               </BccInputText>
             </Grid>
@@ -682,11 +716,9 @@ const CardOrder = (props: any) => {
                 size={isXS ? "small" : "medium"}
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="phone"
                 value={phone}
-                disabled
                 onChange={(e: any) => handlePhoneChange(e.target.value)}
                 label="Номер телефона"
                 InputLabelProps={{
@@ -702,7 +734,6 @@ const CardOrder = (props: any) => {
                 size={isXS ? "small" : "medium"}
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="email"
                 value={email}
@@ -733,7 +764,6 @@ const CardOrder = (props: any) => {
             size={isXS ? "small" : "medium"}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="code"
             value={code}
@@ -749,7 +779,6 @@ const CardOrder = (props: any) => {
             size={isXS ? "small" : "medium"}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             disabled
             name="code"
@@ -799,8 +828,8 @@ const CardOrder = (props: any) => {
               control={<BccCheckbox />}
               label={
                 <Typography className={classes.checkBoxLabel}>
-                  Я согласен(-а) на сбор и обработку персональных данных
-              </Typography>
+                  Я согласен(-а) на сбор и <a href="agreement.docx" download>обработку персональных данных</a>
+                </Typography>
               }
             /> : ''}
             <Grid container style={{ marginTop: "15px" }} spacing={4}>
