@@ -13,7 +13,7 @@ import {
   MobileBanking
 } from "./components";
 import { animateScroll } from "react-scroll";
-
+import { YMInitializer } from "react-yandex-metrika";
 import SnackBarBottom from "./components/SnackBar";
 
 function App() {
@@ -26,6 +26,16 @@ function App() {
 
   return (
     <div>
+      <YMInitializer
+        accounts={[56874502]}
+        options={{
+          clickmap: true,
+          trackLinks: true,
+          accurateTrackBounce: true,
+          webvisor: true,
+          trackHash: true
+        }}
+      />
       <Header scrollToOrder={scrollToOrderRef} />
       <FixedHeader scrollToOrder={scrollToOrderRef} />
       <BestCard />

@@ -19,6 +19,7 @@ import api from "../api/Api";
 import Timer from "./Timer";
 import { BccInputText } from './CustomComponents';
 import axios from "axios";
+import ym from "react-yandex-metrika";
 
 interface Branch {
   code: string;
@@ -558,6 +559,8 @@ const CardOrder = (props: any) => {
       action: "Preorder_successful"
     });
 
+    ym("reachGoal", "get_consult");
+
     if (name && phone) {
       api.card
         .order({ fio: name, phoneNumber: phone })
@@ -574,13 +577,15 @@ const CardOrder = (props: any) => {
     if (step === 0) {
       ReactGA.event({
         category: "BccIronCard_Go_to_the_payment",
-        action: "Go_to_the_payment"
+        action: "Go_to_the_payment",
       });
+      ym("reachGoal", "get_card");
     } else if (step === 1) {
       ReactGA.event({
         category: "BccIronCard_To_Pay",
         action: "To_Pay"
       });
+      ym("reachGoal", "get_topay");
     }
     handleStepChange(step, flag)
   }
