@@ -841,7 +841,7 @@ const CardOrder = (props: any) => {
               control={<BccCheckbox name="checkbox" defaultChecked={true} checked={checkbox} onChange={() => handleCheckboxChange()} />}
               label={
                 <Typography className={classes.checkBoxLabel}>
-                  Я согласен(-а) на сбор и <a href="agreement.docx" download>обработку персональных данных</a>
+                  Я согласен(-а) на сбор и <a href="agreement.pdf" target="_blank">обработку персональных данных</a>
                 </Typography>
               }
             /> : ''}
