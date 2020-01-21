@@ -165,6 +165,11 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: 40,
         color: "#141414"
       }
+    },
+    root: {
+      maxWidth: 1280,
+      margin: '0 auto',
+      position: 'relative'
     }
   })
 );

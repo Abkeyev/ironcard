@@ -67,6 +67,15 @@ const useStyles = makeStyles((theme: Theme) =>
         right: 100,
         bottom: 0
       }
+    },
+    root: {
+      padding: 0
+    },
+    innerRoot: {
+      padding: "27px 42px 52px 52px",
+      maxWidth: 1280,
+      margin: '0 auto',
+      position: 'relative'
     }
   })
 );
@@ -100,40 +109,42 @@ const MobileBanking = () => {
 
   return (
     <Grid container className={classes.root} spacing={4}>
-      <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
-        <Typography className={classes.title}>
-          Мобильное приложение Starbanking
-        </Typography>
-        <Typography className={classes.description}>
-          Оплачивайте услуги, управляйте рассрочкой и кешбэком, пополняйте карту
-          онлайн с карт других банков РК
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item>
-            <img
-              onClick={() => onClickAppStore()}
-              className={classes.googlePlayAppStore}
-              src="app_store.svg"
-              alt="app_store"
-            />
-          </Grid>
-          <Grid item>
-            <img
-              onClick={() => onClickGooglePlay()}
-              className={classes.googlePlayAppStore}
-              src="google_play.svg"
-              alt="google_play"
-            />
+      <Grid item container className={classes.innerRoot} spacing={4}>
+        <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
+          <Typography className={classes.title}>
+            Мобильное приложение Starbanking
+          </Typography>
+          <Typography className={classes.description}>
+            Оплачивайте услуги, управляйте рассрочкой и кешбэком, пополняйте карту
+            онлайн с карт других банков РК
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid item>
+              <img
+                onClick={() => onClickAppStore()}
+                className={classes.googlePlayAppStore}
+                src="app_store.svg"
+                alt="app_store"
+              />
+            </Grid>
+            <Grid item>
+              <img
+                onClick={() => onClickGooglePlay()}
+                className={classes.googlePlayAppStore}
+                src="google_play.svg"
+                alt="google_play"
+              />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
-        <Grid container justify="center">
-          <img
-            className={classes.img}
-            src="froot-apps.svg"
-            alt="star_mobile_banking"
-          />
+        <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
+          <Grid container justify="center">
+            <img
+              className={classes.img}
+              src="froot-apps.svg"
+              alt="star_mobile_banking"
+            />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

@@ -113,6 +113,12 @@ const useStyles = makeStyles((theme: Theme) =>
           color: "#5B5B5B"
         }
       }
+    },
+    root: {
+      padding: "27px 42px 52px 52px",
+      maxWidth: 1280,
+      margin: '0 auto',
+      position: 'relative'
     }
   })
 );

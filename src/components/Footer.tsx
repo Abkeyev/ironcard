@@ -3,7 +3,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { paddingDownSm, rootSmXl } from './helper/DefaultStyle';
 
-const useStyles = makeStyles((theme: Theme) => 
+const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         [theme.breakpoints.down('sm')]: {
             mainRoot: {
@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme: Theme) =>
                 fontSize: 15,
                 color: 'white'
             }
+        },
+        root: {
+            maxWidth: 1280,
+            margin: '0 auto',
+            position: 'relative'
         }
     })
 )
@@ -38,7 +43,7 @@ const Footer = () => {
 
     const classes = useStyles({});
 
-    return(
+    return (
         <Grid container className={classes.mainRoot}>
             <Grid container className={classes.root}>
                 <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>

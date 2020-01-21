@@ -160,6 +160,11 @@ const useStyles = makeStyles((theme: Theme) =>
         alignItems: "center"
       }
     },
+    root: {
+      maxWidth: 1280,
+      margin: '0 auto',
+      position: 'relative'
+    },
     gridMargin: {
       "& > a": {
         textDecoration: "none",

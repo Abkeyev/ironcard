@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme: Theme) =>
         border: "1px solid #E8e8e8",
         boxSizing: "border-box",
         borderRadius: "8px",
-        width: "70%"
+        width: "60%"
       },
       icon: {
         width: "18px",
@@ -219,6 +219,11 @@ const useStyles = makeStyles((theme: Theme) =>
       paper: {
         padding: "36px 24px"
       }
+    },
+    root: {
+      maxWidth: 1280,
+      margin: '0 auto',
+      position: 'relative'
     },
     checkBoxLabel: {
       "& > a": {
@@ -447,7 +452,7 @@ const CardOrder = (props: any) => {
   };
 
   function uuid() {
-    return "xxxxxxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    return "xxxxxxxxxxxxxxxx".replace(/[xy]/g, function (c) {
       var r = (Math.random() * 16) | 0,
         v = c === "x" ? r : (r & 0x3) | 0x8;
       return v.toString();
@@ -780,10 +785,10 @@ const CardOrder = (props: any) => {
                       );
                     })
                   ) : (
-                    <MenuItem key="000000" value="000000">
-                      -
+                      <MenuItem key="000000" value="000000">
+                        -
                     </MenuItem>
-                  )}
+                    )}
                 </BccInputText>
               </Grid>
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -905,129 +910,129 @@ const CardOrder = (props: any) => {
             </div>
           </div>
         ) : (
-          <div className={classes.progress}>
-            <span>
-              {step === 3
-                ? `Шаг 2: ${stepText[step]}`
-                : step === 4
-                ? `Успешно! ${stepText[step]}`
-                : `Шаг ${step + 1}: ${stepText[step]}`}
-            </span>
-            <div className={classes.progressBar}>
-              <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
-              <div
-                style={{
-                  width: `${
-                    step === 3 ? "50" : step === 4 ? "100" : step * 50
-                  }%`
-                }}
-                className={classes.progressBarInner}
-              ></div>
+            <div className={classes.progress}>
+              <span>
+                {step === 3
+                  ? `Шаг 2: ${stepText[step]}`
+                  : step === 4
+                    ? `Успешно! ${stepText[step]}`
+                    : `Шаг ${step + 1}: ${stepText[step]}`}
+              </span>
+              <div className={classes.progressBar}>
+                <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
+                <div
+                  style={{
+                    width: `${
+                      step === 3 ? "50" : step === 4 ? "100" : step * 50
+                      }%`
+                  }}
+                  className={classes.progressBarInner}
+                ></div>
+              </div>
             </div>
-          </div>
-        )}
+          )}
         {window.document.location.search === "?success=true" ? (
           <div className={classes.successForm}>
             <img src="success.svg" alt="" />
             <span>Оплата прошла успешно</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
-            {generateForm(step)}
-            {step === 0 || step === 1 ? (
-              <FormControlLabel
-                control={
-                  <BccCheckbox
-                    name="checkbox"
-                    defaultChecked={true}
-                    checked={checkbox}
-                    onChange={() => handleCheckboxChange()}
-                  />
-                }
-                label={
-                  <Typography className={classes.checkBoxLabel}>
-                    Я согласен(-а) на сбор и{" "}
-                    <a href="agreement.pdf" target="_blank">
-                      обработку персональных данных
+            <form onSubmit={handleSubmit}>
+              {generateForm(step)}
+              {step === 0 || step === 1 ? (
+                <FormControlLabel
+                  control={
+                    <BccCheckbox
+                      name="checkbox"
+                      defaultChecked={true}
+                      checked={checkbox}
+                      onChange={() => handleCheckboxChange()}
+                    />
+                  }
+                  label={
+                    <Typography className={classes.checkBoxLabel}>
+                      Я согласен(-а) на сбор и{" "}
+                      <a href="agreement.pdf" target="_blank">
+                        обработку персональных данных
                     </a>
-                  </Typography>
-                }
-              />
-            ) : (
-              ""
-            )}
-            <Grid container style={{ marginTop: "15px" }} spacing={4}>
-              {step !== 2 ? (
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Grid container spacing={2}>
-                    <Grid
-                      item
-                      xl={false}
-                      lg={false}
-                      md={false}
-                      sm={false}
-                      xs={false}
-                    >
-                      <img
-                        src="card_order_security.svg"
-                        className={classes.icon}
-                        alt="order_security"
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      xl={true}
-                      lg={true}
-                      md={true}
-                      sm={true}
-                      xs={true}
-                    >
-                      <Typography className={classes.garant}>
-                        Мы гарантируем безопасность и сохранность ваших данных
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
+                    </Typography>
+                  }
+                />
               ) : (
-                ""
-              )}
-              <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
-                {step === 0 ? (
-                  <Button
-                    variant="outlined"
-                    className={classes.consult}
-                    disabled={!isValid()}
-                    type="submit"
-                  >
-                    Получить консультацию
-                  </Button>
-                ) : step === 3 && timer >= 1 ? (
-                  <span className={classes.timerSMS}>
-                    Отправить еще через ({timer})
-                  </span>
-                ) : step === 3 && timer < 1 ? (
-                  <Button variant="outlined" className={classes.sendSMSAgain}>
-                    Отправить повторно
-                  </Button>
-                ) : (
                   ""
                 )}
+              <Grid container style={{ marginTop: "15px" }} spacing={4}>
+                {step !== 2 ? (
+                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                    <Grid container spacing={2}>
+                      <Grid
+                        item
+                        xl={false}
+                        lg={false}
+                        md={false}
+                        sm={false}
+                        xs={false}
+                      >
+                        <img
+                          src="card_order_security.svg"
+                          className={classes.icon}
+                          alt="order_security"
+                        />
+                      </Grid>
+                      <Grid
+                        item
+                        xl={true}
+                        lg={true}
+                        md={true}
+                        sm={true}
+                        xs={true}
+                      >
+                        <Typography className={classes.garant}>
+                          Мы гарантируем безопасность и сохранность ваших данных
+                      </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ) : (
+                    ""
+                  )}
+                <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
+                  {step === 0 ? (
+                    <Button
+                      variant="outlined"
+                      className={classes.consult}
+                      disabled={!isValid()}
+                      type="submit"
+                    >
+                      Получить консультацию
+                  </Button>
+                  ) : step === 3 && timer >= 1 ? (
+                    <span className={classes.timerSMS}>
+                      Отправить еще через ({timer})
+                  </span>
+                  ) : step === 3 && timer < 1 ? (
+                    <Button variant="outlined" className={classes.sendSMSAgain}>
+                      Отправить повторно
+                  </Button>
+                  ) : (
+                          ""
+                        )}
+                </Grid>
+                <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
+                  <Button
+                    disabled={!isValid()}
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    className={classes.submit}
+                    onClick={() => nextButton(false)}
+                  >
+                    {buttonText[step]}
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
-                <Button
-                  disabled={!isValid()}
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  className={classes.submit}
-                  onClick={() => nextButton(false)}
-                >
-                  {buttonText[step]}
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        )}
+            </form>
+          )}
       </Paper>
     </Grid>
   );

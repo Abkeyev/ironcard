@@ -91,8 +91,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     [theme.breakpoints.between("sm", "xl")]: {
       root: {
-        backgroundColor: "#FAFAFA",
-        padding: "27px 42px 52px 52px"
+        backgroundColor: "#FAFAFA"
       },
       mainTitle: {
         fontStyle: "normal",
@@ -188,6 +187,12 @@ const useStyles = makeStyles((theme: Theme) =>
         width: "15px",
         height: "15px"
       }
+    },
+    innerRoot: {
+      padding: "27px 42px 52px 52px",
+      maxWidth: 1280,
+      margin: '0 auto',
+      position: 'relative'
     }
   })
 );
@@ -207,12 +212,12 @@ const Benefits = (props: any) => {
 
   return (
     <Grid container className={classes.root}>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
         <Typography className={classes.mainTitle}>
           Преимущества VISA Infinite
         </Typography>
       </Grid>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
         <Grid container spacing={2}>
           <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
             <Grid className={classes.paper} container alignItems="center">

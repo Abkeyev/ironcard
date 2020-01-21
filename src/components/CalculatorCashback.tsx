@@ -237,6 +237,12 @@ const useStyles = makeStyles((theme: Theme) =>
       resultOrderCard: {
         width: "100%"
       }
+    },
+    innerRoot: {
+      padding: "27px 42px 52px 52px!important",
+      maxWidth: 1280,
+      margin: '0 auto',
+      position: 'relative'
     }
   })
 );
@@ -257,10 +263,10 @@ const CaclulatorCashBack = (props: any) => {
 
   return (
     <Grid container className={classes.root} spacing={4}>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
         <Typography className={classes.title}>Калькулятор кешбэка</Typography>
       </Grid>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
         <Grid container justify="space-between">
           <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
             <Grid container>

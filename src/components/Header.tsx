@@ -22,7 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
         transform: "scale(.9)"
       }
     },
-
+    root: {
+      maxWidth: 1280,
+      margin: '0 auto',
+      position: 'relative'
+    },
     [theme.breakpoints.down("sm")]: {
       root: {
         backgroundSize: "auto",

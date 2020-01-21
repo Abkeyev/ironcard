@@ -3,13 +3,13 @@ import { Grid, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { paddingDownSm, rootSmXl } from './helper/DefaultStyle';
 
-const useStyles = makeStyles((theme: Theme) => 
+const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         [theme.breakpoints.down('sm')]: {
             root: {
                 padding: paddingDownSm
             },
-            mainTitle: {                  
+            mainTitle: {
                 fontStyle: 'normal',
                 textAlign: 'center',
                 marginBottom: 30,
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 left: '50%',
                 transform: 'translate(-50%, -50%)'
             },
-            title: {            
+            title: {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '18px',
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 lineHeight: '20px',
                 marginBottom: 10
             },
-            description: {            
+            description: {
                 fontStyle: 'normal',
                 fontWeight: 'normal',
                 fontSize: '16px',
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         [theme.breakpoints.between('sm', 'xl')]: {
             ...rootSmXl,
-            mainTitle: {                  
+            mainTitle: {
                 fontStyle: 'normal',
                 textAlign: 'center',
                 marginBottom: 30,
@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 left: '50%',
                 transform: 'translate(-50%, -50%)'
             },
-            title: {            
+            title: {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '18px',
@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 lineHeight: '20px',
                 margin: '10px 0'
             },
-            description: {            
+            description: {
                 fontStyle: 'normal',
                 fontWeight: 'normal',
                 fontSize: '16px',
@@ -135,6 +135,11 @@ const useStyles = makeStyles((theme: Theme) =>
             title: {
                 marginBottom: 10
             }
+        },
+        root: {
+            maxWidth: 1280,
+            margin: '0 auto',
+            position: 'relative'
         }
     })
 )
@@ -143,7 +148,7 @@ const BestCard = (props: any) => {
 
     const classes = useStyles({});
 
-    return(
+    return (
         <Grid container className={classes.root}>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <Typography className={classes.mainTitle}>Лучшее для вас</Typography>
@@ -157,9 +162,9 @@ const BestCard = (props: any) => {
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
                                 <Typography className={classes.title}>Кэшбэк с покупок</Typography>
-                                <Typography className={classes.description}>· 2% за все операции<br/>
-· +1% при наличии вклада от 1 000 000 до 6 000 000 ₸<br/>
-· +2% при наличии вклада от 6 000 000 ₸</Typography>
+                                <Typography className={classes.description}>· 2% за все операции<br />
+                                    · +1% при наличии вклада от 1 000 000 до 6 000 000 ₸<br />
+                                    · +2% при наличии вклада от 6 000 000 ₸</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -170,7 +175,7 @@ const BestCard = (props: any) => {
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
                                 <Typography className={classes.title}>Бесплатное посещение бизнес-залов по всему миру</Typography>
-                                <Typography className={classes.description}>· 6 проходов в бизнес-зал аэропорта г. Нур-Султан<br/>
+                                <Typography className={classes.description}>· 6 проходов в бизнес-зал аэропорта г. Нур-Султан<br />
                                     · Более 1000 бизнес-залов во всем мире</Typography>
                             </Grid>
                         </Grid>
@@ -182,7 +187,7 @@ const BestCard = (props: any) => {
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
                                 <Typography className={classes.title}>Бесплатные переводы между картами любых банков</Typography>
-                                <Typography className={classes.description}>· РК - безлимитно<br/>· зарубеж - до 1 000 000 ₸</Typography>
+                                <Typography className={classes.description}>· РК - безлимитно<br />· зарубеж - до 1 000 000 ₸</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
