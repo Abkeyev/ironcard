@@ -647,7 +647,7 @@ const CardOrder = (props: any) => {
   const isValid = () => {
     if (step === 0) {
       return (
-        checkbox && name.length > 1 && phone.replace("_", "").length === 17
+        checkbox && name.length > 1 && phone.replace("_", "").length === 16
       );
     } else if (step === 3) {
       return code.length > 1;
