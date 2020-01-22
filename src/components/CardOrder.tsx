@@ -658,7 +658,7 @@ const CardOrder = (props: any) => {
         city.length > 1 &&
         branchName.length > 1 &&
         iin.length === 12 &&
-        phone.replace("_", "").length === 17 &&
+        phone.replace("_", "").length === 16 &&
         email.length > 1
       );
     } else {
