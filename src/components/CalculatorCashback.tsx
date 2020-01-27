@@ -241,8 +241,8 @@ const useStyles = makeStyles((theme: Theme) =>
     innerRoot: {
       padding: "27px 42px 52px 52px!important",
       maxWidth: 1280,
-      margin: '0 auto',
-      position: 'relative'
+      margin: "0 auto",
+      position: "relative"
     }
   })
 );
@@ -251,7 +251,7 @@ const CaclulatorCashBack = (props: any) => {
   const classes = useStyles({});
 
   const [spendingSum, setSpendingSum] = React.useState(300000);
-  const cashback = (spendingSum * 2) / 100;
+  const cashback = (spendingSum * 4) / 100;
 
   const onClickIssue = () => {
     ReactGA.event({
@@ -263,10 +263,26 @@ const CaclulatorCashBack = (props: any) => {
 
   return (
     <Grid container className={classes.root} spacing={4}>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
+      <Grid
+        item
+        xl={12}
+        lg={12}
+        md={12}
+        sm={12}
+        xs={12}
+        className={classes.innerRoot}
+      >
         <Typography className={classes.title}>Калькулятор кешбэка</Typography>
       </Grid>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
+      <Grid
+        item
+        xl={12}
+        lg={12}
+        md={12}
+        sm={12}
+        xs={12}
+        className={classes.innerRoot}
+      >
         <Grid container justify="space-between">
           <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
             <Grid container>
@@ -319,7 +335,7 @@ const CaclulatorCashBack = (props: any) => {
               </Grid>
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <Typography className={classes.note}>
-                  * В расчет для примера взят кешбэк на все операции 2%
+                  * В расчет для примера взят кешбэк на все операции 4%
                 </Typography>
               </Grid>
             </Grid>
@@ -330,7 +346,7 @@ const CaclulatorCashBack = (props: any) => {
                 Ваш кешбэк с картой #IronCard
               </Typography>
               <Typography align="center" className={classes.resultSum}>
-                {cashback} ₸
+                {cashback > 100000 ? 100000 : cashback} ₸
               </Typography>
               <Typography align="center">
                 <Button
