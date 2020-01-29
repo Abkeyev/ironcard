@@ -496,7 +496,7 @@ const CardOrder = (props: any) => {
       .add(-6, "hours")
       .format("YYYYMMDDHHmmss");
     const backref = "https://www.bcc.kz";
-    const value = `5150003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`;
+    const value = `5150003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}1${localGMT()}${timestamp.length}${timestamp}11${uid.length}${uid}`;
     var shaObj = new jsSHA("SHA-1", "TEXT");
     shaObj.setHMACKey(xor, "HEX");
     shaObj.update(value);
