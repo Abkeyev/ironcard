@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     root: {
       maxWidth: 1280,
-      margin: '0 auto',
-      position: 'relative'
+      margin: "0 auto",
+      position: "relative"
     },
     [theme.breakpoints.down("sm")]: {
       root: {
@@ -465,7 +465,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const calculateTimeLeft = () => {
-  const difference = +new Date("2020-02-01") - +new Date();
+  const difference = +new Date("2020-03-01") - +new Date();
   let timeLeft: any = {};
 
   if (difference > 0) {
@@ -572,7 +572,7 @@ const Header = (props: any) => {
                     style={{ zIndex: 4 }}
                   >
                     <Typography className={classes.saleText}>
-                      Успейте оформить со скидкой 50% до конца января
+                      Успейте оформить со скидкой 50% до конца февраля
                     </Typography>
                   </Grid>
                   <Grid
@@ -585,7 +585,10 @@ const Header = (props: any) => {
                     style={{ zIndex: 3 }}
                   >
                     <Typography className={classes.timer}>
-                      {days} : {hours} : {minutes} : {seconds}
+                      {days > 9 ? days : `0${days}`} :{" "}
+                      {hours > 9 ? hours : `0${hours}`} :{" "}
+                      {minutes > 9 ? minutes : `0${minutes}`} :{" "}
+                      {seconds > 9 ? seconds : `0${seconds}`}
                     </Typography>
                   </Grid>
                   <Grid

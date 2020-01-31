@@ -475,10 +475,10 @@ const CardOrder = (props: any) => {
     return res;
   }
 
-  const localGMT = () => {
-    const date = new Date();
-    return (-1 * date.getTimezoneOffset()) / 60;
-  };
+  // const localGMT = () => {
+  //   const date = new Date();
+  //   return (-1 * date.getTimezoneOffset()) / 60;
+  // };
 
   const generateUrl = () => {
     // const hex1 = "690B5589573ACB3608DB7395A319B175";
