@@ -7,7 +7,6 @@ import {
   Theme,
   useTheme
 } from "@material-ui/core/styles";
-import moment from "moment";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -20,6 +19,8 @@ import Timer from "./Timer";
 import { BccInputText } from "./CustomComponents";
 import axios from "axios";
 import ym from "react-yandex-metrika";
+
+var momentTz = require("moment-timezone");
 
 interface Branch {
   code: string;
@@ -492,16 +493,17 @@ const CardOrder = (props: any) => {
     const terminal = "90030556";
     // const terminal = "88888881";
     const nameOnCard = cardName.replace(/ /g, "-");
-    const timestamp = moment()
+    const timestamp = momentTz()
+      .tz("Asia/Almaty")
       .add(-6, "hours")
       .format("YYYYMMDDHHmmss");
     const backref = "https://www.bcc.kz";
-    const value = `5150003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}1${localGMT()}${timestamp.length}${timestamp}11${uid.length}${uid}`;
+    const value = `5150003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`;
     var shaObj = new jsSHA("SHA-1", "TEXT");
     shaObj.setHMACKey(xor, "HEX");
     shaObj.update(value);
     const pSign = shaObj.getHMAC("HEX").toUpperCase();
-    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=${localGMT()}&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
+    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
     // let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
     window.location.replace(url);
     setSrc(url);
