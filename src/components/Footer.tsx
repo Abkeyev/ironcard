@@ -47,7 +47,7 @@ const Footer = () => {
         <Grid container className={classes.mainRoot}>
             <Grid container className={classes.root}>
                 <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                    <Typography className={classes.myFont}>© 2000 - 2019 АО "Банк ЦентрКредит"</Typography>
+                    <Typography className={classes.myFont}>© 2000 - 2020 АО "Банк ЦентрКредит"</Typography>
                     <Typography className={classes.myFont}>Все права защищены.</Typography>
                 </Grid>
                 <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
