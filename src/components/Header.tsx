@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Button, Typography } from "@material-ui/core";
+import { Grid, Button, Typography, MenuItem, Select } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { paddingDownSm, rootSmXl } from "./helper/DefaultStyle";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -460,6 +461,18 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: 8,
         padding: 32
       }
+    },
+    select: {
+      color: "white",
+      "&:before": {
+        borderColor: "white"
+      },
+      "&:after": {
+        borderColor: "white"
+      }
+    },
+    icon: {
+      fill: "white"
     }
   })
 );
@@ -482,6 +495,11 @@ const calculateTimeLeft = () => {
 
 const Header = (props: any) => {
   const classes = useStyles({});
+  const { t, i18n } = useTranslation();
+
+  const handleLangChange = (lang: any) => {
+    props.changeLang(lang);
+  };
 
   const [, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -509,7 +527,7 @@ const Header = (props: any) => {
     <Grid container className={classes.mainRoot}>
       <Grid container className={classes.root}>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-          <Grid container>
+          <Grid container justify="space-between">
             <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
               <div className={classes.logo_div}>
                 <img
@@ -518,6 +536,29 @@ const Header = (props: any) => {
                   alt="logo-bcc"
                 />
               </div>
+            </Grid>
+            <Grid
+              item
+              xl={6}
+              lg={6}
+              md={6}
+              sm={6}
+              xs={6}
+              style={{ textAlign: "right", zIndex: 10 }}
+            >
+              <Select
+                className={classes.select}
+                value={props.lang}
+                onChange={(e: any) => handleLangChange(e.target.value)}
+                inputProps={{
+                  classes: {
+                    icon: classes.icon
+                  }
+                }}
+              >
+                <MenuItem value="ru">Рус</MenuItem>
+                <MenuItem value="kz">Каз</MenuItem>
+              </Select>
             </Grid>
           </Grid>
         </Grid>
@@ -533,7 +574,7 @@ const Header = (props: any) => {
               style={{ zIndex: 5 }}
             >
               <Typography className={classes.cardTitle}>
-                Первая бесконтактная
+                {t("header.title")}
                 <br />
                 металлическая карта в Казахстане
               </Typography>
