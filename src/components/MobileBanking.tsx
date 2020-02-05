@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,6 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MobileBanking = () => {
   const classes = useStyles({});
+  const { t } = useTranslation();
 
   const onClickAppStore = () => {
     ReactGA.event({
@@ -112,11 +114,10 @@ const MobileBanking = () => {
       <Grid item container className={classes.innerRoot} spacing={4}>
         <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
           <Typography className={classes.title}>
-            Мобильное приложение Starbanking
+            {t("block_7.title_main")}
           </Typography>
           <Typography className={classes.description}>
-            Оплачивайте услуги, управляйте рассрочкой и кешбэком, пополняйте карту
-            онлайн с карт других банков РК
+            {t("block_7.subtitle_2")}
           </Typography>
           <Grid container spacing={3}>
             <Grid item>

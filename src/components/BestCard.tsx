@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { paddingDownSm, rootSmXl } from './helper/DefaultStyle';
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -147,11 +148,12 @@ const useStyles = makeStyles((theme: Theme) =>
 const BestCard = (props: any) => {
 
     const classes = useStyles({});
+    const { t, i18n } = useTranslation();
 
     return (
         <Grid container className={classes.root}>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                <Typography className={classes.mainTitle}>Лучшее для вас</Typography>
+                <Typography className={classes.mainTitle}>{t("block_2.title_main")}</Typography>
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <Grid container spacing={2}>
@@ -161,10 +163,10 @@ const BestCard = (props: any) => {
                                 <img src="percent.svg" className={classes.icon} alt="percent" />
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Кэшбэк с покупок</Typography>
-                                <Typography className={classes.description}>· 2% за все операции<br />
-                                    · +1% при наличии вклада от 1 000 000 до 6 000 000 ₸<br />
-                                    · +2% при наличии вклада от 6 000 000 ₸</Typography>
+                                <Typography className={classes.title}>{t("block_2.subtitle_desc")}</Typography>
+                                <Typography className={classes.description}>{t("block_2.title_2_desc")}<br />
+                                    {t("block_2.subtitle_2_desc")}<br />
+                                    {t("block_2.subtitle_2_1_desc")}</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -174,9 +176,9 @@ const BestCard = (props: any) => {
                                 <img src="repeat.svg" className={classes.icon} alt="repeat" />
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Бесплатное посещение бизнес-залов по всему миру</Typography>
-                                <Typography className={classes.description}>· 6 проходов в бизнес-зал аэропорта г. Нур-Султан<br />
-                                    · Более 1000 бизнес-залов во всем мире</Typography>
+                                <Typography className={classes.title}>{t("block_2.title_3_desc")}</Typography>
+                                <Typography className={classes.description}>{t("block_2.subtitle_3_desc")}<br />
+                                    {t("block_2.subtitle_3_1_desc")}</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -186,8 +188,8 @@ const BestCard = (props: any) => {
                                 <img src="card-small.svg" className={classes.icon} alt="card" />
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Бесплатные переводы между картами любых банков</Typography>
-                                <Typography className={classes.description}>· РК - безлимитно<br />· зарубеж - до 1 000 000 ₸</Typography>
+                                <Typography className={classes.title}>{t("block_2.subtitle_3_2_desc")}</Typography>
+                                <Typography className={classes.description}>{t("block_2.title_4_desc")}<br />{t("block_2.subtitle_4_desc")}</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -197,15 +199,15 @@ const BestCard = (props: any) => {
                                 <img src="guard.svg" className={classes.icon} alt="guard" />
                             </Grid>
                             <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                <Typography className={classes.title}>Страхование до 1 000 000 $ для владельцев и членов семьи</Typography>
+                                <Typography className={classes.title}>{t("block_2.subtitle_4_1_desc")}</Typography>
                                 <Grid container xl={true} lg={true} md={true} sm={12} xs={12}>
                                     <Grid item xl={true} lg={true} md={true} sm={12} xs={12}>
-                                        <Typography className={classes.description}>·  медицинская помощь</Typography>
-                                        <Typography className={classes.description}>·  отмена рейса</Typography>
+                                        <Typography className={classes.description}>{t("block_2.title_5_desc")}</Typography>
+                                        <Typography className={classes.description}> {t("block_2.subtitle_5_desc")}</Typography>
                                     </Grid>
                                     <Grid item xl={true} lg={true} md={true} sm={12} xs={12}>
-                                        <Typography className={classes.description}>·  потеря багажа</Typography>
-                                        <Typography className={classes.description}>·  защита покупок</Typography>
+                                        <Typography className={classes.description}>{t("block_2.subtitle_5_1_desc")}</Typography>
+                                        <Typography className={classes.description}> {t("block_2.subtitle_5_1_desc_1")}</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>

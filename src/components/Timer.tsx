@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -90,6 +91,7 @@ const calculateTimeLeft = () => {
 
 const Timer = (props: any) => {
   const classes = useStyles({});
+  const { t } = useTranslation();
 
   const [, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -107,7 +109,7 @@ const Timer = (props: any) => {
 
   return (
     <div className={classes.timerBox}>
-      <h1>Дней до завершения акции</h1>
+      <h1>{t("block_6.subtitle_desc_19")}</h1>
       <span>
         {days > 9 ? days : `0${days}`} : {hours > 9 ? hours : `0${hours}`} :{" "}
         {minutes > 9 ? minutes : `0${minutes}`} :{" "}

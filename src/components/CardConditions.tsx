@@ -4,6 +4,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import { rootSmXl } from "./helper/DefaultStyle";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -125,6 +126,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CardConditions = (props: any) => {
   const classes = useStyles({});
+  const { t, i18n } = useTranslation();
 
   const onClickOrder = () => {
     ReactGA.event({
@@ -145,7 +147,7 @@ const CardConditions = (props: any) => {
         <Grid container>
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
             <Typography className={classes.title}>
-              Условия обслуживания карты
+              {t("block_4.title_main")}
             </Typography>
           </Grid>
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -171,17 +173,17 @@ const CardConditions = (props: any) => {
                 className={classes.cardText}
               >
                 <h1>
-                  Пользуйтесь картой бесплатно, если выполнено одно из условий:
+                  {t("block_4.title_1_desc")}
                 </h1>
                 <p>
-                  1. Транзакции по карте в месяц от 1 000 000 ₸<br />
-                  2. Депозит/Остаток на карте от 15 000 000 ₸
+                  1. {t("block_4.subtitle_1_desc")}<br />
+                  2. {t("block_4.title_2_desc")}
                 </p>
                 <Button
                   onClick={() => onClickOrder()}
                   className={classes.resultOrderCard}
                 >
-                  Заказать карту
+                  {t("block_4.button_main")}
                 </Button>
               </Grid>
             </Grid>

@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -199,6 +200,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Benefits = (props: any) => {
   const classes = useStyles({});
+  const { t, i18n } = useTranslation();
   const onClickIssue = () => {
     ReactGA.event({
       category: "BccIronCard_all_benefits_visa",
@@ -214,7 +216,7 @@ const Benefits = (props: any) => {
     <Grid container className={classes.root}>
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
         <Typography className={classes.mainTitle}>
-          Преимущества VISA Infinite
+          {t("block_3.title_main")}
         </Typography>
       </Grid>
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
@@ -238,11 +240,10 @@ const Benefits = (props: any) => {
               </Grid>
               <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
                 <Typography className={classes.title}>
-                  Консьерж-служба
+                  {t("block_3.subtitle_2_desc")}
                 </Typography>
                 <Typography className={classes.description}>
-                  Воспользуйтесь множеством услуг, доступных круглосуточно в
-                  телефонном режиме или онлайн с любой точки мира.
+                  {t("block_3.subtitle_3_desc")}
                 </Typography>
               </Grid>
             </Grid>
@@ -262,11 +263,10 @@ const Benefits = (props: any) => {
               </Grid>
               <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
                 <Typography className={classes.title}>
-                  Страхование поездок
+                  {t("block_3.subtitle_4_desc")}
                 </Typography>
                 <Typography className={classes.description}>
-                  Оплачивая поездку картой Visa Infinite, вы обеспечиваете себе
-                  полное страхование на время путешествий.
+                  {t("block_3.subtitle_5_desc")}
                 </Typography>
               </Grid>
             </Grid>
@@ -286,11 +286,10 @@ const Benefits = (props: any) => {
               </Grid>
               <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
                 <Typography className={classes.title}>
-                  Служба Поддержки
+                  {t("block_3.subtitle_6_desc")}
                 </Typography>
                 <Typography className={classes.description}>
-                  Круглосуточная помощь в случае потери вашей карты Visa, мы
-                  можем помочь в блокировании счета, отправке временной карты.
+                  {t("block_3.subtitle_7_desc")}
                 </Typography>
               </Grid>
             </Grid>
@@ -299,7 +298,7 @@ const Benefits = (props: any) => {
             <Grid className={classes.paper} container alignItems="center">
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <div className={classes.seeMore} onClick={() => onClickIssue()}>
-                  Все преимущества VISA
+                  {t("block_3.button_main")}
                 </div>
               </Grid>
             </Grid>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { paddingDownSm, rootSmXl } from './helper/DefaultStyle';
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -42,16 +43,17 @@ const useStyles = makeStyles((theme: Theme) =>
 const Footer = () => {
 
     const classes = useStyles({});
+    const { t } = useTranslation();
 
     return (
         <Grid container className={classes.mainRoot}>
             <Grid container className={classes.root}>
                 <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                    <Typography className={classes.myFont}>© 2000 - 2020 АО "Банк ЦентрКредит"</Typography>
-                    <Typography className={classes.myFont}>Все права защищены.</Typography>
+                    <Typography className={classes.myFont}>{t("footer.copyright_main")}</Typography>
+                    <Typography className={classes.myFont}>{t("footer.copyright_2_main")}</Typography>
                 </Grid>
                 <Grid item xl={6} lg={6} md={6} sm={6} xs={6}>
-                    <Typography className={classes.myFont}>Лицензия на проведение банковских и иных операций и деятельности на рынке ценных бумаг №1.2.25/195/34 от 28.01.2015 выданная НБ РК.</Typography>
+                    <Typography className={classes.myFont}>{t("footer.copyright_3_main")}</Typography>
                 </Grid>
             </Grid>
         </Grid>

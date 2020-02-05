@@ -19,6 +19,7 @@ import Timer from "./Timer";
 import { BccInputText } from "./CustomComponents";
 import axios from "axios";
 import ym from "react-yandex-metrika";
+import { useTranslation } from "react-i18next";
 
 var momentTz = require("moment-timezone");
 
@@ -381,24 +382,25 @@ const TextMaskCustom = (props: TextMaskCustomProps) => {
 
 const CardOrder = (props: any) => {
   const classes = useStyles({});
+  const { t, i18n } = useTranslation();
 
   const theme = useTheme();
 
   const isXS = useMediaQuery(theme.breakpoints.down("sm"));
 
   const stepText = [
-    "Заполнение данных",
-    "Заполнение общих данных",
-    "Оплата",
-    "Подтверждение номера телефона",
-    "Ожидайте звонка"
+    `${t("block_6.subtitle_desc_20")}`,
+    `${t("block_6.subtitle_desc_21")}`,
+    `${t("block_6.subtitle_desc_22")}`,
+    `${t("block_6.subtitle_desc_23")}`,
+    `${t("block_6.subtitle_desc_24")}`
   ];
   const buttonText = [
-    "Оформить карту",
-    "Перейти к оплате",
-    "Оплатить",
-    "Подтвердить",
-    "Купить онлайн"
+    `${t("block_6.subtitle_desc_25")}`,
+    `${t("block_6.subtitle_desc_26")}`,
+    `${t("block_6.subtitle_desc_27")}`,
+    `${t("block_6.subtitle_desc_28")}`,
+    `${t("block_6.subtitle_desc_29")}`
   ];
   const emailPrefix = [
     { label: "gmail.com", value: "@gmail.com" },
@@ -453,7 +455,7 @@ const CardOrder = (props: any) => {
   };
 
   function uuid() {
-    return "xxxxxxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    return "xxxxxxxxxxxxxxxx".replace(/[xy]/g, function (c) {
       var r = (Math.random() * 16) | 0,
         v = c === "x" ? r : (r & 0x3) | 0x8;
       return v.toString();
@@ -681,7 +683,7 @@ const CardOrder = (props: any) => {
               name="name"
               value={name}
               onChange={(e: any) => handleNameChange(e.target.value)}
-              label="Фамилия, имя и отчество"
+              label={t("block_6.subtitle_desc_11")}
               id="name"
             />
             <BccInputText
@@ -692,7 +694,7 @@ const CardOrder = (props: any) => {
               name="phone"
               value={phone}
               onChange={(e: any) => handlePhoneChange(e.target.value)}
-              label="Номер телефона"
+              label={t("block_6.subtitle_desc_12")}
               InputLabelProps={{
                 shrink: true
               }}
@@ -713,7 +715,7 @@ const CardOrder = (props: any) => {
               name="name"
               value={name}
               onChange={(e: any) => handleNameChange(e.target.value)}
-              label="Фамилия, имя и отчество"
+              label={t("block_6.subtitle_desc_11")}
               id="name"
             />
             <BccInputText
@@ -725,7 +727,7 @@ const CardOrder = (props: any) => {
               name="cardName"
               value={cardName}
               onChange={(e: any) => handleCardNameChange(e.target.value)}
-              label="Имя и фамилия на латинице"
+              label={t("block_6.subtitle_desc_13")}
               id="cardName"
             />
             <span className={classes.hintText}>
@@ -740,7 +742,7 @@ const CardOrder = (props: any) => {
               name="iin"
               value={iin}
               onChange={(e: any) => handleIinChange(e.target.value)}
-              label="ИИН"
+              label={t("block_6.subtitle_desc_14")}
               type="number"
               id="iin"
             />
@@ -748,7 +750,7 @@ const CardOrder = (props: any) => {
               <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
                 <BccInputText
                   fullWidth={true}
-                  label="Город"
+                  label={t("block_6.subtitle_desc_15")}
                   id="city"
                   name="city"
                   value={city}
@@ -769,7 +771,7 @@ const CardOrder = (props: any) => {
               <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
                 <BccInputText
                   fullWidth={true}
-                  label="Отделение для доставки"
+                  label={t("block_6.subtitle_desc_16")}
                   id="branchName"
                   name="branchName"
                   value={branchName}
@@ -787,10 +789,10 @@ const CardOrder = (props: any) => {
                       );
                     })
                   ) : (
-                    <MenuItem key="000000" value="000000">
-                      -
+                      <MenuItem key="000000" value="000000">
+                        -
                     </MenuItem>
-                  )}
+                    )}
                 </BccInputText>
               </Grid>
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -802,7 +804,7 @@ const CardOrder = (props: any) => {
                   name="phone"
                   value={phone}
                   onChange={(e: any) => handlePhoneChange(e.target.value)}
-                  label="Номер телефона"
+                  label={t("block_6.subtitle_desc_17")}
                   InputLabelProps={{
                     shrink: true
                   }}
@@ -857,7 +859,7 @@ const CardOrder = (props: any) => {
               name="code"
               value={code}
               onChange={(e: any) => handleCodeChange(e.target.value)}
-              label="Код подтверждения"
+              label={t("block_6.subtitle_desc_18")}
               id="code"
               type="number"
             />
@@ -875,7 +877,7 @@ const CardOrder = (props: any) => {
               name="code"
               value={code}
               onChange={(e: any) => handleCodeChange(e.target.value)}
-              label="Код подтверждения"
+              label={t("block_6.subtitle_desc_18")}
               id="code"
               type="number"
             />
@@ -898,13 +900,13 @@ const CardOrder = (props: any) => {
     >
       <Paper elevation={0} className={classes.paper}>
         <Typography className={classes.box}>
-          Заполните заявку и получите металлическую карту с 50% скидкой
+          {t("block_6.title_main")}
         </Typography>
         <Timer />
         {window.document.location.search === "?success=true" ? (
           <div className={classes.progress}>
             <div className={classes.progressBarSuccess}>
-              <span>Готово!</span>
+              <span>{t("block_6.subtitle_desc")}</span>
               <div
                 style={{ width: `100%` }}
                 className={classes.progressBarInnerSuccess}
@@ -912,129 +914,129 @@ const CardOrder = (props: any) => {
             </div>
           </div>
         ) : (
-          <div className={classes.progress}>
-            <span>
-              {step === 3
-                ? `Шаг 2: ${stepText[step]}`
-                : step === 4
-                ? `Успешно! ${stepText[step]}`
-                : `Шаг ${step + 1}: ${stepText[step]}`}
-            </span>
-            <div className={classes.progressBar}>
-              <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
-              <div
-                style={{
-                  width: `${
-                    step === 3 ? "50" : step === 4 ? "100" : step * 50
-                  }%`
-                }}
-                className={classes.progressBarInner}
-              ></div>
+            <div className={classes.progress}>
+              <span>
+                {step === 3
+                  ? `${t("block_6.subtitle_desc_2")} ${stepText[step]}`
+                  : step === 4
+                    ? `${t("block_6.subtitle_desc_3")} ${stepText[step]}`
+                    : `${t("block_6.subtitle_desc_1")} ${step + 1}: ${stepText[step]}`}
+              </span>
+              <div className={classes.progressBar}>
+                <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
+                <div
+                  style={{
+                    width: `${
+                      step === 3 ? "50" : step === 4 ? "100" : step * 50
+                      }%`
+                  }}
+                  className={classes.progressBarInner}
+                ></div>
+              </div>
             </div>
-          </div>
-        )}
+          )}
         {window.document.location.search === "?success=true" ? (
           <div className={classes.successForm}>
             <img src="success.svg" alt="" />
-            <span>Оплата прошла успешно</span>
+            <span>{t("block_6.subtitle_desc_4")}</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
-            {generateForm(step)}
-            {step === 0 || step === 1 ? (
-              <FormControlLabel
-                control={
-                  <BccCheckbox
-                    name="checkbox"
-                    defaultChecked={true}
-                    checked={checkbox}
-                    onChange={() => handleCheckboxChange()}
-                  />
-                }
-                label={
-                  <Typography className={classes.checkBoxLabel}>
-                    Я согласен(-а) на сбор и{" "}
-                    <a href="agreement.pdf" target="_blank">
-                      обработку персональных данных
-                    </a>
-                  </Typography>
-                }
-              />
-            ) : (
-              ""
-            )}
-            <Grid container style={{ marginTop: "15px" }} spacing={4}>
-              {step !== 2 ? (
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Grid container spacing={2}>
-                    <Grid
-                      item
-                      xl={false}
-                      lg={false}
-                      md={false}
-                      sm={false}
-                      xs={false}
-                    >
-                      <img
-                        src="card_order_security.svg"
-                        className={classes.icon}
-                        alt="order_security"
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      xl={true}
-                      lg={true}
-                      md={true}
-                      sm={true}
-                      xs={true}
-                    >
-                      <Typography className={classes.garant}>
-                        Мы гарантируем безопасность и сохранность ваших данных
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
+            <form onSubmit={handleSubmit}>
+              {generateForm(step)}
+              {step === 0 || step === 1 ? (
+                <FormControlLabel
+                  control={
+                    <BccCheckbox
+                      name="checkbox"
+                      defaultChecked={true}
+                      checked={checkbox}
+                      onChange={() => handleCheckboxChange()}
+                    />
+                  }
+                  label={
+                    <Typography className={classes.checkBoxLabel}>
+                      {t("block_6.subtitle_desc_5")}{" "}
+                      <a href="agreement.pdf" target="_blank">
+                        {t("block_6.subtitle_desc_6")}
+                      </a>
+                    </Typography>
+                  }
+                />
               ) : (
-                ""
-              )}
-              <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
-                {step === 0 ? (
-                  <Button
-                    variant="outlined"
-                    className={classes.consult}
-                    disabled={!isValid()}
-                    type="submit"
-                  >
-                    Получить консультацию
-                  </Button>
-                ) : step === 3 && timer >= 1 ? (
-                  <span className={classes.timerSMS}>
-                    Отправить еще через ({timer})
-                  </span>
-                ) : step === 3 && timer < 1 ? (
-                  <Button variant="outlined" className={classes.sendSMSAgain}>
-                    Отправить повторно
-                  </Button>
-                ) : (
                   ""
                 )}
+              <Grid container style={{ marginTop: "15px" }} spacing={4}>
+                {step !== 2 ? (
+                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                    <Grid container spacing={2}>
+                      <Grid
+                        item
+                        xl={false}
+                        lg={false}
+                        md={false}
+                        sm={false}
+                        xs={false}
+                      >
+                        <img
+                          src="card_order_security.svg"
+                          className={classes.icon}
+                          alt="order_security"
+                        />
+                      </Grid>
+                      <Grid
+                        item
+                        xl={true}
+                        lg={true}
+                        md={true}
+                        sm={true}
+                        xs={true}
+                      >
+                        <Typography className={classes.garant}>
+                          {t("block_6.subtitle_desc_7")}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ) : (
+                    ""
+                  )}
+                <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
+                  {step === 0 ? (
+                    <Button
+                      variant="outlined"
+                      className={classes.consult}
+                      disabled={!isValid()}
+                      type="submit"
+                    >
+                      {t("block_6.subtitle_desc_8")}
+                    </Button>
+                  ) : step === 3 && timer >= 1 ? (
+                    <span className={classes.timerSMS}>
+                      {t("block_6.subtitle_desc_9")} ({timer})
+                  </span>
+                  ) : step === 3 && timer < 1 ? (
+                    <Button variant="outlined" className={classes.sendSMSAgain}>
+                      {t("block_6.subtitle_desc_10")}
+                    </Button>
+                  ) : (
+                          ""
+                        )}
+                </Grid>
+                <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
+                  <Button
+                    disabled={!isValid()}
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    className={classes.submit}
+                    onClick={() => nextButton(false)}
+                  >
+                    {buttonText[step]}
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
-                <Button
-                  disabled={!isValid()}
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  className={classes.submit}
-                  onClick={() => nextButton(false)}
-                >
-                  {buttonText[step]}
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        )}
+            </form>
+          )}
       </Paper>
     </Grid>
   );

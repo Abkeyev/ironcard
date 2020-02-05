@@ -9,6 +9,7 @@ import {
 import NumberFormat from "react-number-format";
 import { rootSmXl } from "./helper/DefaultStyle";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const PrettoSlider = withStyles({
   root: {
@@ -249,6 +250,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CaclulatorCashBack = (props: any) => {
   const classes = useStyles({});
+  const { t } = useTranslation();
 
   const [spendingSum, setSpendingSum] = React.useState(300000);
   const cashback = (spendingSum * 4) / 100;
@@ -272,7 +274,7 @@ const CaclulatorCashBack = (props: any) => {
         xs={12}
         className={classes.innerRoot}
       >
-        <Typography className={classes.title}>Калькулятор кешбэка</Typography>
+        <Typography className={classes.title}> {t("block_5.title_main")}</Typography>
       </Grid>
       <Grid
         item
@@ -288,7 +290,7 @@ const CaclulatorCashBack = (props: any) => {
             <Grid container>
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <Typography className={classes.monthSpending}>
-                  Личные покупки в месяц
+                  {t("block_5.title_main_2")}
                 </Typography>
               </Grid>
               <Grid
@@ -335,7 +337,7 @@ const CaclulatorCashBack = (props: any) => {
               </Grid>
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <Typography className={classes.note}>
-                  * В расчет для примера взят кешбэк на все операции 4%
+                  * {t("block_5.title_main_3")}
                 </Typography>
               </Grid>
             </Grid>
@@ -343,7 +345,7 @@ const CaclulatorCashBack = (props: any) => {
           <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
             <Paper elevation={0} className={classes.result}>
               <Typography align="center" className={classes.resultTitle}>
-                Ваш кешбэк с картой #IronCard
+                {t("block_5.title_main_4")}
               </Typography>
               <Typography align="center" className={classes.resultSum}>
                 {cashback > 100000 ? 100000 : cashback} ₸
@@ -353,7 +355,7 @@ const CaclulatorCashBack = (props: any) => {
                   onClick={() => onClickIssue()}
                   className={classes.resultOrderCard}
                 >
-                  Заказать карту
+                  {t("block_5.button_main")}
                 </Button>
               </Typography>
             </Paper>

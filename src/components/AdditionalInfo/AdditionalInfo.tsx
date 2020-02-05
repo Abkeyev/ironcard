@@ -12,6 +12,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Tab from "./Tab";
 import { paddingDownSm } from "../helper/DefaultStyle";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const useStylesTarifs = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,38 +59,38 @@ const useStylesTarifs = makeStyles((theme: Theme) =>
 
 const Tarifs = () => {
   const classes = useStylesTarifs({});
+  const { t } = useTranslation();
 
   const rows = [
-    { code: "Тип карты", value: "Visa Infinite #IRonCard" },
-    { code: "Стоимость выпуска", value: "30 000 скидка 50% до конца февраля" },
-    { code: "Доставка", value: "до 2-х недель" },
+    { code: `${t("block_8.title_1_tab_1")}`, value: `${t("block_8.subtitle_1_tab_1")}` },
+    { code: `${t("block_8.title_2_tab_1")}`, value: `${t("block_8.subtitle_2_tab_1")}` },
+    { code: `${t("block_8.title_3_tab_1")}`, value: `${t("block_8.subtitle_3_tab_1")}` },
     {
-      code: "Стоимость обслуживания, мес",
+      code: `${t("block_8.title_4_tab_1")}`,
       value:
-        "Бесплатно в случае: <br/>1. Безналичная оплата в месяц от 1 000 000 ₸ <br/>2. Депозит Рахмет/Рахмет+ на сумму от 15 млн тенге (количество депозитов суммируется)<br/>3. Депозит в валюте от 40 тыс. евро или долларов<br/><span>В прочих случаях - 10 000 KZT в месяц</span>"
+        `${t("block_8.subtitle_4_tab_1")}`
     },
     {
-      code: "Кешбэк",
-      value:
-        "2% базовый<br/>+1% при наличии вклада от 1 000 000 до 6 000 000 ₸<br/>+2% при наличии вклада от 6 000 000 ₸"
+      code: `${t("block_8.title_5_tab_1")}`,
+      value: `${t("block_8.subtitle_5_tab_1")}`
     },
-    { code: "Кешбэк лимит в мес", value: "100 000 ₸" },
+    { code: `${t("block_8.title_6_tab_1")}`, value: `${t("block_8.subtitle_6_tab_1")}` },
     {
       code:
-        "Получение наличных<br/>(сторонние банкоматы РК)<br/><br/>Получение наличных<br/>(сторонние банкоматы мир)",
+        `${t("block_8.title_7_tab_1")}`,
       value:
-        "от 5 000 ₸ - 0 ₸<br/>до 5 000 ₸ - 100 ₸<br/>лимит в мес 3 000 000 ₸, свыше - 1% мин 250 ₸"
+        `${t("block_8.subtitle_7_tab_1")}`
     },
     {
-      code: "Переводы на карту любого банка РК",
-      value: "Бесплатно"
+      code: `${t("block_8.title_8_tab_1")}`,
+      value: `${t("block_8.subtitle_8_tab_1")}`
     },
     {
-      code: "Переводы на карту в зарубежный банк",
-      value: "1 000 000 - бесплатно<br/>свыше 1%, мин 250 ₸"
+      code: `${t("block_8.title_9_tab_1")}`,
+      value: `${t("block_8.subtitle_9_tab_1")}`
     },
-    { code: "Смс-обслуживание", value: "Бесплатно" },
-    { code: "Перевыпуск по утере", value: "80 000 ₸" }
+    { code: `${t("block_8.title_10_tab_1")}`, value: `${t("block_8.subtitle_10_tab_1")}` },
+    { code: `${t("block_8.title_11_tab_1")}`, value: `${t("block_8.subtitle_11_tab_1")}` }
   ];
 
   return (
@@ -114,16 +115,17 @@ const Tarifs = () => {
 
 const Conditions = () => {
   const classes = useStylesTarifs({});
+  const { t } = useTranslation();
 
   const rows = [
-    { code: "Кредитный лимит", value: "до 3 млн тенге" },
-    { code: "Выпуск", value: "Бесплатно" },
-    { code: "Годовое обслуживание", value: "Бесплатно" },
-    { code: "Беспроцентный период", value: "55 дней" },
-    { code: "Процентная ставка", value: "25%" },
-    { code: "Комиссия за снятие наличных", value: "25%" },
-    { code: "Процентная ставка", value: "4%" },
-    { code: "Комиссия за перевод в другие Банки", value: "4%" }
+    { code: `${t("block_8.title_12_tab_1")}`, value: `${t("block_8.subtitle_12_tab_1")}` },
+    { code: `${t("block_8.title_13_tab_1")}`, value: `${t("block_8.subtitle_10_tab_1")}` },
+    { code: `${t("block_8.title_14_tab_1")}`, value: `${t("block_8.subtitle_10_tab_1")}` },
+    { code: `${t("block_8.title_15_tab_1")}`, value: `${t("block_8.subtitle_13_tab_1")}` },
+    { code: `${t("block_8.title_16_tab_1")}`, value: "25%" },
+    { code: `${t("block_8.title_17_tab_1")}`, value: "25%" },
+    { code: `${t("block_8.title_18_tab_1")}`, value: "4%" },
+    { code: `${t("block_8.title_19_tab_1")}`, value: "4%" }
   ];
 
   return (
@@ -177,6 +179,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const AdditionalInfo = () => {
   const classes = useStyles({});
+  const { t } = useTranslation();
 
   const swipeTab = (index: number) => {
     const actionName =
@@ -191,12 +194,12 @@ const AdditionalInfo = () => {
   return (
     <Grid container className={classes.root}>
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-        <Typography className={classes.title}>Дополнительно</Typography>
+        <Typography className={classes.title}>{t("block_8.title_main")}</Typography>
       </Grid>
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
         <Tab
           onHandleChanged={(i: number) => swipeTab(i)}
-          menuTitle={["Тарифы"]}
+          menuTitle={[`${t("block_8.button_2_tab_2")}`]}
           pans={[<Tarifs />]}
         />
       </Grid>

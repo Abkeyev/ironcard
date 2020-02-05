@@ -576,7 +576,7 @@ const Header = (props: any) => {
               <Typography className={classes.cardTitle}>
                 {t("header.title")}
                 <br />
-                металлическая карта в Казахстане
+                {t("header.title_2")}
               </Typography>
             </Grid>
             <Grid
@@ -589,7 +589,7 @@ const Header = (props: any) => {
               style={{ zIndex: 5 }}
             >
               <Typography className={classes.cardWhatYourWant}>
-                Статус имеет значение!
+                {t("header.subtitle_desc")}
               </Typography>
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -613,7 +613,7 @@ const Header = (props: any) => {
                     style={{ zIndex: 4 }}
                   >
                     <Typography className={classes.saleText}>
-                      Успейте оформить со скидкой 50% до конца февраля
+                      {t("header.title_2_desc")}
                     </Typography>
                   </Grid>
                   <Grid
@@ -646,7 +646,7 @@ const Header = (props: any) => {
                       variant="contained"
                       className={classes.buttonOrderCard}
                     >
-                      Заказать карту
+                      {t("header.button_main")}
                     </Button>
                   </Grid>
                 </Grid>
@@ -657,15 +657,15 @@ const Header = (props: any) => {
         <Grid container id="secondHeader">
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
             <Typography className={classes.ironCard}>
-              <span>#IronCard</span> - мы объединили наши традиции и<br />
-              инновационные технологии
+              <span>#IronCard</span>{t("header.title_3")}<br />
+              {t("header.subtitle3_desc")}
             </Typography>
           </Grid>
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
             <Typography className={classes.ironCardDescriptionBlock}>
-              Карта подчеркивает статус и престиж владельца. Это высочайший
+              {t("header.title_4")}
               <br />
-              уровень заботы, безопасности и конфиденциальности
+              {t("header.subtitle4_desc")}
             </Typography>
           </Grid>
           <Grid
@@ -689,9 +689,9 @@ const Header = (props: any) => {
                 </div>
               </div>
               <span className={classes.circleUnderText}>
-                Первоклассная сталь
+                {t("header.subtitle5_desc")}
                 <br />
-                как для острых мечей
+                {t("header.subtitle5_1_desc")}
               </span>
             </Grid>
             <Grid
@@ -716,9 +716,9 @@ const Header = (props: any) => {
                 </div>
               </div>
               <span className={classes.circleUnderText}>
-                Современные технологии
+                {t("header.subtitle6_desc")}
                 <br />
-                для комфорта
+                {t("header.subtitle6_1_desc")}
               </span>
             </Grid>
             <Grid
@@ -739,8 +739,8 @@ const Header = (props: any) => {
                 alt="iconcard"
               />
               <span className={classes.circleUnderText}>
-                Карта всего <b>17 грамм</b>,<br />
-                <b>15 грамм</b> нержавеющей стали
+                {t("header.subtitle7_desc")} <b>17 грамм</b>,<br />
+                <b>15 грамм</b> {t("header.subtitle7_1_desc")}
               </span>
             </Grid>
           </Grid>
@@ -756,8 +756,8 @@ const Header = (props: any) => {
             className={classes.cardMFeatures}
           >
             <div className={classes.cardFeatures}>
-              Бесконтактная оплата
-              <span>В том числе Apple Pay</span>
+              {t("header.subtitle8_desc")}
+              <span>{t("header.subtitle8_1_desc")}</span>
             </div>
           </Grid>
           <Grid
@@ -771,7 +771,7 @@ const Header = (props: any) => {
           >
             <div className={classes.cardFeatures}>
               Visa Infinite
-              <span>Самый высокий уровень премиальной карты</span>
+              <span>{t("header.subtitle9_1_desc")}</span>
             </div>
           </Grid>
         </Grid>
