@@ -62,24 +62,33 @@ const Tarifs = () => {
   const { t } = useTranslation();
 
   const rows = [
-    { code: `${t("block_8.title_1_tab_1")}`, value: `${t("block_8.subtitle_1_tab_1")}` },
-    { code: `${t("block_8.title_2_tab_1")}`, value: `${t("block_8.subtitle_2_tab_1")}` },
-    { code: `${t("block_8.title_3_tab_1")}`, value: `${t("block_8.subtitle_3_tab_1")}` },
+    {
+      code: `${t("block_8.title_1_tab_1")}`,
+      value: `${t("block_8.subtitle_1_tab_1")}`
+    },
+    {
+      code: `${t("block_8.title_2_tab_1")}`,
+      value: `${t("block_8.subtitle_2_tab_1")}`
+    },
+    {
+      code: `${t("block_8.title_3_tab_1")}`,
+      value: `${t("block_8.subtitle_3_tab_1")}`
+    },
     {
       code: `${t("block_8.title_4_tab_1")}`,
-      value:
-        `${t("block_8.subtitle_4_tab_1")}`
+      value: `${t("block_8.subtitle_4_tab_1")}`
     },
     {
       code: `${t("block_8.title_5_tab_1")}`,
       value: `${t("block_8.subtitle_5_tab_1")}`
     },
-    { code: `${t("block_8.title_6_tab_1")}`, value: `${t("block_8.subtitle_6_tab_1")}` },
     {
-      code:
-        `${t("block_8.title_7_tab_1")}`,
-      value:
-        `${t("block_8.subtitle_7_tab_1")}`
+      code: `${t("block_8.title_6_tab_1")}`,
+      value: `${t("block_8.subtitle_6_tab_1")}`
+    },
+    {
+      code: `${t("block_8.title_7_tab_1")}`,
+      value: `${t("block_8.subtitle_7_tab_1")}`
     },
     {
       code: `${t("block_8.title_8_tab_1")}`,
@@ -89,8 +98,18 @@ const Tarifs = () => {
       code: `${t("block_8.title_9_tab_1")}`,
       value: `${t("block_8.subtitle_9_tab_1")}`
     },
-    { code: `${t("block_8.title_10_tab_1")}`, value: `${t("block_8.subtitle_10_tab_1")}` },
-    { code: `${t("block_8.title_11_tab_1")}`, value: `${t("block_8.subtitle_11_tab_1")}` }
+    {
+      code: `${t("block_8.title_10_tab_1")}`,
+      value: `${t("block_8.subtitle_10_tab_1")}`
+    },
+    {
+      code: `${t("block_8.title_11_tab_1")}`,
+      value: `${t("block_8.subtitle_11_tab_1")}`
+    },
+    {
+      code: `${t("block_8.title_12_tab_1")}`,
+      value: `${t("block_8.subtitle_12_tab_1")}`
+    }
   ];
 
   return (
@@ -118,10 +137,22 @@ const Conditions = () => {
   const { t } = useTranslation();
 
   const rows = [
-    { code: `${t("block_8.title_12_tab_1")}`, value: `${t("block_8.subtitle_12_tab_1")}` },
-    { code: `${t("block_8.title_13_tab_1")}`, value: `${t("block_8.subtitle_10_tab_1")}` },
-    { code: `${t("block_8.title_14_tab_1")}`, value: `${t("block_8.subtitle_10_tab_1")}` },
-    { code: `${t("block_8.title_15_tab_1")}`, value: `${t("block_8.subtitle_13_tab_1")}` },
+    {
+      code: `${t("block_8.title_12_tab_1")}`,
+      value: `${t("block_8.subtitle_12_tab_1")}`
+    },
+    {
+      code: `${t("block_8.title_13_tab_1")}`,
+      value: `${t("block_8.subtitle_10_tab_1")}`
+    },
+    {
+      code: `${t("block_8.title_14_tab_1")}`,
+      value: `${t("block_8.subtitle_10_tab_1")}`
+    },
+    {
+      code: `${t("block_8.title_15_tab_1")}`,
+      value: `${t("block_8.subtitle_13_tab_1")}`
+    },
     { code: `${t("block_8.title_16_tab_1")}`, value: "25%" },
     { code: `${t("block_8.title_17_tab_1")}`, value: "25%" },
     { code: `${t("block_8.title_18_tab_1")}`, value: "4%" },
@@ -194,7 +225,9 @@ const AdditionalInfo = () => {
   return (
     <Grid container className={classes.root}>
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-        <Typography className={classes.title}>{t("block_8.title_main")}</Typography>
+        <Typography className={classes.title}>
+          {t("block_8.title_main")}
+        </Typography>
       </Grid>
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
         <Tab
