@@ -105,10 +105,6 @@ const Tarifs = () => {
     {
       code: `${t("block_8.title_11_tab_1")}`,
       value: `${t("block_8.subtitle_11_tab_1")}`
-    },
-    {
-      code: `${t("block_8.title_12_tab_1")}`,
-      value: `${t("block_8.subtitle_12_tab_1")}`
     }
   ];
 
