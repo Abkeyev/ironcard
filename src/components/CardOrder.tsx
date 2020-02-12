@@ -455,7 +455,7 @@ const CardOrder = (props: any) => {
   };
 
   function uuid() {
-    return "xxxxxxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    return "xxxxxxxxxxxxxxxx".replace(/[xy]/g, function (c) {
       var r = (Math.random() * 16) | 0,
         v = c === "x" ? r : (r & 0x3) | 0x8;
       return v.toString();
@@ -620,6 +620,28 @@ const CardOrder = (props: any) => {
     ym("reachGoal", "get_consult");
 
     if (name && phone) {
+      const formData = new FormData();
+
+      formData.append('TELEPHONE', phone);
+      formData.append('NAME', name);
+      formData.append('SYSTEM_TITLE', "#IronCard");
+      formData.append('SYSTEM_POST_EVENT', "NEW_USER");
+      formData.append('SYSTEM_LINK', "https://www.bcc.kz/kartakarta");
+      formData.append('SYSTEM_IBLOCK_ID', "140");
+      formData.append('SYSTEM_NAME_ELEMENT', "NAME");
+      formData.append('SYSTEM_STATUS', "2877182");
+      formData.append('SYSTEM_LID', "S1");
+      formData.append('BCC_KEY', "1v5df35v");
+      formData.append('utm_source', "utm_source");
+      formData.append('utm_medium', "utm_medium");
+      formData.append('utm_campaign', "utm_campaign");
+      formData.append('utm_term', "utm_term");
+      formData.append('utm_content', "utm_content");
+
+      const response = fetch(`https://www.bcc.kz/local/tmpl/ajax/iblock_save.php`, {
+        method: 'POST',
+        body: formData
+      });
       api.card
         .order({ fio: name, phoneNumber: phone })
         .then((m: any) => {
@@ -789,10 +811,10 @@ const CardOrder = (props: any) => {
                       );
                     })
                   ) : (
-                    <MenuItem key="000000" value="000000">
-                      -
+                      <MenuItem key="000000" value="000000">
+                        -
                     </MenuItem>
-                  )}
+                    )}
                 </BccInputText>
               </Grid>
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -914,131 +936,131 @@ const CardOrder = (props: any) => {
             </div>
           </div>
         ) : (
-          <div className={classes.progress}>
-            <span>
-              {step === 3
-                ? `${t("block_6.subtitle_desc_2")} ${stepText[step]}`
-                : step === 4
-                ? `${t("block_6.subtitle_desc_3")} ${stepText[step]}`
-                : `${t("block_6.subtitle_desc_1")} ${step + 1}: ${
+            <div className={classes.progress}>
+              <span>
+                {step === 3
+                  ? `${t("block_6.subtitle_desc_2")} ${stepText[step]}`
+                  : step === 4
+                    ? `${t("block_6.subtitle_desc_3")} ${stepText[step]}`
+                    : `${t("block_6.subtitle_desc_1")} ${step + 1}: ${
                     stepText[step]
-                  }`}
-            </span>
-            <div className={classes.progressBar}>
-              <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
-              <div
-                style={{
-                  width: `${
-                    step === 3 ? "50" : step === 4 ? "100" : step * 50
-                  }%`
-                }}
-                className={classes.progressBarInner}
-              ></div>
+                    }`}
+              </span>
+              <div className={classes.progressBar}>
+                <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
+                <div
+                  style={{
+                    width: `${
+                      step === 3 ? "50" : step === 4 ? "100" : step * 50
+                      }%`
+                  }}
+                  className={classes.progressBarInner}
+                ></div>
+              </div>
             </div>
-          </div>
-        )}
+          )}
         {window.document.location.search === "?success=true" ? (
           <div className={classes.successForm}>
             <img src="success.svg" alt="" />
             <span>{t("block_6.subtitle_desc_4")}</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
-            {generateForm(step)}
-            {step === 0 || step === 1 ? (
-              <FormControlLabel
-                control={
-                  <BccCheckbox
-                    name="checkbox"
-                    defaultChecked={true}
-                    checked={checkbox}
-                    onChange={() => handleCheckboxChange()}
-                  />
-                }
-                label={
-                  <Typography className={classes.checkBoxLabel}>
-                    {t("block_6.subtitle_desc_5")}{" "}
-                    <a href="agreement.pdf" target="_blank">
-                      {t("block_6.subtitle_desc_6")}
-                    </a>
-                  </Typography>
-                }
-              />
-            ) : (
-              ""
-            )}
-            <Grid container style={{ marginTop: "15px" }} spacing={4}>
-              {step !== 2 ? (
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Grid container spacing={2}>
-                    <Grid
-                      item
-                      xl={false}
-                      lg={false}
-                      md={false}
-                      sm={false}
-                      xs={false}
-                    >
-                      <img
-                        src="card_order_security.svg"
-                        className={classes.icon}
-                        alt="order_security"
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      xl={true}
-                      lg={true}
-                      md={true}
-                      sm={true}
-                      xs={true}
-                    >
-                      <Typography className={classes.garant}>
-                        {t("block_6.subtitle_desc_7")}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
+            <form onSubmit={handleSubmit}>
+              {generateForm(step)}
+              {step === 0 || step === 1 ? (
+                <FormControlLabel
+                  control={
+                    <BccCheckbox
+                      name="checkbox"
+                      defaultChecked={true}
+                      checked={checkbox}
+                      onChange={() => handleCheckboxChange()}
+                    />
+                  }
+                  label={
+                    <Typography className={classes.checkBoxLabel}>
+                      {t("block_6.subtitle_desc_5")}{" "}
+                      <a href="agreement.pdf" target="_blank">
+                        {t("block_6.subtitle_desc_6")}
+                      </a>
+                    </Typography>
+                  }
+                />
               ) : (
-                ""
-              )}
-              <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
-                {step === 0 ? (
-                  <Button
-                    variant="outlined"
-                    className={classes.consult}
-                    disabled={!isValid()}
-                    type="submit"
-                  >
-                    {t("block_6.subtitle_desc_8")}
-                  </Button>
-                ) : step === 3 && timer >= 1 ? (
-                  <span className={classes.timerSMS}>
-                    {t("block_6.subtitle_desc_9")} ({timer})
-                  </span>
-                ) : step === 3 && timer < 1 ? (
-                  <Button variant="outlined" className={classes.sendSMSAgain}>
-                    {t("block_6.subtitle_desc_10")}
-                  </Button>
-                ) : (
                   ""
                 )}
+              <Grid container style={{ marginTop: "15px" }} spacing={4}>
+                {step !== 2 ? (
+                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                    <Grid container spacing={2}>
+                      <Grid
+                        item
+                        xl={false}
+                        lg={false}
+                        md={false}
+                        sm={false}
+                        xs={false}
+                      >
+                        <img
+                          src="card_order_security.svg"
+                          className={classes.icon}
+                          alt="order_security"
+                        />
+                      </Grid>
+                      <Grid
+                        item
+                        xl={true}
+                        lg={true}
+                        md={true}
+                        sm={true}
+                        xs={true}
+                      >
+                        <Typography className={classes.garant}>
+                          {t("block_6.subtitle_desc_7")}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ) : (
+                    ""
+                  )}
+                <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
+                  {step === 0 ? (
+                    <Button
+                      variant="outlined"
+                      className={classes.consult}
+                      disabled={!isValid()}
+                      type="submit"
+                    >
+                      {t("block_6.subtitle_desc_8")}
+                    </Button>
+                  ) : step === 3 && timer >= 1 ? (
+                    <span className={classes.timerSMS}>
+                      {t("block_6.subtitle_desc_9")} ({timer})
+                  </span>
+                  ) : step === 3 && timer < 1 ? (
+                    <Button variant="outlined" className={classes.sendSMSAgain}>
+                      {t("block_6.subtitle_desc_10")}
+                    </Button>
+                  ) : (
+                          ""
+                        )}
+                </Grid>
+                <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
+                  <Button
+                    disabled={!isValid()}
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    className={classes.submit}
+                    onClick={() => nextButton(false)}
+                  >
+                    {buttonText[step]}
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
-                <Button
-                  disabled={!isValid()}
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  className={classes.submit}
-                  onClick={() => nextButton(false)}
-                >
-                  {buttonText[step]}
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        )}
+            </form>
+          )}
       </Paper>
     </Grid>
   );
