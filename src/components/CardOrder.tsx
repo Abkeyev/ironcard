@@ -631,7 +631,7 @@ const CardOrder = (props: any) => {
       formData.append('NAME', name);
       formData.append('SYSTEM_TITLE', "#IronCard");
       formData.append('SYSTEM_POST_EVENT', "NEW_USER");
-      formData.append('SYSTEM_LINK', "https://www.bcc.kz/kartakarta");
+      formData.append('SYSTEM_LINK', "https://www.bcc.kz/ironcard");
       formData.append('SYSTEM_IBLOCK_ID', "140");
       formData.append('SYSTEM_NAME_ELEMENT', "NAME");
       formData.append('SYSTEM_STATUS', "2877182");
