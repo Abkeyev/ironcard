@@ -379,7 +379,12 @@ const TextMaskCustom = (props: TextMaskCustomProps) => {
     />
   );
 };
-
+function getUrlParameter(name: string) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(window.location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
 const CardOrder = (props: any) => {
   const classes = useStyles({});
   const { t, i18n } = useTranslation();
@@ -632,11 +637,11 @@ const CardOrder = (props: any) => {
       formData.append('SYSTEM_STATUS', "2877182");
       formData.append('SYSTEM_LID', "S1");
       formData.append('BCC_KEY', "1v5df35v");
-      formData.append('utm_source', "utm_source");
-      formData.append('utm_medium', "utm_medium");
-      formData.append('utm_campaign', "utm_campaign");
-      formData.append('utm_term', "utm_term");
-      formData.append('utm_content', "utm_content");
+      formData.append('utm_source', getUrlParameter('utm_source'));
+      formData.append('utm_medium', getUrlParameter('utm_medium'));
+      formData.append('utm_campaign', getUrlParameter('utm_campaign'));
+      formData.append('utm_term', getUrlParameter('utm_term'));
+      formData.append('utm_content', getUrlParameter('utm_content'));
 
       const response = fetch(`https://www.bcc.kz/local/tmpl/ajax/iblock_save.php`, {
         method: 'POST',
