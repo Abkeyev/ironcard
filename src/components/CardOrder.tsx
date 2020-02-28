@@ -15,7 +15,6 @@ import MaskedInput from "react-maskedinput";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ReactGA from "react-ga";
 import api from "../api/Api";
-import Timer from "./Timer";
 import { BccInputText } from "./CustomComponents";
 import axios from "axios";
 import ym from "react-yandex-metrika";
