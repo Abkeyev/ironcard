@@ -215,7 +215,6 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       orderWrap: {
         marginTop: 32,
-        background: "linear-gradient(to right, #27ae60 0%, rgba(0,0,0,0) 50%)",
         borderRadius: 8,
         padding: 1,
         marginBottom: 110
@@ -223,7 +222,8 @@ const useStyles = makeStyles((theme: Theme) =>
       orderInner: {
         background: "#111111",
         borderRadius: 8,
-        padding: 32
+        padding: 32,
+        paddingLeft: 0
       }
     },
     [theme.breakpoints.down("xs")]: {
@@ -451,7 +451,6 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       orderWrap: {
         marginTop: 32,
-        background: "linear-gradient(to right, #27ae60 0%, rgba(0,0,0,0) 50%)",
         borderRadius: 8,
         padding: 1,
         marginBottom: 110
@@ -459,7 +458,8 @@ const useStyles = makeStyles((theme: Theme) =>
       orderInner: {
         background: "#111111",
         borderRadius: 8,
-        padding: 32
+        padding: 32,
+        paddingLeft: 0
       }
     },
     select: {
@@ -477,22 +477,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const calculateTimeLeft = () => {
-  const difference = +new Date("2020-03-01") - +new Date();
-  let timeLeft: any = {};
-
-  if (difference > 0) {
-    timeLeft = {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60)
-    };
-  }
-
-  return timeLeft;
-};
-
 const Header = (props: any) => {
   const classes = useStyles({});
   const { t, i18n } = useTranslation();
@@ -500,20 +484,6 @@ const Header = (props: any) => {
   const handleLangChange = (lang: any) => {
     props.changeLang(lang);
   };
-
-  const [, setTimeLeft] = useState(calculateTimeLeft());
-
-  useEffect(() => {
-    setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    });
-  });
-
-  const date = calculateTimeLeft();
-  const days = date.days;
-  const hours = date.hours;
-  const minutes = date.minutes;
-  const seconds = date.seconds;
 
   const eventGAOrderCard = () => {
     ReactGA.event({
@@ -610,35 +580,6 @@ const Header = (props: any) => {
                     md={12}
                     sm={12}
                     xs={12}
-                    style={{ zIndex: 4 }}
-                  >
-                    <Typography className={classes.saleText}>
-                      {t("header.title_2_desc")}
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    item
-                    xl={12}
-                    lg={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
-                    style={{ zIndex: 3 }}
-                  >
-                    <Typography className={classes.timer}>
-                      {days > 9 ? days : `0${days}`} :{" "}
-                      {hours > 9 ? hours : `0${hours}`} :{" "}
-                      {minutes > 9 ? minutes : `0${minutes}`} :{" "}
-                      {seconds > 9 ? seconds : `0${seconds}`}
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    item
-                    xl={12}
-                    lg={12}
-                    md={12}
-                    sm={12}
-                    xs={12}
                     style={{ zIndex: 3 }}
                   >
                     <Button
@@ -657,7 +598,9 @@ const Header = (props: any) => {
         <Grid container id="secondHeader">
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
             <Typography className={classes.ironCard}>
-              <span>#IronCard</span>{t("header.title_3")}<br />
+              <span>#IronCard</span>
+              {t("header.title_3")}
+              <br />
               {t("header.subtitle3_desc")}
             </Typography>
           </Grid>

@@ -55,7 +55,8 @@ const useStyles = makeStyles((theme: Theme) =>
         textAlign: "center",
         fontWeight: "bold",
         fontSize: "36px",
-        lineHeight: "40px"
+        lineHeight: "40px",
+        marginBottim: 20
       },
       checkBoxLabel: {
         fontStyle: "normal",
@@ -133,7 +134,8 @@ const useStyles = makeStyles((theme: Theme) =>
         textAlign: "center",
         fontWeight: "bold",
         fontSize: "36px",
-        lineHeight: "40px"
+        lineHeight: "40px",
+        marginBottim: 20
       },
       checkBoxLabel: {
         fontStyle: "normal",
@@ -196,7 +198,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       box: {
         fontSize: "24px",
-        lineHeight: "40px"
+        lineHeight: "40px",
+        marginBottim: 20
       },
       timerBox: {
         padding: "24px",
@@ -500,12 +503,12 @@ const CardOrder = (props: any) => {
       .add(-6, "hours")
       .format("YYYYMMDDHHmmss");
     const backref = "https://www.bcc.kz";
-    const value = `5150003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`;
+    const value = `5300003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`;
     var shaObj = new jsSHA("SHA-1", "TEXT");
     shaObj.setHMACKey(xor, "HEX");
     shaObj.update(value);
     const pSign = shaObj.getHMAC("HEX").toUpperCase();
-    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
+    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=30000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
     // let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
     window.location.replace(url);
     setSrc(url);
@@ -902,7 +905,6 @@ const CardOrder = (props: any) => {
         <Typography className={classes.box}>
           {t("block_6.title_main")}
         </Typography>
-        <Timer />
         {window.document.location.search === "?success=true" ? (
           <div className={classes.progress}>
             <div className={classes.progressBarSuccess}>
