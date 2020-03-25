@@ -34,6 +34,16 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: "8px",
         minHeight: 160
       },
+      paperCol: {
+        padding: "12px 0",
+        minHeight: 100
+      },
+      aPaper: {
+        textDecoration: 'none',
+        '&:hover': {
+          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'
+        }
+      },
       iconWrap: {
         padding: 30,
         border: "1px solid #7DCEA0",
@@ -115,7 +125,17 @@ const useStyles = makeStyles((theme: Theme) =>
         background: "#ffffff",
         boxSizing: "border-box",
         borderRadius: "8px",
+        minHeight: 100
+      },
+      paperCol: {
+        padding: "12px 0",
         minHeight: 160
+      },
+      aPaper: {
+        textDecoration: 'none',
+        '&:hover': {
+          textDecoration: 'underline',
+        }
       },
       iconWrap: {
         padding: 30,
@@ -294,8 +314,36 @@ const Benefits = (props: any) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-            <Grid className={classes.paper} container alignItems="center">
+
+          <Grid item xl={6} lg={6} md={12} sm={12} xs={12}>
+            <a href="Pamyatka_razmeweniya.pdf" target="_blank" className={classes.aPaper}>
+              <Grid className={classes.paper} container alignItems="center">
+                <Grid
+                  item
+                  className={classes.iconWrap}
+                  xl={false}
+                  lg={false}
+                  md={false}
+                  sm={false}
+                  xs={false}
+                >
+                  <img src="phone-alt.svg" className={classes.icon} alt="phone" />
+                </Grid>
+                <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
+                  <Typography className={classes.title}>
+                    {t("block_3.subtitle_8_desc")}
+                  </Typography>
+                  <Typography className={classes.description}>
+                    {t("block_3.subtitle_9_desc")}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </a>
+          </Grid>
+
+
+          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+            <Grid className={classes.paperCol} container alignItems="center">
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <div className={classes.seeMore} onClick={() => onClickIssue()}>
                   {t("block_3.button_main")}
@@ -303,6 +351,7 @@ const Benefits = (props: any) => {
               </Grid>
             </Grid>
           </Grid>
+
         </Grid>
       </Grid>
     </Grid>
