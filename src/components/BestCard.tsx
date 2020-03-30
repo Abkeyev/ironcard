@@ -88,7 +88,8 @@ const useStyles = makeStyles((theme: Theme) =>
                 background: '#FAFAFA',
                 boxSizing: 'border-box',
                 borderRadius: '8px',
-                minHeight: 160
+                minHeight: 160,
+                height: '100%'
             },
             iconWrap: {
                 padding: 30,
