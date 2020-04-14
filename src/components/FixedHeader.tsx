@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,8 +78,8 @@ const useStyles = makeStyles((theme: Theme) =>
     innerRoot: {
       padding: "21px 52px",
       maxWidth: 1280,
-      margin: '0 auto',
-      position: 'relative'
+      margin: "0 auto",
+      position: "relative"
     },
     header: {
       position: "fixed",
@@ -93,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "#ffffff",
       boxShadow: "0px 7px 25px rgba(29, 29, 29, 0.15)",
       transition: "all ease-in-out .3s"
-    },
+    }
   })
 );
 
@@ -101,6 +102,7 @@ let hide = true;
 
 const FixedHeader = (props: any) => {
   let [hide, setHide] = useState(true);
+  const { t, i18n } = useTranslation();
   useEffect(() => {
     window.document.addEventListener("scroll", d => {
       const doc = document;
@@ -123,10 +125,7 @@ const FixedHeader = (props: any) => {
   };
 
   return (
-    <Grid
-      container
-      className={hide ? classes.hide : classes.header}
-    >
+    <Grid container className={hide ? classes.hide : classes.header}>
       <Grid
         item
         container
@@ -167,7 +166,7 @@ const FixedHeader = (props: any) => {
                 className={classes.buttonOrderCard}
                 onClick={() => onClickOrder()}
               >
-                Заказать карту
+                {t("header.button_main")}
               </Button>
             </Grid>
           </Grid>

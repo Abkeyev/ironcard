@@ -5,7 +5,7 @@ import {
   createStyles,
   withStyles,
   Theme,
-  useTheme,
+  useTheme
 } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -19,6 +19,8 @@ import { BccInputText } from "./CustomComponents";
 import axios from "axios";
 import ym from "react-yandex-metrika";
 import { useTranslation } from "react-i18next";
+import spacetime from "spacetime";
+import moment from "moment";
 
 var momentTz = require("moment-timezone");
 
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
       root: {
         marginTop: "34px",
         padding: "27px 19px 52px 52px",
-        alignItems: "center",
+        alignItems: "center"
       },
       paper: {
         padding: "64px 72px",
@@ -44,29 +46,29 @@ const useStyles = makeStyles((theme: Theme) =>
         border: "1px solid #E8e8e8",
         boxSizing: "border-box",
         borderRadius: "8px",
-        width: "100%",
+        width: "100%"
       },
       icon: {
         width: "18px",
-        height: "19px",
+        height: "19px"
       },
       box: {
         textAlign: "center",
         fontWeight: "bold",
         fontSize: "36px",
         lineHeight: "40px",
-        marginBottom: 20,
+        marginBottom: 20
       },
       checkBoxLabel: {
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 16,
-        color: "black",
+        color: "black"
       },
       garant: {
         fontStyle: "normal",
         fontWeight: "normal",
-        fontSize: 14,
+        fontSize: 14
       },
       submit: {
         background: "#27AE60",
@@ -82,13 +84,13 @@ const useStyles = makeStyles((theme: Theme) =>
         height: "62px",
         "&:hover, &:active": {
           backgroundColor: "#7DCEA0",
-          boxShadow: "none",
+          boxShadow: "none"
         },
         "&:disabled": {
           backgroundColor: "#7DCEA0",
           color: "white",
-          opacity: 0.8,
-        },
+          opacity: 0.8
+        }
       },
       timerBox: {
         padding: "24px",
@@ -102,20 +104,20 @@ const useStyles = makeStyles((theme: Theme) =>
           fontWeight: "normal",
           padding: 0,
           fontSize: 16,
-          lineHeight: "24px",
+          lineHeight: "24px"
         },
         "& > span": {
           fontWeight: "bold",
           fontSize: 48,
-          lineHeight: "56px",
-        },
-      },
+          lineHeight: "56px"
+        }
+      }
     },
     [theme.breakpoints.between("md", "xl")]: {
       root: {
         marginTop: "34px",
         padding: "27px 19px 52px 52px",
-        alignItems: "center",
+        alignItems: "center"
       },
       paper: {
         padding: "64px 72px",
@@ -123,29 +125,29 @@ const useStyles = makeStyles((theme: Theme) =>
         border: "1px solid #E8e8e8",
         boxSizing: "border-box",
         borderRadius: "8px",
-        width: "60%",
+        width: "60%"
       },
       icon: {
         width: "18px",
-        height: "19px",
+        height: "19px"
       },
       box: {
         textAlign: "center",
         fontWeight: "bold",
         fontSize: "36px",
         lineHeight: "40px",
-        marginBottom: 20,
+        marginBottom: 20
       },
       checkBoxLabel: {
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 16,
-        color: "black",
+        color: "black"
       },
       garant: {
         fontStyle: "normal",
         fontWeight: "normal",
-        fontSize: 14,
+        fontSize: 14
       },
       submit: {
         background: "#27AE60",
@@ -161,13 +163,13 @@ const useStyles = makeStyles((theme: Theme) =>
         height: "62px",
         "&:hover, &:active": {
           backgroundColor: "#7DCEA0",
-          boxShadow: "none",
+          boxShadow: "none"
         },
         "&:disabled": {
           backgroundColor: "#7DCEA0",
           color: "white",
-          opacity: 0.8,
-        },
+          opacity: 0.8
+        }
       },
       timerBox: {
         padding: "24px",
@@ -181,24 +183,24 @@ const useStyles = makeStyles((theme: Theme) =>
           fontWeight: "normal",
           padding: 0,
           fontSize: 16,
-          lineHeight: "24px",
+          lineHeight: "24px"
         },
         "& > span": {
           fontWeight: "bold",
           fontSize: 48,
-          lineHeight: "56px",
-        },
-      },
+          lineHeight: "56px"
+        }
+      }
     },
     [theme.breakpoints.down("xs")]: {
       root: {
         marginTop: "34px",
-        padding: "27px 19px 52px 19px",
+        padding: "27px 19px 52px 19px"
       },
       box: {
         fontSize: "24px",
         lineHeight: "40px",
-        marginBottom: 20,
+        marginBottom: 20
       },
       timerBox: {
         padding: "24px",
@@ -212,30 +214,30 @@ const useStyles = makeStyles((theme: Theme) =>
           fontWeight: "normal",
           padding: 0,
           fontSize: 16,
-          lineHeight: "24px",
+          lineHeight: "24px"
         },
         "& > span": {
           fontWeight: "bold",
           fontSize: 36,
-          lineHeight: "56px",
-        },
+          lineHeight: "56px"
+        }
       },
       paper: {
-        padding: "36px 24px",
-      },
+        padding: "36px 24px"
+      }
     },
     root: {
       maxWidth: 1280,
       margin: "0 auto",
-      position: "relative",
+      position: "relative"
     },
     checkBoxLabel: {
       "& > a": {
         color: "#27AE60",
         "&:hover": {
-          color: "#7DCEA0",
-        },
-      },
+          color: "#7DCEA0"
+        }
+      }
     },
     progressBarSuccess: {
       background: "#27AE60",
@@ -251,8 +253,8 @@ const useStyles = makeStyles((theme: Theme) =>
         zIndex: 5,
         color: "white",
         fontWeight: "bold",
-        position: "relative",
-      },
+        position: "relative"
+      }
     },
     progressBarInnerSuccess: {
       position: "absolute",
@@ -261,7 +263,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 36,
       borderRadius: 5,
       bottom: 0,
-      zIndex: 4,
+      zIndex: 4
     },
     successForm: {
       padding: "30px",
@@ -271,14 +273,14 @@ const useStyles = makeStyles((theme: Theme) =>
       "& > img": {
         display: "block",
         margin: "0 auto",
-        marginBottom: 23,
+        marginBottom: 23
       },
       "& > span": {
         display: "block",
         fontSize: 16,
         fontWeight: "bold",
-        color: "#1F7042",
-      },
+        color: "#1F7042"
+      }
     },
     progressBar: {
       background: "#E0E0E0",
@@ -293,8 +295,8 @@ const useStyles = makeStyles((theme: Theme) =>
       "& > span": {
         zIndex: 5,
         fontWeight: "bold",
-        position: "relative",
-      },
+        position: "relative"
+      }
     },
     progressBarInner: {
       position: "absolute",
@@ -304,7 +306,7 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 5,
       bottom: 0,
       background: "url('progress.svg') #27AE60",
-      zIndex: 4,
+      zIndex: 4
     },
     consult: {
       height: 62,
@@ -315,13 +317,13 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 14,
       "&:hover, &:active": {
         backgroundColor: "#27AE60",
-        color: "white",
-      },
+        color: "white"
+      }
     },
     timerSMS: {
       lineHeight: "62px",
       color: "#5B5B5B",
-      fontSize: 14,
+      fontSize: 14
     },
     sendSMSAgain: {
       color: "#27AE60",
@@ -333,8 +335,8 @@ const useStyles = makeStyles((theme: Theme) =>
       textTransform: "none",
       "&:hover": {
         backgroundColor: "transparent",
-        color: "#2eca70",
-      },
+        color: "#2eca70"
+      }
     },
     chip: {
       backgroundColor: "rgba(125, 206, 160, 0.2)",
@@ -344,7 +346,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "inline-block",
       borderRadius: 16,
       padding: "6px 32px",
-      cursor: "pointer",
+      cursor: "pointer"
     },
     activeChip: {
       backgroundColor: "#27AE60",
@@ -353,13 +355,13 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "inline-block",
       borderRadius: 16,
       padding: "6px 32px",
-      cursor: "pointer",
+      cursor: "pointer"
     },
     hintText: {
       fontSize: 12,
       color: "#898989",
-      lineHeight: "16px",
-    },
+      lineHeight: "16px"
+    }
   })
 );
 
@@ -395,19 +397,19 @@ const CardOrder = (props: any) => {
     `${t("block_6.subtitle_desc_21")}`,
     `${t("block_6.subtitle_desc_22")}`,
     `${t("block_6.subtitle_desc_23")}`,
-    `${t("block_6.subtitle_desc_24")}`,
+    `${t("block_6.subtitle_desc_24")}`
   ];
   const buttonText = [
     `${t("block_6.subtitle_desc_25")}`,
     `${t("block_6.subtitle_desc_26")}`,
     `${t("block_6.subtitle_desc_27")}`,
     `${t("block_6.subtitle_desc_28")}`,
-    `${t("block_6.subtitle_desc_29")}`,
+    `${t("block_6.subtitle_desc_29")}`
   ];
   const emailPrefix = [
     { label: "gmail.com", value: "@gmail.com" },
     { label: "mail.ru", value: "@mail.ru" },
-    { label: "yandex.ru", value: "@yandex.ru" },
+    { label: "yandex.ru", value: "@yandex.ru" }
   ];
 
   const [name, setName] = React.useState("");
@@ -491,16 +493,30 @@ const CardOrder = (props: any) => {
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
     const uid = uuid();
     let desc = encodeURIComponent(
-      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}-${branchName}`
+      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}`
     ).substring(0, 80);
     const merchant = "ironcardpromo";
     const terminal = "90030556";
     // const terminal = "88888881";
     const nameOnCard = cardName.replace(/ /g, "-");
-    const timestamp = momentTz()
-      .tz("Asia/Almaty")
+
+    let datetime = new Date().toLocaleString("ru-RU", {
+      timeZone: "Asia/Almaty"
+    });
+    let date = datetime.substr(0, 10);
+    let time = datetime.substr(12, 8);
+
+    const timestamp = momentTz(
+      date
+        .split(".")
+        .reverse()
+        .join("-") +
+        " " +
+        time
+    )
       .add(-6, "hours")
       .format("YYYYMMDDHHmmss");
+
     const backref = "https://www.bcc.kz";
     const value = `5300003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`;
     var shaObj = new jsSHA("SHA-1", "TEXT");
@@ -515,30 +531,30 @@ const CardOrder = (props: any) => {
 
   const handleCityChange = (city: string) => {
     setCity(city);
-    axios
-      .get(
-        `https://www.bcc.kz/local/tmpl/ajax/getmap.php?type=F&city=${city}&lang=s1`
-      )
-      .then((e: any) => {
-        let branches: Branch[] = [];
-        e &&
-          e.data &&
-          e.data.markers &&
-          e.data.markers.map((mark: any) => {
-            let res =
-              mark.name +
-              ", " +
-              mark.address.substring(8).replace(/&quot;/g, '"');
-            let temp = mark.address.split(",");
-            temp[0] &&
-              branches.push({
-                code: isNaN(+temp[0]) ? "000000" : temp[0].replace(/ /g, ""),
-                address: res,
-              });
-          });
-        setBranchList(branches);
-      })
-      .catch((e: any) => console.log(e));
+    // axios
+    //   .get(
+    //     `https://www.bcc.kz/local/tmpl/ajax/getmap.php?type=F&city=${city}&lang=s1`
+    //   )
+    //   .then((e: any) => {
+    //     let branches: Branch[] = [];
+    //     e &&
+    //       e.data &&
+    //       e.data.markers &&
+    //       e.data.markers.map((mark: any) => {
+    //         let res =
+    //           mark.name +
+    //           ", " +
+    //           mark.address.substring(8).replace(/&quot;/g, '"');
+    //         let temp = mark.address.split(",");
+    //         temp[0] &&
+    //           branches.push({
+    //             code: isNaN(+temp[0]) ? "000000" : temp[0].replace(/ /g, ""),
+    //             address: res
+    //           });
+    //       });
+    //     setBranchList(branches);
+    //   })
+    //   .catch((e: any) => console.log(e));
   };
 
   const handleBranchChange = (branchName: string) => {
@@ -605,10 +621,10 @@ const CardOrder = (props: any) => {
     root: {
       color: "#D8D8D8",
       "&$checked": {
-        color: "#27AE60",
-      },
+        color: "#27AE60"
+      }
     },
-    checked: {},
+    checked: {}
   })((props: any) => <Checkbox {...props} />);
 
   function getUrlParameter(name: string) {
@@ -625,7 +641,7 @@ const CardOrder = (props: any) => {
 
     ReactGA.event({
       category: "BccIronCard_Preorder_successful",
-      action: "Preorder_successful",
+      action: "Preorder_successful"
     });
 
     ym("reachGoal", "get_consult");
@@ -653,7 +669,7 @@ const CardOrder = (props: any) => {
         `https://www.bcc.kz/local/tmpl/ajax/iblock_save.php`,
         {
           method: "POST",
-          body: formData,
+          body: formData
         }
       );
       api.card
@@ -671,13 +687,13 @@ const CardOrder = (props: any) => {
     if (step === 0) {
       ReactGA.event({
         category: "BccIronCard_Go_to_the_payment",
-        action: "Go_to_the_payment",
+        action: "Go_to_the_payment"
       });
       ym("reachGoal", "get_card");
     } else if (step === 1) {
       ReactGA.event({
         category: "BccIronCard_To_Pay",
-        action: "To_Pay",
+        action: "To_Pay"
       });
       ym("reachGoal", "get_topay");
     }
@@ -696,10 +712,8 @@ const CardOrder = (props: any) => {
         checkbox &&
         cardName.length > 1 &&
         city.length > 1 &&
-        branchName.length > 1 &&
         iin.length === 12 &&
-        phone.replace("_", "").length === 16 &&
-        email.length > 1
+        phone.replace("_", "").length === 16
       );
     } else {
       return true;
@@ -732,10 +746,10 @@ const CardOrder = (props: any) => {
               onChange={(e: any) => handlePhoneChange(e.target.value)}
               label={t("block_6.subtitle_desc_12")}
               InputLabelProps={{
-                shrink: true,
+                shrink: true
               }}
               InputProps={{
-                inputComponent: TextMaskCustom as any,
+                inputComponent: TextMaskCustom as any
               }}
             />
           </>
@@ -783,7 +797,7 @@ const CardOrder = (props: any) => {
               id="iin"
             />
             <Grid container spacing={2}>
-              <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <BccInputText
                   fullWidth={true}
                   label={t("block_6.subtitle_desc_15")}
@@ -804,7 +818,7 @@ const CardOrder = (props: any) => {
                   })}
                 </BccInputText>
               </Grid>
-              <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+              {/* <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
                 <BccInputText
                   fullWidth={true}
                   label={t("block_6.subtitle_desc_16")}
@@ -830,8 +844,8 @@ const CardOrder = (props: any) => {
                     </MenuItem>
                   )}
                 </BccInputText>
-              </Grid>
-              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+              </Grid> */}
+              {/* <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <BccInputText
                   size={isXS ? "small" : "medium"}
                   variant="outlined"
@@ -842,14 +856,14 @@ const CardOrder = (props: any) => {
                   onChange={(e: any) => handlePhoneChange(e.target.value)}
                   label={t("block_6.subtitle_desc_17")}
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: true
                   }}
                   InputProps={{
-                    inputComponent: TextMaskCustom as any,
+                    inputComponent: TextMaskCustom as any
                   }}
                 />
-              </Grid>
-              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+              </Grid> */}
+              {/* <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <BccInputText
                   size={isXS ? "small" : "medium"}
                   variant="outlined"
@@ -878,7 +892,7 @@ const CardOrder = (props: any) => {
                     </div>
                   );
                 })}
-              </Grid>
+              </Grid> */}
             </Grid>
           </>
         );
@@ -965,7 +979,7 @@ const CardOrder = (props: any) => {
                 style={{
                   width: `${
                     step === 3 ? "50" : step === 4 ? "100" : step * 50
-                  }%`,
+                  }%`
                 }}
                 className={classes.progressBarInner}
               ></div>
@@ -978,7 +992,7 @@ const CardOrder = (props: any) => {
             <span>{t("block_6.subtitle_desc_4")}</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} autoComplete="off">
             {generateForm(step)}
             {step === 0 || step === 1 ? (
               <FormControlLabel
