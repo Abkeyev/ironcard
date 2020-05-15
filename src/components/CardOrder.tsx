@@ -466,6 +466,14 @@ const CardOrder = (props: any) => {
     });
   }
 
+  function uuidNonce() {
+    return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+      var r = (Math.random() * 16) | 0,
+        v = c === "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16).substr(0, 32);
+    });
+  }
+
   function XOR_hex(a: string, b: string) {
     var res = "",
       l = Math.max(a.length, b.length);
@@ -491,7 +499,8 @@ const CardOrder = (props: any) => {
     // const hex2 = "02BBF98BB3411445D15498E2DC22E3E1";
     // const xor = XOR_hex(hex1, hex2);
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
-    const uid = uuid();
+    const order = uuid();
+    const nonce = uuidNonce();
     let desc = encodeURIComponent(
       `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}`
     ).substring(0, 80);
@@ -518,12 +527,12 @@ const CardOrder = (props: any) => {
       .format("YYYYMMDDHHmmss");
 
     const backref = "https://www.bcc.kz";
-    const value = `5300003398${uid.length}${uid}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${uid.length}${uid}`;
+    const value = `5300003398${order.length}${order}${desc.length}${desc}${merchant.length}${merchant}${terminal.length}${terminal}16${timestamp.length}${timestamp}11${nonce.length}${nonce}`;
     var shaObj = new jsSHA("SHA-1", "TEXT");
     shaObj.setHMACKey(xor, "HEX");
     shaObj.update(value);
     const pSign = shaObj.getHMAC("HEX").toUpperCase();
-    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=30000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
+    let url = `https://3dsecure.bcc.kz:5443/cgi-bin/cgi_link/?AMOUNT=30000&CURRENCY=398&ORDER=${order}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${nonce}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`;
     // let url = `https://test3ds.bcc.kz:5445/cgi-bin/cgi_link/?AMOUNT=15000&CURRENCY=398&ORDER=${uid}&DESC=${desc}&NAME=${nameOnCard}&MERCHANT=${merchant}&TERMINAL=${terminal}&MERCH_GMT=6&TIMESTAMP=${timestamp}&TRTYPE=1&NONCE=${uid}&P_SIGN=${pSign}&LANG=RU&BACKREF=${backref}`
     window.location.replace(url);
     setSrc(url);
