@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     [theme.breakpoints.between("md", "xl")]: {
       small: {
-        display: "none"
+        display: "none",
       },
       buttonOrderCard: {
         background: "#27AE60",
@@ -22,17 +22,17 @@ const useStyles = makeStyles((theme: Theme) =>
         fontWeight: "bold",
         padding: 0,
         "&:hover": {
-          backgroundColor: "#7DCEA0"
+          backgroundColor: "#7DCEA0",
         },
-        overflow: "hidden"
-      }
+        overflow: "hidden",
+      },
     },
     [theme.breakpoints.down("sm")]: {
       small: {
-        display: "none"
+        display: "none",
       },
       header: {
-        padding: "16px 26px"
+        padding: "16px 26px",
       },
       buttonOrderCard: {
         background: "#27AE60",
@@ -46,40 +46,49 @@ const useStyles = makeStyles((theme: Theme) =>
         textTransform: "none",
         fontWeight: "bold",
         "&:hover": {
-          backgroundColor: "#7DCEA0"
+          backgroundColor: "#7DCEA0",
         },
-        overflow: "hidden"
+        overflow: "hidden",
       },
       smallcard: {
-        marginRight: 20
-      }
+        marginRight: 20,
+      },
     },
     [theme.breakpoints.down("xs")]: {
       header: {
-        padding: "16px 26px"
+        padding: "16px 26px",
       },
       logo: {
-        display: "none"
+        display: "none",
       },
       small: {
-        display: "block"
+        display: "block",
+      },
+      innerRoot: {
+        padding: "0!important",
+        maxWidth: 1280,
+        margin: "0 auto",
+        position: "relative",
+      },
+      buttonOrderCard: {
+        lineHeight: "14px",
       },
       smallcard: {
         marginRight: 20,
         "& > img": {
-          width: "100%"
-        }
-      }
+          width: "100%",
+        },
+      },
     },
     hide: {
       opacity: 0,
-      transition: "all ease-in-out .3s"
+      transition: "all ease-in-out .3s",
     },
     innerRoot: {
       padding: "21px 52px",
       maxWidth: 1280,
       margin: "0 auto",
-      position: "relative"
+      position: "relative",
     },
     header: {
       position: "fixed",
@@ -93,8 +102,8 @@ const useStyles = makeStyles((theme: Theme) =>
       boxSizing: "border-box",
       backgroundColor: "#ffffff",
       boxShadow: "0px 7px 25px rgba(29, 29, 29, 0.15)",
-      transition: "all ease-in-out .3s"
-    }
+      transition: "all ease-in-out .3s",
+    },
   })
 );
 
@@ -104,7 +113,7 @@ const FixedHeader = (props: any) => {
   let [hide, setHide] = useState(true);
   const { t, i18n } = useTranslation();
   useEffect(() => {
-    window.document.addEventListener("scroll", d => {
+    window.document.addEventListener("scroll", (d) => {
       const doc = document;
       const element = doc && doc.getElementById("secondHeader");
       const scrollTop = element && element.offsetTop;
@@ -119,7 +128,7 @@ const FixedHeader = (props: any) => {
   const onClickOrder = () => {
     ReactGA.event({
       category: "BccCard_order_card",
-      action: "order_card"
+      action: "order_card",
     });
     props.scrollToOrder();
   };

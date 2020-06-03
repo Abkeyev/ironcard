@@ -9,34 +9,34 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     "@keyframes card": {
       from: {
-        transform: "translateY(0px)"
+        transform: "translateY(0px)",
       },
       to: {
-        transform: "translateY(30px)"
-      }
+        transform: "translateY(30px)",
+      },
     },
     "@keyframes cardShadow": {
       from: {
-        transform: "scale(1.2)"
+        transform: "scale(1.2)",
       },
       to: {
-        transform: "scale(.9)"
-      }
+        transform: "scale(.9)",
+      },
     },
     root: {
       maxWidth: 1280,
       margin: "0 auto",
-      position: "relative"
+      position: "relative",
     },
     [theme.breakpoints.down("sm")]: {
       root: {
         backgroundSize: "auto",
         backgroundColor: "#111111",
-        padding: paddingDownSm
+        padding: paddingDownSm,
       },
       logo_img: {
         width: "126px",
-        height: "30px"
+        height: "30px",
       },
       buttonInternetBank: {
         width: "120px",
@@ -47,17 +47,17 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: 4,
         color: "white",
         textTransform: "none",
-        fontSize: 9
+        fontSize: 9,
       },
       cardDescriptionBlock: {
         marginTop: "50px",
-        zIndex: 3
+        zIndex: 3,
       },
       cardTitle: {
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: "24px",
-        color: "white"
+        color: "white",
       },
       cardWhatYourWant: {
         fontStyle: "normal",
@@ -65,24 +65,23 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: "12px",
         color: "white",
         opacity: 0.7,
-        marginTop: 24
+        marginTop: 24,
       },
       cardLimitPecentDay: {
         fontStyle: "normal",
         fontWeight: 500,
         fontSize: "12px",
         color: "white",
-        marginTop: "21px"
+        marginTop: "21px",
       },
       cardLimitPecentDayTh: {
         fontStyle: "normal",
         fontWeight: 500,
         fontSize: "9px",
         color: "white",
-        opacity: 0.54
+        opacity: 0.54,
       },
       buttonOrderCard: {
-        marginTop: 32,
         background: "#27AE60",
         minWidth: 320,
         color: "white",
@@ -94,13 +93,13 @@ const useStyles = makeStyles((theme: Theme) =>
         textTransform: "none",
         fontWeight: "bold",
         "&:hover": {
-          backgroundColor: "#7DCEA0"
-        }
+          backgroundColor: "#7DCEA0",
+        },
       },
       card: {
         position: "absolute",
         right: 17,
-        top: 160,
+        top: 240,
         zIndex: 2,
         width: "90%",
         animationName: "$card",
@@ -108,12 +107,12 @@ const useStyles = makeStyles((theme: Theme) =>
         animationTimingFunction: "ease-in-out",
         animationIterationCount: "infinite",
         animationDirection: "alternate",
-        animationDelay: "2s"
+        animationDelay: "2s",
       },
       cardShadow: {
         position: "absolute",
         right: 20,
-        top: 200,
+        top: 280,
         width: "80%",
         zIndex: 1,
         animationName: "$cardShadow",
@@ -122,7 +121,7 @@ const useStyles = makeStyles((theme: Theme) =>
         animationIterationCount: "infinite",
         animationDirection: "alternate",
         animationDelay: "2s",
-        transform: "scale(1.1)"
+        transform: "scale(1.1)",
       },
       ironCard: {
         fontSize: 36,
@@ -133,8 +132,8 @@ const useStyles = makeStyles((theme: Theme) =>
           background:
             "linear-gradient(to bottom, #27AE60 0%, rgba(39, 174, 96, 0.4) 100%)",
           "-webkit-background-clip": "text",
-          "-webkit-text-fill-color": "transparent"
-        }
+          "-webkit-text-fill-color": "transparent",
+        },
       },
       ironCardDescriptionBlock: {
         fontSize: 20,
@@ -142,7 +141,7 @@ const useStyles = makeStyles((theme: Theme) =>
         textAlign: "center",
         color: "white",
         fontWeight: 300,
-        marginBottom: 40
+        marginBottom: 40,
       },
       circleWrap: {
         margin: "0 auto",
@@ -151,38 +150,38 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: "50%",
         padding: 1,
         background:
-          "linear-gradient(to bottom, #27AE60 0%, rgba(39, 174, 96, 0.4) 100%)"
+          "linear-gradient(to bottom, #27AE60 0%, rgba(39, 174, 96, 0.4) 100%)",
       },
       circleInner: {
         width: "100%",
         height: "100%",
         borderRadius: "50%",
         background: "#111",
-        position: "relative"
+        position: "relative",
       },
       circleImg: {
         transform: "translate(-50%, -50%)",
         position: "absolute",
         top: "50%",
-        left: "50%"
+        left: "50%",
       },
       circleUnderText: {
         color: "white",
         marginTop: "25px",
         fontSize: 16,
         display: "block",
-        textAlign: "center"
+        textAlign: "center",
       },
       signStyle: {
         textAlign: "center",
         color: "white",
         opacity: 0.7,
         fontSize: 38,
-        lineHeight: "128px"
+        lineHeight: "128px",
       },
       ironCardImg: {
         width: "100%",
-        height: "fit-content"
+        height: "fit-content",
       },
       cardFeatures: {
         backgroundColor: "rgba(255,255,255,.05)",
@@ -197,34 +196,34 @@ const useStyles = makeStyles((theme: Theme) =>
           marginTop: 15,
           opacity: 0.7,
           fontWeight: 300,
-          fontSize: 16
-        }
+          fontSize: 16,
+        },
       },
       saleText: {
         color: "white",
         fontSize: 24,
         lineHeight: "32px",
-        fontWeight: "bold"
+        fontWeight: "bold",
       },
       timer: {
         color: "white",
         fontSize: 48,
         marginTop: 5,
         lineHeight: "64px",
-        fontWeight: "bold"
+        fontWeight: "bold",
       },
       orderWrap: {
         marginTop: 32,
         borderRadius: 8,
         padding: 1,
-        marginBottom: 110
+        marginBottom: 20,
       },
       orderInner: {
         background: "#111111",
         borderRadius: 8,
-        padding: 32,
-        paddingLeft: 0
-      }
+        padding: 0,
+        marginTop: 240,
+      },
     },
     [theme.breakpoints.down("xs")]: {
       buttonOrderCard: {
@@ -240,37 +239,37 @@ const useStyles = makeStyles((theme: Theme) =>
         letterSpacing: "0",
         fontWeight: "bold",
         "&:hover": {
-          backgroundColor: "#7DCEA0"
-        }
+          backgroundColor: "#7DCEA0",
+        },
       },
       cardWhatYourWant: {
-        marginTop: 10
+        marginTop: 10,
       },
       saleText: {
-        fontSize: 20
+        fontSize: 20,
       },
       timer: {
         fontSize: 38,
-        textAlign: "center"
+        textAlign: "center",
       },
       ironCard: {
-        fontSize: 24
+        fontSize: 24,
       },
       cardFeatures: {
         borderRadius: 8,
         margin: "30px 0",
-        marginBottom: 0
-      }
+        marginBottom: 0,
+      },
     },
     [theme.breakpoints.between("sm", "xl")]: {
       mainRoot: {
         backgroundSize: "auto",
-        backgroundColor: "#111111"
+        backgroundColor: "#111111",
       },
       ...rootSmXl,
       logo_img: {
         width: "168px",
-        height: "40px"
+        height: "40px",
       },
       buttonInternetBank: {
         width: "160px",
@@ -281,18 +280,18 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: 4,
         color: "white",
         textTransform: "none",
-        fontSize: 12
+        fontSize: 12,
       },
       cardDescriptionBlock: {
         marginTop: "80px",
-        zIndex: 3
+        zIndex: 3,
       },
       cardTitle: {
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: "40px",
         lineHeight: "48px",
-        color: "white"
+        color: "white",
       },
       cardWhatYourWant: {
         fontStyle: "normal",
@@ -300,21 +299,21 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: "24px",
         color: "white",
         opacity: 0.7,
-        marginTop: 24
+        marginTop: 24,
       },
       cardLimitPecentDay: {
         fontStyle: "normal",
         fontWeight: 500,
         fontSize: "24px",
         color: "white",
-        marginTop: "42px"
+        marginTop: "42px",
       },
       cardLimitPecentDayTh: {
         fontStyle: "normal",
         fontWeight: 500,
         fontSize: "16px",
         color: "white",
-        opacity: 0.54
+        opacity: 0.54,
       },
       buttonOrderCard: {
         marginTop: 32,
@@ -329,8 +328,8 @@ const useStyles = makeStyles((theme: Theme) =>
         letterSpacing: "0",
         fontWeight: "bold",
         "&:hover": {
-          backgroundColor: "#7DCEA0"
-        }
+          backgroundColor: "#7DCEA0",
+        },
       },
       card: {
         position: "absolute",
@@ -342,7 +341,7 @@ const useStyles = makeStyles((theme: Theme) =>
         animationTimingFunction: "ease-in-out",
         animationIterationCount: "infinite",
         animationDirection: "alternate",
-        animationDelay: "2s"
+        animationDelay: "2s",
       },
       cardShadow: {
         position: "absolute",
@@ -355,7 +354,7 @@ const useStyles = makeStyles((theme: Theme) =>
         animationIterationCount: "infinite",
         animationDirection: "alternate",
         animationDelay: "2s",
-        transform: "scale(1.2)"
+        transform: "scale(1.2)",
       },
       ironCard: {
         fontSize: 36,
@@ -366,8 +365,8 @@ const useStyles = makeStyles((theme: Theme) =>
           background:
             "linear-gradient(to bottom, #27AE60 0%, rgba(39, 174, 96, 0.4) 100%)",
           "-webkit-background-clip": "text",
-          "-webkit-text-fill-color": "transparent"
-        }
+          "-webkit-text-fill-color": "transparent",
+        },
       },
       ironCardDescriptionBlock: {
         fontSize: 20,
@@ -375,7 +374,7 @@ const useStyles = makeStyles((theme: Theme) =>
         textAlign: "center",
         color: "white",
         fontWeight: 300,
-        marginBottom: 40
+        marginBottom: 40,
       },
       circleWrap: {
         margin: "0 auto",
@@ -384,38 +383,38 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: "50%",
         padding: 1,
         background:
-          "linear-gradient(to bottom, #27AE60 0%, rgba(39, 174, 96, 0.4) 100%)"
+          "linear-gradient(to bottom, #27AE60 0%, rgba(39, 174, 96, 0.4) 100%)",
       },
       circleInner: {
         width: "100%",
         height: "100%",
         borderRadius: "50%",
         background: "#111",
-        position: "relative"
+        position: "relative",
       },
       circleImg: {
         transform: "translate(-50%, -50%)",
         position: "absolute",
         top: "50%",
-        left: "50%"
+        left: "50%",
       },
       circleUnderText: {
         color: "white",
         marginTop: "25px",
         fontSize: 16,
         display: "block",
-        textAlign: "center"
+        textAlign: "center",
       },
       signStyle: {
         textAlign: "center",
         color: "white",
         opacity: 0.7,
         fontSize: 38,
-        lineHeight: "128px"
+        lineHeight: "128px",
       },
       ironCardImg: {
         width: "100%",
-        height: "fit-content"
+        height: "fit-content",
       },
       cardFeatures: {
         backgroundColor: "rgba(255,255,255,.05)",
@@ -430,50 +429,50 @@ const useStyles = makeStyles((theme: Theme) =>
           marginTop: 15,
           opacity: 0.7,
           fontWeight: 300,
-          fontSize: 16
-        }
+          fontSize: 16,
+        },
       },
       cardMFeatures: {
-        flexBasis: "49%"
+        flexBasis: "49%",
       },
       saleText: {
         color: "white",
         fontSize: 24,
         lineHeight: "32px",
-        fontWeight: "normal"
+        fontWeight: "normal",
       },
       timer: {
         color: "white",
         fontSize: 48,
         marginTop: 5,
         lineHeight: "64px",
-        fontWeight: "bold"
+        fontWeight: "bold",
       },
       orderWrap: {
         marginTop: 32,
         borderRadius: 8,
         padding: 1,
-        marginBottom: 110
+        marginBottom: 110,
       },
       orderInner: {
         background: "#111111",
         borderRadius: 8,
         padding: 32,
-        paddingLeft: 0
-      }
+        paddingLeft: 0,
+      },
     },
     select: {
       color: "white",
       "&:before": {
-        borderColor: "white"
+        borderColor: "white",
       },
       "&:after": {
-        borderColor: "white"
-      }
+        borderColor: "white",
+      },
     },
     icon: {
-      fill: "white"
-    }
+      fill: "white",
+    },
   })
 );
 
@@ -488,7 +487,7 @@ const Header = (props: any) => {
   const eventGAOrderCard = () => {
     ReactGA.event({
       category: "BccIronCard_Preorder_1",
-      action: "Preorder_1"
+      action: "Preorder_1",
     });
     props.scrollToOrder();
   };
@@ -522,8 +521,8 @@ const Header = (props: any) => {
                 onChange={(e: any) => handleLangChange(e.target.value)}
                 inputProps={{
                   classes: {
-                    icon: classes.icon
-                  }
+                    icon: classes.icon,
+                  },
                 }}
               >
                 <MenuItem value="ru">Рус</MenuItem>

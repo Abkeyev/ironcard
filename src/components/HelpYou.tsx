@@ -11,14 +11,14 @@ const useStyles = makeStyles((theme: Theme) =>
     [theme.breakpoints.down("sm")]: {
       mainRoot: {
         backgroundColor: "#FAFAFA",
-        padding: "20px 0"
+        padding: "20px 0",
       },
       ...rootSmXl,
       helpYou: {
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 40,
-        color: "#141414"
+        color: "#141414",
       },
       paper: {
         backgroundColor: "#FFFFFF",
@@ -27,20 +27,20 @@ const useStyles = makeStyles((theme: Theme) =>
         border: "1px solid #E8E8E8",
         marginBottom: 10,
         "&:hover": {
-          cursor: "pointer"
-        }
+          cursor: "pointer",
+        },
       },
       ourSpec: {
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 18,
         color: "#5B5B5B",
-        paddingLeft: 56
+        paddingLeft: 56,
       },
       freeCallText: {
         fontStyle: "normal",
         fontWeight: "bold",
-        fontSize: 28
+        fontSize: 28,
       },
       freeCall: {
         color: "#ffffff",
@@ -51,12 +51,12 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: 6,
         boxSizing: "border-box",
         verticalAlign: "text-bottom",
-        marginRight: 16
+        marginRight: 16,
       },
       phoneText: {
         fonStyle: "normal",
         fontWeight: "bold",
-        fontSize: 28
+        fontSize: 28,
       },
       phone: {
         color: "#ffffff",
@@ -67,23 +67,23 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: 6,
         boxSizing: "border-box",
         verticalAlign: "text-bottom",
-        marginRight: 16
+        marginRight: 16,
       },
       gridMargin: {
-        marginTop: 30
-      }
+        marginTop: 30,
+      },
     },
     [theme.breakpoints.between("md", "xl")]: {
       mainRoot: {
         backgroundColor: "#FAFAFA",
-        padding: "50px 0"
+        padding: "50px 0",
       },
       ...rootSmXl,
       helpYou: {
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 40,
-        color: "#141414"
+        color: "#141414",
       },
       paper: {
         backgroundColor: "#FFFFFF",
@@ -93,20 +93,20 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "grid",
         alignContent: "center",
         "&:hover": {
-          cursor: "pointer"
-        }
+          cursor: "pointer",
+        },
       },
       ourSpec: {
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 18,
         color: "#5B5B5B",
-        paddingLeft: 56
+        paddingLeft: 56,
       },
       freeCallText: {
         fontStyle: "normal",
         fontWeight: "bold",
-        fontSize: 28
+        fontSize: 28,
       },
       freeCall: {
         color: "#ffffff",
@@ -117,14 +117,14 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: 6,
         boxSizing: "border-box",
         verticalAlign: "text-bottom",
-        marginRight: 16
+        marginRight: 16,
       },
       phoneText: {
         fonStyle: "normal",
         fontWeight: "bold",
         fontSize: 28,
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
       },
       phone: {
         color: "#ffffff",
@@ -135,43 +135,46 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: 6,
         boxSizing: "border-box",
         verticalAlign: "text-bottom",
-        marginRight: 16
-      }
+        marginRight: 16,
+      },
     },
     [theme.breakpoints.down("xs")]: {
       paper: {
         display: "flex",
         alignItems: "center",
         "&:hover": {
-          cursor: "pointer"
-        }
+          cursor: "pointer",
+        },
       },
       ourSpec: {
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 16,
-        paddingLeft: 0
+        paddingLeft: 10,
       },
       freeCallText: {
-        fontSize: 20
+        fontSize: 20,
       },
       phoneText: {
         fontSize: 18,
         display: "flex",
-        alignItems: "center"
-      }
+        alignItems: "center",
+      },
+      gridMargin: {
+        marginTop: 0,
+      },
     },
     root: {
       maxWidth: 1280,
-      margin: '0 auto',
-      position: 'relative'
+      margin: "0 auto",
+      position: "relative",
     },
     gridMargin: {
       "& > a": {
         textDecoration: "none",
-        color: "black"
-      }
-    }
+        color: "black",
+      },
+    },
   })
 );
 
@@ -182,7 +185,7 @@ const HelpYou = () => {
   const onClickCall505 = () => {
     ReactGA.event({
       category: "BccIronCard_iron_call_505",
-      action: "iron_call_505"
+      action: "iron_call_505",
     });
     window.open("tel:505");
   };
@@ -190,7 +193,7 @@ const HelpYou = () => {
   const onClickCallMB = () => {
     ReactGA.event({
       category: "BccIronCard_iron_call_2443030",
-      action: "iron_call_2443030"
+      action: "iron_call_2443030",
     });
     window.open("tel:87272443030");
   };

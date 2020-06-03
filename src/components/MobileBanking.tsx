@@ -8,76 +8,78 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     [theme.breakpoints.down("sm")]: {
       root: {
-        padding: "20px 24px 20px 24px"
+        padding: 0,
+      },
+      innerRoot: {
+        padding: "24px 12px",
+        maxWidth: 1280,
+        margin: "0 auto",
+        position: "relative",
       },
       title: {
         marginTop: 50,
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 30,
-        color: "#141414"
+        color: "#141414",
       },
       description: {
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 14,
         color: "#141414",
-        marginBottom: 24
+        marginBottom: 24,
       },
       googlePlayAppStore: {
         width: 120,
         height: 40,
         "&:hover": {
-          cursor: "pointer"
-        }
+          cursor: "pointer",
+        },
       },
       img: {
-        display: "none"
-      }
+        display: "none",
+      },
     },
     [theme.breakpoints.between("md", "xl")]: {
       root: {
         padding: "27px 42px 52px 52px",
         background: "#fafafa",
         width: "100%",
-        position: "relative"
+        position: "relative",
+      },
+      innerRoot: {
+        padding: "27px 42px 52px 52px",
+        maxWidth: 1280,
+        margin: "0 auto",
+        position: "relative",
       },
       title: {
         marginTop: 200,
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 40,
-        color: "#141414"
+        color: "#141414",
       },
       description: {
         fontStyle: "normal",
         fontWeight: "normal",
         fontSize: 18,
         color: "#141414",
-        marginBottom: 48
+        marginBottom: 48,
       },
       googlePlayAppStore: {
         "&:hover": {
-          cursor: "pointer"
-        }
+          cursor: "pointer",
+        },
       },
       img: {
         width: 330,
         height: 484,
         position: "absolute",
-        right: 100,
-        bottom: 0
-      }
+        bottom: 0,
+      },
     },
-    root: {
-      padding: 0
-    },
-    innerRoot: {
-      padding: "27px 42px 52px 52px",
-      maxWidth: 1280,
-      margin: '0 auto',
-      position: 'relative'
-    }
   })
 );
 
@@ -88,7 +90,7 @@ const MobileBanking = () => {
   const onClickAppStore = () => {
     ReactGA.event({
       category: "BccIronCard_AppStore_download",
-      action: "AppStore_download"
+      action: "AppStore_download",
     });
 
     window.open(
@@ -100,7 +102,7 @@ const MobileBanking = () => {
   const onClickGooglePlay = () => {
     ReactGA.event({
       category: "BccIronCard_GooglePlay_download",
-      action: "GooglePlay_download"
+      action: "GooglePlay_download",
     });
 
     window.open(
@@ -110,8 +112,8 @@ const MobileBanking = () => {
   };
 
   return (
-    <Grid container className={classes.root} spacing={4}>
-      <Grid item container className={classes.innerRoot} spacing={4}>
+    <Grid container className={classes.root}>
+      <Grid item container className={classes.innerRoot}>
         <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
           <Typography className={classes.title}>
             {t("block_7.title_main")}

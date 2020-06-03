@@ -6,215 +6,214 @@ import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    [theme.breakpoints.down("sm")]: {
-      root: {
-        backgroundColor: "#FAFAFA",
-        padding: "27px 42px 52px 52px"
-      },
-      mainTitle: {
-        fontStyle: "normal",
-        marginTop: 30,
-        textAlign: "center",
-        marginBottom: 30,
-        fontWeight: "bold",
-        fontSize: "36px",
-        lineHeight: "40px",
-        color: "#141414"
-      },
-      mainDescription: {
-        fontStyle: "normal",
-        fontWeight: "normal",
-        fontSize: "16px",
-        color: "#8B98A7"
-      },
-      paper: {
-        padding: "24px",
-        background: "#ffffff",
-        boxSizing: "border-box",
-        borderRadius: "8px",
-        minHeight: 160
-      },
-      paperCol: {
-        padding: "12px 0",
-        minHeight: 100
-      },
-      aPaper: {
-        textDecoration: 'none',
-        '&:hover': {
-          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'
-        }
-      },
-      iconWrap: {
-        padding: 30,
-        border: "1px solid #7DCEA0",
-        borderRadius: "50%",
-        position: "relative",
-        width: 80,
-        height: 80,
-        marginRight: 25
-      },
-      icon: {
-        width: "20px",
-        height: "20px",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)"
-      },
-      title: {
-        fontStyle: "normal",
-        fontWeight: "bold",
-        fontSize: "18px",
-        color: "#141414",
-        marginBottom: 20,
-        lineHeight: "20px"
-      },
-      description: {
-        fontStyle: "normal",
-        fontWeight: "normal",
-        fontSize: "16px",
-        color: "#5B5B5B"
-      },
-      seeMore: {
-        fontWeight: "bold",
-        fontSize: 18,
-        marginTop: "0",
-        textAlign: "center",
-        "&:hover": {
-          textDecoration: "underline",
-          cursor: "pointer"
-        },
-        "& > a": {
-          textDecoration: "none",
-          color: "inherit"
-        },
-        "&::after": {
-          content: '""',
-          display: "inline-block",
-          width: 11,
-          height: 21,
-          marginLeft: 13,
-          background: "url('seeMoreArrow.svg') #fff no-repeat",
-          backgroundSize: "contain",
-          position: "absolute"
-        }
-      }
-    },
-    [theme.breakpoints.between("sm", "xl")]: {
-      root: {
-        backgroundColor: "#FAFAFA"
-      },
-      mainTitle: {
-        fontStyle: "normal",
-        marginTop: 30,
-        textAlign: "center",
-        marginBottom: 30,
-        fontWeight: "bold",
-        fontSize: "36px",
-        lineHeight: "40px",
-        color: "#141414"
-      },
-      mainDescription: {
-        fontStyle: "normal",
-        fontWeight: "normal",
-        fontSize: "16px",
-        color: "#8B98A7"
-      },
-      paper: {
-        padding: "24px",
-        background: "#ffffff",
-        boxSizing: "border-box",
-        borderRadius: "8px",
-        minHeight: 100
-      },
-      paperCol: {
-        padding: "12px 0",
-        minHeight: 160
-      },
-      aPaper: {
-        textDecoration: 'none',
-        '&:hover': {
-          textDecoration: 'underline',
-        }
-      },
-      iconWrap: {
-        padding: 30,
-        border: "1px solid #7DCEA0",
-        borderRadius: "50%",
-        position: "relative",
-        width: 80,
-        height: 80,
-        marginRight: 25
-      },
-      icon: {
-        width: "20px",
-        height: "20px",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)"
-      },
-      title: {
-        fontStyle: "normal",
-        fontWeight: "bold",
-        fontSize: "18px",
-        color: "#141414",
-        marginBottom: 20,
-        lineHeight: "20px"
-      },
-      description: {
-        fontStyle: "normal",
-        fontWeight: "normal",
-        fontSize: "16px",
-        color: "#5B5B5B"
-      },
-      seeMore: {
-        fontWeight: "bold",
-        fontSize: 18,
-        marginTop: "0",
-        textAlign: "center",
-        "&:hover": {
-          textDecoration: "underline",
-          cursor: "pointer"
-        },
-        "& > a": {
-          textDecoration: "none",
-          color: "inherit"
-        },
-        "&::after": {
-          content: '""',
-          display: "inline-block",
-          width: 11,
-          height: 21,
-          marginLeft: 13,
-          background: "url('seeMoreArrow.svg') #fff no-repeat",
-          backgroundSize: "contain",
-          position: "absolute"
-        }
-      }
-    },
     [theme.breakpoints.down("xs")]: {
-      root: {
-        backgroundColor: "#FAFAFA",
-        padding: "27px 24px 27px 24px"
+      innerRoot: {
+        padding: 0,
       },
       iconWrap: {
         padding: 24,
         width: 20,
         height: 20,
-        marginRight: 20
+        marginRight: 20,
       },
       icon: {
         width: "15px",
-        height: "15px"
-      }
+        height: "15px",
+      },
     },
-    innerRoot: {
-      padding: "27px 42px 52px 52px",
-      maxWidth: 1280,
-      margin: '0 auto',
-      position: 'relative'
-    }
+    [theme.breakpoints.down("sm")]: {
+      root: {
+        backgroundColor: "#FAFAFA",
+        padding: "24px 12px",
+      },
+      mainTitle: {
+        fontStyle: "normal",
+        marginTop: 30,
+        textAlign: "center",
+        marginBottom: 30,
+        fontWeight: "bold",
+        fontSize: "36px",
+        lineHeight: "40px",
+        color: "#141414",
+      },
+      mainDescription: {
+        fontStyle: "normal",
+        fontWeight: "normal",
+        fontSize: "16px",
+        color: "#8B98A7",
+      },
+      paper: {
+        padding: "24px",
+        background: "#ffffff",
+        boxSizing: "border-box",
+        borderRadius: "8px",
+        minHeight: 160,
+      },
+      paperCol: {
+        padding: "12px 0",
+        minHeight: 100,
+      },
+      aPaper: {
+        textDecoration: "none",
+        "&:hover": {
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+        },
+      },
+      iconWrap: {
+        padding: 30,
+        border: "1px solid #7DCEA0",
+        borderRadius: "50%",
+        position: "relative",
+        width: 80,
+        height: 80,
+        marginRight: 25,
+      },
+      icon: {
+        width: "20px",
+        height: "20px",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      },
+      title: {
+        fontStyle: "normal",
+        fontWeight: "bold",
+        fontSize: "18px",
+        color: "#141414",
+        marginBottom: 20,
+        lineHeight: "20px",
+      },
+      description: {
+        fontStyle: "normal",
+        fontWeight: "normal",
+        fontSize: "16px",
+        color: "#5B5B5B",
+      },
+      seeMore: {
+        fontWeight: "bold",
+        fontSize: 18,
+        marginTop: "0",
+        textAlign: "center",
+        "&:hover": {
+          textDecoration: "underline",
+          cursor: "pointer",
+        },
+        "& > a": {
+          textDecoration: "none",
+          color: "inherit",
+        },
+        "&::after": {
+          content: '""',
+          display: "inline-block",
+          width: 11,
+          height: 21,
+          marginLeft: 13,
+          background: "url('seeMoreArrow.svg') #fff no-repeat",
+          backgroundSize: "contain",
+          position: "absolute",
+        },
+      },
+    },
+    [theme.breakpoints.between("sm", "xl")]: {
+      root: {
+        backgroundColor: "#FAFAFA",
+      },
+      innerRoot: {
+        padding: "27px 42px 52px 52px",
+        maxWidth: 1280,
+        margin: "0 auto",
+        position: "relative",
+      },
+      mainTitle: {
+        fontStyle: "normal",
+        marginTop: 30,
+        textAlign: "center",
+        marginBottom: 30,
+        fontWeight: "bold",
+        fontSize: "36px",
+        lineHeight: "40px",
+        color: "#141414",
+      },
+      mainDescription: {
+        fontStyle: "normal",
+        fontWeight: "normal",
+        fontSize: "16px",
+        color: "#8B98A7",
+      },
+      paper: {
+        padding: "24px",
+        background: "#ffffff",
+        boxSizing: "border-box",
+        borderRadius: "8px",
+        minHeight: 100,
+      },
+      paperCol: {
+        padding: "12px 0",
+        minHeight: 160,
+      },
+      aPaper: {
+        textDecoration: "none",
+        "&:hover": {
+          textDecoration: "underline",
+        },
+      },
+      iconWrap: {
+        padding: 30,
+        border: "1px solid #7DCEA0",
+        borderRadius: "50%",
+        position: "relative",
+        width: 80,
+        height: 80,
+        marginRight: 25,
+      },
+      icon: {
+        width: "20px",
+        height: "20px",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      },
+      title: {
+        fontStyle: "normal",
+        fontWeight: "bold",
+        fontSize: "18px",
+        color: "#141414",
+        marginBottom: 20,
+        lineHeight: "20px",
+      },
+      description: {
+        fontStyle: "normal",
+        fontWeight: "normal",
+        fontSize: "16px",
+        color: "#5B5B5B",
+      },
+      seeMore: {
+        fontWeight: "bold",
+        fontSize: 18,
+        marginTop: "0",
+        textAlign: "center",
+        "&:hover": {
+          textDecoration: "underline",
+          cursor: "pointer",
+        },
+        "& > a": {
+          textDecoration: "none",
+          color: "inherit",
+        },
+        "&::after": {
+          content: '""',
+          display: "inline-block",
+          width: 11,
+          height: 21,
+          marginLeft: 13,
+          background: "url('seeMoreArrow.svg') #fff no-repeat",
+          backgroundSize: "contain",
+          position: "absolute",
+        },
+      },
+    },
   })
 );
 
@@ -224,7 +223,7 @@ const Benefits = (props: any) => {
   const onClickIssue = () => {
     ReactGA.event({
       category: "BccIronCard_all_benefits_visa",
-      action: "all_benefits_visa"
+      action: "all_benefits_visa",
     });
     window.open(
       "https://www.visa.com.kz/ru_KZ/pay-with-visa/find-a-card/infinite.html",
@@ -234,12 +233,28 @@ const Benefits = (props: any) => {
 
   return (
     <Grid container className={classes.root}>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
+      <Grid
+        item
+        xl={12}
+        lg={12}
+        md={12}
+        sm={12}
+        xs={12}
+        className={classes.innerRoot}
+      >
         <Typography className={classes.mainTitle}>
           {t("block_3.title_main")}
         </Typography>
       </Grid>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.innerRoot}>
+      <Grid
+        item
+        xl={12}
+        lg={12}
+        md={12}
+        sm={12}
+        xs={12}
+        className={classes.innerRoot}
+      >
         <Grid container spacing={2}>
           <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
             <Grid className={classes.paper} container alignItems="center">
@@ -316,7 +331,11 @@ const Benefits = (props: any) => {
           </Grid>
 
           <Grid item xl={6} lg={6} md={12} sm={12} xs={12}>
-            <a href="Pamyatka_razmeweniya.pdf" target="_blank" className={classes.aPaper}>
+            <a
+              href="Pamyatka_razmeweniya.pdf"
+              target="_blank"
+              className={classes.aPaper}
+            >
               <Grid className={classes.paper} container alignItems="center">
                 <Grid
                   item
@@ -327,7 +346,11 @@ const Benefits = (props: any) => {
                   sm={false}
                   xs={false}
                 >
-                  <img src="phone-alt.svg" className={classes.icon} alt="phone" />
+                  <img
+                    src="phone-alt.svg"
+                    className={classes.icon}
+                    alt="phone"
+                  />
                 </Grid>
                 <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
                   <Typography className={classes.title}>
@@ -341,7 +364,6 @@ const Benefits = (props: any) => {
             </a>
           </Grid>
 
-
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
             <Grid className={classes.paperCol} container alignItems="center">
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -351,7 +373,6 @@ const Benefits = (props: any) => {
               </Grid>
             </Grid>
           </Grid>
-
         </Grid>
       </Grid>
     </Grid>

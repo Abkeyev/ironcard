@@ -195,7 +195,8 @@ const useStyles = makeStyles((theme: Theme) =>
     [theme.breakpoints.down("xs")]: {
       root: {
         marginTop: "34px",
-        padding: "27px 19px 52px 19px",
+        padding: "24px 12px",
+        width: "100%",
       },
       box: {
         fontSize: "24px",
