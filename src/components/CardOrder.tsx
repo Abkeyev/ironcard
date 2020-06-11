@@ -9,13 +9,12 @@ import {
 } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
 import MaskedInput from "react-maskedinput";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ReactGA from "react-ga";
 import api from "../api/Api";
-import { BccInputText } from "./CustomComponents";
+import { BccInputText, BccRadio, BccRadioGroup, BccFormControl, BccFormControlLabel } from "./CustomComponents";
 import axios from "axios";
 import ym from "react-yandex-metrika";
 import { useTranslation } from "react-i18next";
@@ -363,6 +362,125 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#898989",
       lineHeight: "16px",
     },
+    changeCard: {
+      position: 'relative',
+      width: 310,
+      height: 210,
+      margin: '20px auto',
+      filter: 'drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))',
+      marginLeft: '240px',
+      borderRadius: 10,
+      transition: '.3s',
+      display: 'grid',
+      alignContent: 'flex-end',
+      justifyContent: 'center',
+      '&:before': {
+        content: "url(card-layer-2.png)",
+        width: '100%',
+        height: '100%',
+        display: 'block',
+        filter: 'drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))',
+        zIndex: 10,
+        borderRadius: 10,
+        position: 'absolute',
+        maskSize: '100% 100%',
+        top: 0,
+        left: 0,
+      }
+    },
+    changeCardImg: {
+      position: 'absolute',
+      margin: 'auto',
+      top: 0,
+      transition: '.3s',
+      bottom: 0,
+    },
+    btnCardBlock: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 30
+    },
+    btnCard: {
+      width: 30,
+      height: 30,
+      marginRight: 20,
+      borderRadius: '50%',
+      minWidth: 'unset',
+      zIndex: 20,
+      transition: '.3s',
+      color: 'white',
+      border: '1px solid transparent',
+      '&:hover': {
+        transform: 'translateY(-5px)',
+        background: 'unset',
+        opacity: 0.8
+      }
+    },
+    cardTextMain: {
+      zIndex: 30,
+      fontSize: 20,
+      color: '#5f5f5f',
+      fontWeight: 'bold',
+      marginBottom: 10
+    },
+    btnCardRed: {
+      background: '#A50020 !important'
+    },
+    btnCardRose: {
+      background: '#D7A3AB!important'
+    },
+    btnCardTiffany: {
+      background: '#00BFB2!important'
+    },
+    btnCardBlack: {
+      background: 'black!important',
+      marginRight: 10
+    },
+    cardImgBlack: {
+      left: -230,
+      zIndex: 9
+    },
+    cardImgRed: {
+      left: 10
+    },
+    cardImgTiffany: {
+      left: 10
+    },
+    red: {
+      transition: '.3s',
+      '& > img:nth-child(2)': {
+        left: 14
+      },
+      '& > img:nth-child(3)': {
+        left: -230
+      },
+      '& > img:nth-child(1)': {
+        left: 14
+      }
+    },
+    rose: {
+      transition: '.3s',
+      '& > img:nth-child(1)': {
+        left: 14
+      },
+      '& > img:nth-child(2)': {
+        left: -230
+      }
+    },
+    tiffany: {
+      transition: '.3s',
+      '& > img:nth-child(1)': {
+        left: 14
+      },
+      '& > img:nth-child(4)': {
+        left: -230
+      }
+    },
+    radioSelect: {
+      width: '70%',
+      margin: '30px auto'
+    }
   })
 );
 
@@ -407,11 +525,6 @@ const CardOrder = (props: any) => {
     `${t("block_6.subtitle_desc_28")}`,
     `${t("block_6.subtitle_desc_29")}`,
   ];
-  const emailPrefix = [
-    { label: "gmail.com", value: "@gmail.com" },
-    { label: "mail.ru", value: "@mail.ru" },
-    { label: "yandex.ru", value: "@yandex.ru" },
-  ];
 
   const [name, setName] = React.useState("");
   const [src, setSrc] = React.useState("");
@@ -421,13 +534,13 @@ const CardOrder = (props: any) => {
   const [code, setCode] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [city, setCity] = React.useState("");
-  const [branchName, setBranchName] = React.useState("");
-  const [branchList, setBranchList] = React.useState<Branch[]>([]);
   const [checkbox, setCheckbox] = React.useState(true);
   const [flag, setFlag] = React.useState(false);
   const [step, setStep] = React.useState(0);
   const [cardName, setCardName] = React.useState("");
   const [timer, setTimer] = React.useState(5);
+  const [cardType, setCardType] = React.useState(0);
+  const [gift, setGift] = React.useState(false);
 
   useEffect(() => {
     if (step === 1) {
@@ -460,7 +573,7 @@ const CardOrder = (props: any) => {
   };
 
   function uuid() {
-    return "xxxxxx".replace(/[xy]/g, function(c) {
+    return "xxxxxx".replace(/[xy]/g, function (c) {
       var r = (Math.random() * 16) | 0,
         v = c === "x" ? r : (r & 0x3) | 0x8;
       return v.toString();
@@ -468,7 +581,7 @@ const CardOrder = (props: any) => {
   }
 
   function uuidNonce() {
-    return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".replace(/[xy]/g, function (c) {
       var r = (Math.random() * 16) | 0,
         v = c === "x" ? r : (r & 0x3) | 0x8;
       return v.toString(16).substr(0, 32);
@@ -503,7 +616,7 @@ const CardOrder = (props: any) => {
     const order = uuid();
     const nonce = uuidNonce();
     let desc = encodeURIComponent(
-      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}`
+      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}-${cardType === 3 ? 'tiffany' : cardType === 2 ? 'rose' : cardType === 1 ? 'red' : 'black'}-${gift ? 'gift' : 'for me'}`
     ).substring(0, 80);
     const merchant = "ironcardpromo";
     const terminal = "90030556";
@@ -521,8 +634,8 @@ const CardOrder = (props: any) => {
         .split(".")
         .reverse()
         .join("-") +
-        " " +
-        time
+      " " +
+      time
     )
       .add(-6, "hours")
       .format("YYYYMMDDHHmmss");
@@ -777,81 +890,6 @@ const CardOrder = (props: any) => {
                   })}
                 </BccInputText>
               </Grid>
-              {/* <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-                <BccInputText
-                  fullWidth={true}
-                  label={t("block_6.subtitle_desc_16")}
-                  id="branchName"
-                  name="branchName"
-                  value={branchName}
-                  onChange={(e: any) => handleBranchChange(e.target.value)}
-                  variant="outlined"
-                  margin="normal"
-                  select
-                >
-                  {branchList.length > 0 ? (
-                    branchList.map((b: any) => {
-                      return (
-                        <MenuItem key={b.code} value={b.code}>
-                          {b.address}
-                        </MenuItem>
-                      );
-                    })
-                  ) : (
-                    <MenuItem key="000000" value="000000">
-                      -
-                    </MenuItem>
-                  )}
-                </BccInputText>
-              </Grid> */}
-              {/* <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                <BccInputText
-                  size={isXS ? "small" : "medium"}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  name="phone"
-                  value={phone}
-                  onChange={(e: any) => handlePhoneChange(e.target.value)}
-                  label={t("block_6.subtitle_desc_17")}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  InputProps={{
-                    inputComponent: TextMaskCustom as any
-                  }}
-                />
-              </Grid> */}
-              {/* <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                <BccInputText
-                  size={isXS ? "small" : "medium"}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  name="email"
-                  value={email}
-                  onChange={(e: any) => handleEmailChange(e.target.value)}
-                  label="Email"
-                  id="email"
-                />
-              </Grid>
-              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                {emailPrefix.map((mail, index) => {
-                  return (
-                    <div
-                      key={mail.value}
-                      onClick={() => handleSelectEmailChange(index, mail.value)}
-                      className={
-                        index === selectedEmail
-                          ? classes.activeChip
-                          : classes.chip
-                      }
-                    >
-                      {mail.label}
-                    </div>
-                  );
-                })}
-              </Grid> */}
             </Grid>
           </>
         );
@@ -911,6 +949,46 @@ const CardOrder = (props: any) => {
         <Typography className={classes.box}>
           {t("block_6.title_main")}
         </Typography>
+        <Grid className={`${classes.changeCard} ${cardType === 3 ? classes.tiffany : cardType === 2 ? classes.rose : cardType === 1 ? classes.red : ''}`}>
+          <img src="IronCard-second.svg" className={`${classes.changeCardImg} ${classes.cardImgBlack}`} />
+          <img src="rose-card.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+          <img src="redCard.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+          <img src="tiffanyCard.png" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+          {/* <Typography className={classes.cardTextMain}>Выберите свою карту</Typography> */}
+          <Grid className={classes.btnCardBlock}>
+            <Button className={`${classes.btnCardTiffany} ${classes.btnCard}`} onClick={() => setCardType(3)}></Button>
+            <Button className={`${classes.btnCardRose} ${classes.btnCard}`} onClick={() => setCardType(2)}></Button>
+            <Button className={`${classes.btnCardRed} ${classes.btnCard}`} onClick={() => setCardType(1)}></Button>
+            <Button className={`${classes.btnCardBlack} ${classes.btnCard}`} onClick={() => setCardType(0)}></Button>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Grid container justify="space-between" className={classes.radioSelect} wrap="nowrap">
+            <Grid item>
+              <BccFormControl>
+                <BccFormControlLabel
+                  control={
+                    <BccRadio
+                      checked={!gift}
+                      onChange={() => setGift(!gift)}
+                    />
+                  }
+                  label="Карта для себя"
+                  labelPlacement="end"
+                /></BccFormControl>
+            </Grid>
+            <Grid item><BccFormControl>
+              <BccFormControlLabel
+                control={
+                  <BccRadio
+                    checked={gift}
+                    onChange={() => setGift(!gift)}
+                  />
+                }
+                label="Карта в подарок"
+              /></BccFormControl></Grid>
+          </Grid>
+        </Grid>
         {window.document.location.search === "?success=true" ? (
           <div className={classes.progress}>
             <div className={classes.progressBarSuccess}>
@@ -922,133 +1000,133 @@ const CardOrder = (props: any) => {
             </div>
           </div>
         ) : (
-          <div className={classes.progress}>
-            <span>
-              {step === 3
-                ? `${t("block_6.subtitle_desc_2")} ${stepText[step]}`
-                : step === 4
-                ? `${t("block_6.subtitle_desc_3")} ${stepText[step]}`
-                : `${t("block_6.subtitle_desc_1")} ${step + 1}: ${
+            <div className={classes.progress}>
+              <span>
+                {step === 3
+                  ? `${t("block_6.subtitle_desc_2")} ${stepText[step]}`
+                  : step === 4
+                    ? `${t("block_6.subtitle_desc_3")} ${stepText[step]}`
+                    : `${t("block_6.subtitle_desc_1")} ${step + 1}: ${
                     stepText[step]
-                  }`}
-            </span>
-            <div className={classes.progressBar}>
-              <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
-              <div
-                style={{
-                  width: `${
-                    step === 3 ? "50" : step === 4 ? "100" : step * 50
-                  }%`,
-                }}
-                className={classes.progressBarInner}
-              ></div>
+                    }`}
+              </span>
+              <div className={classes.progressBar}>
+                <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
+                <div
+                  style={{
+                    width: `${
+                      step === 3 ? "50" : step === 4 ? "100" : step * 50
+                      }%`,
+                  }}
+                  className={classes.progressBarInner}
+                ></div>
+              </div>
             </div>
-          </div>
-        )}
+          )}
         {window.document.location.search === "?success=true" ? (
           <div className={classes.successForm}>
             <img src="success.svg" alt="" />
             <span>{t("block_6.subtitle_desc_4")}</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} autoComplete="off">
-            {generateForm(step)}
-            {step === 0 || step === 1 ? (
-              <FormControlLabel
-                control={
-                  <BccCheckbox
-                    name="checkbox"
-                    defaultChecked={true}
-                    checked={checkbox}
-                    onChange={() => handleCheckboxChange()}
-                  />
-                }
-                label={
-                  <Typography className={classes.checkBoxLabel}>
-                    {t("block_6.subtitle_desc_5")}{" "}
-                    <a href="agreement.pdf" target="_blank">
-                      {t("block_6.subtitle_desc_6")}
-                    </a>
-                  </Typography>
-                }
-              />
-            ) : (
-              ""
-            )}
-            <Grid container style={{ marginTop: "15px" }} spacing={4}>
-              {step !== 2 ? (
-                <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                  <Grid container spacing={2}>
-                    <Grid
-                      item
-                      xl={false}
-                      lg={false}
-                      md={false}
-                      sm={false}
-                      xs={false}
-                    >
-                      <img
-                        src="card_order_security.svg"
-                        className={classes.icon}
-                        alt="order_security"
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      xl={true}
-                      lg={true}
-                      md={true}
-                      sm={true}
-                      xs={true}
-                    >
-                      <Typography className={classes.garant}>
-                        {t("block_6.subtitle_desc_7")}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
+            <form onSubmit={handleSubmit} autoComplete="off">
+              {generateForm(step)}
+              {step === 0 || step === 1 ? (
+                <BccFormControlLabel
+                  control={
+                    <BccCheckbox
+                      name="checkbox"
+                      defaultChecked={true}
+                      checked={checkbox}
+                      onChange={() => handleCheckboxChange()}
+                    />
+                  }
+                  label={
+                    <Typography className={classes.checkBoxLabel}>
+                      {t("block_6.subtitle_desc_5")}{" "}
+                      <a href="agreement.pdf" target="_blank">
+                        {t("block_6.subtitle_desc_6")}
+                      </a>
+                    </Typography>
+                  }
+                />
               ) : (
-                ""
-              )}
-              <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
-                {step === 0 ? (
-                  <Button
-                    variant="outlined"
-                    className={classes.consult}
-                    disabled={!isValid()}
-                    type="submit"
-                  >
-                    {t("block_6.subtitle_desc_8")}
-                  </Button>
-                ) : step === 3 && timer >= 1 ? (
-                  <span className={classes.timerSMS}>
-                    {t("block_6.subtitle_desc_9")} ({timer})
-                  </span>
-                ) : step === 3 && timer < 1 ? (
-                  <Button variant="outlined" className={classes.sendSMSAgain}>
-                    {t("block_6.subtitle_desc_10")}
-                  </Button>
-                ) : (
                   ""
                 )}
+              <Grid container style={{ marginTop: "15px" }} spacing={4}>
+                {step !== 2 ? (
+                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                    <Grid container spacing={2}>
+                      <Grid
+                        item
+                        xl={false}
+                        lg={false}
+                        md={false}
+                        sm={false}
+                        xs={false}
+                      >
+                        <img
+                          src="card_order_security.svg"
+                          className={classes.icon}
+                          alt="order_security"
+                        />
+                      </Grid>
+                      <Grid
+                        item
+                        xl={true}
+                        lg={true}
+                        md={true}
+                        sm={true}
+                        xs={true}
+                      >
+                        <Typography className={classes.garant}>
+                          {t("block_6.subtitle_desc_7")}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ) : (
+                    ""
+                  )}
+                <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
+                  {step === 0 ? (
+                    <Button
+                      variant="outlined"
+                      className={classes.consult}
+                      disabled={!isValid()}
+                      type="submit"
+                    >
+                      {t("block_6.subtitle_desc_8")}
+                    </Button>
+                  ) : step === 3 && timer >= 1 ? (
+                    <span className={classes.timerSMS}>
+                      {t("block_6.subtitle_desc_9")} ({timer})
+                    </span>
+                  ) : step === 3 && timer < 1 ? (
+                    <Button variant="outlined" className={classes.sendSMSAgain}>
+                      {t("block_6.subtitle_desc_10")}
+                    </Button>
+                  ) : (
+                          ""
+                        )}
+                </Grid>
+                <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
+                  <Button
+                    disabled={!isValid()}
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    className={classes.submit}
+                    onClick={() => nextButton(false)}
+                  >
+                    {buttonText[step]}
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
-                <Button
-                  disabled={!isValid()}
-                  type="button"
-                  fullWidth
-                  variant="contained"
-                  className={classes.submit}
-                  onClick={() => nextButton(false)}
-                >
-                  {buttonText[step]}
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        )}
+            </form>
+          )}
       </Paper>
-    </Grid>
+    </Grid >
   );
 };
 
