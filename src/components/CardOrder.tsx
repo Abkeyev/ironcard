@@ -191,41 +191,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
       },
     },
-    [theme.breakpoints.down("xs")]: {
-      root: {
-        marginTop: "34px",
-        padding: "24px 12px",
-        width: "100%",
-      },
-      box: {
-        fontSize: "24px",
-        lineHeight: "40px",
-        marginBottom: 20,
-      },
-      timerBox: {
-        padding: "24px",
-        backgroundColor: "black",
-        color: "white",
-        textAlign: "center",
-        borderRadius: 8,
-        margin: "32px 0 42px",
-        "& > h1": {
-          margin: "0 0 17px",
-          fontWeight: "normal",
-          padding: 0,
-          fontSize: 16,
-          lineHeight: "24px",
-        },
-        "& > span": {
-          fontWeight: "bold",
-          fontSize: 36,
-          lineHeight: "56px",
-        },
-      },
-      paper: {
-        padding: "36px 24px",
-      },
-    },
     root: {
       maxWidth: 1280,
       margin: "0 auto",
@@ -479,8 +444,174 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     radioSelect: {
       width: '70%',
-      margin: '30px auto'
-    }
+      margin: '30px auto',
+
+    },
+    [theme.breakpoints.down("xs")]: {
+      root: {
+        marginTop: "34px",
+        padding: "24px 12px",
+        width: "100%",
+      },
+      box: {
+        fontSize: "24px",
+        lineHeight: "40px",
+        marginBottom: 20,
+      },
+
+      changeCardImg: {
+        position: 'absolute',
+        margin: 'auto',
+        top: 0,
+        transition: '.3s',
+        bottom: 0,
+        width: '170px'
+      },
+      btnCardBlock: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10
+      },
+      btnCard: {
+        width: 18,
+        height: 18,
+        marginRight: 20,
+        borderRadius: '50%',
+        minWidth: 'unset',
+        zIndex: 20,
+        transition: '.3s',
+        color: 'white',
+        border: '1px solid transparent',
+        '&:hover': {
+          transform: 'translateY(-5px)',
+          background: 'unset',
+          opacity: 0.8
+        }
+      },
+      changeCard: {
+        position: 'relative',
+        width: '100%',
+        height: 125,
+        margin: '20px auto',
+        filter: 'drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))',
+        marginLeft: '0px',
+        borderRadius: 10,
+        transition: '.3s',
+        display: 'grid',
+        alignContent: 'flex-end',
+        justifyContent: 'flex-end',
+        '& > img:nth-child(1)': {
+          left: 10
+        },
+        '& > img:nth-child(2)': {
+          left: 130
+        },
+        '& > img:nth-child(3)': {
+          left: 130
+        },
+        '& > img:nth-child(4)': {
+          left: 130
+        },
+        '&:before': {
+          content: " '' ",
+          background: 'url(card-layer-2.png)',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right',
+          width: '100%',
+          height: '100%',
+          display: 'block',
+          filter: 'drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))',
+          zIndex: 10,
+          borderRadius: 10,
+          position: 'absolute',
+          maskSize: '100% 100%',
+          top: 0,
+          left: 0,
+        }
+      },
+      timerBox: {
+        padding: "24px",
+        backgroundColor: "black",
+        color: "white",
+        textAlign: "center",
+        borderRadius: 8,
+        margin: "32px 0 42px",
+        "& > h1": {
+          margin: "0 0 17px",
+          fontWeight: "normal",
+          padding: 0,
+          fontSize: 16,
+          lineHeight: "24px",
+        },
+        "& > span": {
+          fontWeight: "bold",
+          fontSize: 36,
+          lineHeight: "56px",
+        },
+      },
+      paper: {
+        padding: "36px 24px",
+        overflowX: 'hidden'
+      },
+
+      cardImgBlack: {
+        left: -230,
+        zIndex: 9
+      },
+      cardImgRed: {
+        left: 10
+      },
+      cardImgTiffany: {
+        left: 10
+      },
+      red: {
+        transition: '.3s',
+        '& > img:nth-child(1)': {
+          left: 130
+        },
+        '& > img:nth-child(2)': {
+          left: 130
+        },
+        '& > img:nth-child(3)': {
+          left: 10
+        },
+        '& > img:nth-child(4)': {
+          left: 130
+        }
+      },
+      rose: {
+        transition: '.3s',
+        '& > img:nth-child(1)': {
+          left: 130
+        },
+        '& > img:nth-child(2)': {
+          left: 14
+        },
+        '& > img:nth-child(3)': {
+          left: 130
+        },
+        '& > img:nth-child(4)': {
+          left: 130
+        }
+      },
+      tiffany: {
+        transition: '.3s',
+        '& > img:nth-child(1)': {
+          left: 130
+        },
+        '& > img:nth-child(2)': {
+          left: 130
+        },
+        '& > img:nth-child(3)': {
+          left: 130
+        },
+        '& > img:nth-child(4)': {
+          left: 10
+        }
+      },
+    },
   })
 );
 
@@ -963,8 +1094,8 @@ const CardOrder = (props: any) => {
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container justify="space-between" className={classes.radioSelect} wrap="nowrap">
-            <Grid item>
+          <Grid container justify="space-between" className={classes.radioSelect}>
+            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
               <BccFormControl>
                 <BccFormControlLabel
                   control={
@@ -977,7 +1108,7 @@ const CardOrder = (props: any) => {
                   labelPlacement="end"
                 /></BccFormControl>
             </Grid>
-            <Grid item><BccFormControl>
+            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}><BccFormControl>
               <BccFormControlLabel
                 control={
                   <BccRadio
