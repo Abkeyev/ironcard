@@ -367,15 +367,32 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: 30
     },
     btnCard: {
-      width: 30,
+      width: 50,
       height: 30,
       marginRight: 20,
-      borderRadius: '50%',
+      borderRadius: 4,
       minWidth: 'unset',
       zIndex: 20,
       transition: '.3s',
       color: 'white',
-      border: '1px solid transparent',
+      border: 'unset',
+      lineHeight: 0,
+      '&:last-child': {
+        marginRight: 0
+      },
+      '&:before': {
+        content: "' '",
+        display: 'block',
+        clipPath: 'polygon(0% 0%, 100% 0%, 50% 100%, 0% 100%)',
+        background: '#c8c9c9',
+        width: 22,
+        height: '30.2px',
+        position: 'absolute',
+        top: '-0.5px',
+        left: '0',
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 4
+      },
       '&:hover': {
         transform: 'translateY(-5px)',
         background: 'unset',
@@ -445,7 +462,6 @@ const useStyles = makeStyles((theme: Theme) =>
     radioSelect: {
       width: '70%',
       margin: '30px auto',
-
     },
     [theme.breakpoints.down("xs")]: {
       root: {
@@ -459,13 +475,17 @@ const useStyles = makeStyles((theme: Theme) =>
         marginBottom: 20,
       },
 
+      radioSelect: {
+        width: '100%',
+        margin: '30px auto',
+      },
       changeCardImg: {
         position: 'absolute',
         margin: 'auto',
         top: 0,
         transition: '.3s',
         bottom: 0,
-        width: '170px'
+        width: '150px'
       },
       btnCardBlock: {
         display: 'flex',
@@ -494,7 +514,7 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '100%',
         height: 125,
         margin: '20px auto',
-        filter: 'drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))',
+        filter: 'unset',
         marginLeft: '0px',
         borderRadius: 10,
         transition: '.3s',
@@ -502,27 +522,31 @@ const useStyles = makeStyles((theme: Theme) =>
         alignContent: 'flex-end',
         justifyContent: 'flex-end',
         '& > img:nth-child(1)': {
-          left: 10
+          left: 'unset',
+          right: '50%'
         },
         '& > img:nth-child(2)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(3)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(4)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '&:before': {
           content: " '' ",
           background: 'url(card-layer-2.png)',
           backgroundSize: 'contain',
+          filter: 'unset',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'right',
           width: '100%',
           height: '100%',
           display: 'block',
-          filter: 'drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))',
           zIndex: 10,
           borderRadius: 10,
           position: 'absolute',
@@ -569,46 +593,58 @@ const useStyles = makeStyles((theme: Theme) =>
       red: {
         transition: '.3s',
         '& > img:nth-child(1)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(2)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(3)': {
-          left: 10
+          left: 'unset',
+          right: '50%'
         },
         '& > img:nth-child(4)': {
-          left: 130
+          left: 'unset',
+          right: 0
         }
       },
       rose: {
         transition: '.3s',
         '& > img:nth-child(1)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(2)': {
-          left: 14
+          left: 'unset',
+          right: '50%'
         },
         '& > img:nth-child(3)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(4)': {
-          left: 130
+          left: 'unset',
+          right: 0
         }
       },
       tiffany: {
         transition: '.3s',
         '& > img:nth-child(1)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(2)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(3)': {
-          left: 130
+          left: 'unset',
+          right: 0
         },
         '& > img:nth-child(4)': {
-          left: 10
+          left: 'unset',
+          right: '50%'
         }
       },
     },
@@ -1082,8 +1118,8 @@ const CardOrder = (props: any) => {
         </Typography>
         <Grid className={`${classes.changeCard} ${cardType === 3 ? classes.tiffany : cardType === 2 ? classes.rose : cardType === 1 ? classes.red : ''}`}>
           <img src="IronCard-second.svg" className={`${classes.changeCardImg} ${classes.cardImgBlack}`} />
-          <img src="rose-card.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
-          <img src="redCard.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+          <img src="rose-card.png" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+          <img src="redCard.png" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
           <img src="tiffanyCard.png" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
           {/* <Typography className={classes.cardTextMain}>Выберите свою карту</Typography> */}
           <Grid className={classes.btnCardBlock}>

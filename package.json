@@ -1,6 +1,6 @@
 {
-  "homepage": "http://sunnatilla.github.io/ironcard-new",
-  "name": "ironcard-new",
+  "homepage": "http://sunnatilla.github.io/ironcard",
+  "name": "ironcard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
