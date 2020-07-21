@@ -371,7 +371,7 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 10,
       transition: '.3s',
       display: 'grid',
-      alignContent: 'center',
+      alignContent: 'flex-end',
       justifyContent: 'center',
       '&:before': {
         content: "url(card-layer-2.png)",
@@ -398,18 +398,22 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      marginBottom: 30
     },
     btnCard: {
-      width: 60,
-      height: 40,
-      bordeфrRadius: '5px',
+      width: 30,
+      height: 30,
+      marginRight: 20,
+      borderRadius: '50%',
+      minWidth: 'unset',
       zIndex: 20,
       transition: '.3s',
       color: 'white',
       border: '1px solid transparent',
       '&:hover': {
-        background: 'transparent',
-        border: '1px solid #000',
+        transform: 'translateY(-5px)',
+        background: 'unset',
+        opacity: 0.8
       }
     },
     cardTextMain: {
@@ -420,10 +424,17 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: 10
     },
     btnCardRed: {
-      background: '#ef3e61'
+      background: '#A50020 !important'
+    },
+
+    btnCardRose: {
+      background: '#D7A3AB!important'
+    },
+    btnCardTiffany: {
+      background: '#00BFB2!important'
     },
     btnCardBlack: {
-      background: 'black',
+      background: 'black!important',
       marginRight: 10
     },
     cardImgBlack: {
@@ -434,6 +445,27 @@ const useStyles = makeStyles((theme: Theme) =>
       left: 10
     },
     red: {
+      transition: '.3s',
+      '& > img:nth-child(2)': {
+        left: 14
+      },
+      '& > img:nth-child(3)': {
+        left: -230
+      },
+      '& > img:nth-child(1)': {
+        left: 14
+      }
+    },
+    rose: {
+      transition: '.3s',
+      '& > img:nth-child(1)': {
+        left: 14
+      },
+      '& > img:nth-child(2)': {
+        left: -230
+      }
+    },
+    tiffany: {
       transition: '.3s',
       '& > img:nth-child(1)': {
         left: 14
@@ -758,10 +790,10 @@ const CardOrder = (props: any) => {
               onChange={(e: any) => handlePhoneChange(e.target.value)}
               label={t("block_6.subtitle_desc_12")}
               InputLabelProps={{
-                shrink: true
+                shrink: true,
               }}
               InputProps={{
-                inputComponent: TextMaskCustom as any
+                inputComponent: TextMaskCustom as any,
               }}
             />
           </>
@@ -809,7 +841,7 @@ const CardOrder = (props: any) => {
               id="iin"
             />
             <Grid container spacing={2}>
-              <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <BccInputText
                   fullWidth={true}
                   label={t("block_6.subtitle_desc_15")}
@@ -830,7 +862,7 @@ const CardOrder = (props: any) => {
                   })}
                 </BccInputText>
               </Grid>
-              <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+              {/* <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
                 <BccInputText
                   fullWidth={true}
                   label={t("block_6.subtitle_desc_16")}
@@ -851,13 +883,13 @@ const CardOrder = (props: any) => {
                       );
                     })
                   ) : (
-                      <MenuItem key="000000" value="000000">
-                        -
+                    <MenuItem key="000000" value="000000">
+                      -
                     </MenuItem>
-                    )}
+                  )}
                 </BccInputText>
-              </Grid>
-              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+              </Grid> */}
+              {/* <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <BccInputText
                   size={isXS ? "small" : "medium"}
                   variant="outlined"
@@ -874,8 +906,8 @@ const CardOrder = (props: any) => {
                     inputComponent: TextMaskCustom as any
                   }}
                 />
-              </Grid>
-              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+              </Grid> */}
+              {/* <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <BccInputText
                   size={isXS ? "small" : "medium"}
                   variant="outlined"
@@ -904,7 +936,7 @@ const CardOrder = (props: any) => {
                     </div>
                   );
                 })}
-              </Grid>
+              </Grid> */}
             </Grid>
           </>
         );
@@ -964,13 +996,17 @@ const CardOrder = (props: any) => {
         <Typography className={classes.box}>
           {t("block_6.title_main")}
         </Typography>
-        <Grid className={`${classes.changeCard} ${cardType ? classes.red : ''}`}>
+        <Grid className={`${classes.changeCard} ${cardType === 3 ? classes.tiffany : cardType === 2 ? classes.rose : cardType === 1 ? classes.red : ''}`}>
           <img src="IronCard-second.svg" className={`${classes.changeCardImg} ${classes.cardImgBlack}`} />
+          <img src="rose-card.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
           <img src="redCard.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
-          <Typography className={classes.cardTextMain}>Выберите свою карту</Typography>
+          <img src="tiffanyCard.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+          {/* <Typography className={classes.cardTextMain}>Выберите свою карту</Typography> */}
           <Grid className={classes.btnCardBlock}>
-            <Button className={`${classes.btnCardBlack} ${classes.btnCard}`} onClick={() => setCardType(0)}></Button>
+            <Button className={`${classes.btnCardTiffany} ${classes.btnCard}`} onClick={() => setCardType(3)}></Button>
+            <Button className={`${classes.btnCardRose} ${classes.btnCard}`} onClick={() => setCardType(2)}></Button>
             <Button className={`${classes.btnCardRed} ${classes.btnCard}`} onClick={() => setCardType(1)}></Button>
+            <Button className={`${classes.btnCardBlack} ${classes.btnCard}`} onClick={() => setCardType(0)}></Button>
           </Grid>
         </Grid>
         {window.document.location.search === "?success=true" ? (
@@ -1085,7 +1121,7 @@ const CardOrder = (props: any) => {
                   ) : step === 3 && timer >= 1 ? (
                     <span className={classes.timerSMS}>
                       {t("block_6.subtitle_desc_9")} ({timer})
-                  </span>
+                    </span>
                   ) : step === 3 && timer < 1 ? (
                     <Button variant="outlined" className={classes.sendSMSAgain}>
                       {t("block_6.subtitle_desc_10")}
