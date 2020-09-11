@@ -14,7 +14,13 @@ import MaskedInput from "react-maskedinput";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ReactGA from "react-ga";
 import api from "../api/Api";
-import { BccInputText, BccRadio, BccRadioGroup, BccFormControl, BccFormControlLabel } from "./CustomComponents";
+import {
+  BccInputText,
+  BccRadio,
+  BccRadioGroup,
+  BccFormControl,
+  BccFormControlLabel,
+} from "./CustomComponents";
 import axios from "axios";
 import ym from "react-yandex-metrika";
 import { useTranslation } from "react-i18next";
@@ -356,107 +362,125 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight: "16px",
     },
     changeCard: {
-
+      position: "relative",
+      width: 310,
+      height: 210,
+      margin: "20px auto",
+      filter:
+        "drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))",
+      marginLeft: "240px",
+      borderRadius: 10,
+      transition: ".3s",
+      display: "grid",
+      alignContent: "flex-end",
+      justifyContent: "center",
+      "&:before": {
+        content: "url(card-layer-2.png)",
+        width: "100%",
+        height: "100%",
+        display: "block",
+        filter:
+          "drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))",
+        zIndex: 10,
+        borderRadius: 10,
+        position: "absolute",
+        maskSize: "100% 100%",
+        top: 0,
+        left: 0,
+      },
     },
     changeCardImg: {
-
+      position: "absolute",
+      margin: "auto",
+      top: 0,
+      transition: ".3s",
+      bottom: 0,
     },
     btnCardBlock: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      '& button:nth-child(3)': {
-        borderRadius: '0px',
-        borderBottom: '2px solid #27AE60',
-      },
-      '& button': {
-        filter: 'drop-shadow(0px 8px 14px rgba(0, 0, 0, 0.15))',
-        marginRight: 10,
-        padding: 0,
-        paddingBottom: 10,
-        '&:last-child': {
-          marginRight: 0,
-        }
-      },
-      '& img': {
-        width: '100%',
-      }
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 30,
     },
     btnCard: {
-      '&:hover': {
-        transform: 'translateY(-5px)',
-        background: 'unset',
-        opacity: 0.8
-      }
+      width: 30,
+      height: 30,
+      marginRight: 20,
+      borderRadius: "50%",
+      minWidth: "unset",
+      zIndex: 20,
+      transition: ".3s",
+      color: "white",
+      border: "1px solid transparent",
+      "&:hover": {
+        transform: "translateY(-5px)",
+        background: "unset",
+        opacity: 0.8,
+      },
     },
     cardTextMain: {
       zIndex: 30,
       fontSize: 20,
-      color: '#000000',
-      fontWeight: 'bold',
-      marginBottom: 10
+      color: "#5f5f5f",
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+    btnCardRed: {
+      background: "#A50020 !important",
+    },
+    btnCardRose: {
+      background: "#D7A3AB!important",
+    },
+    btnCardTiffany: {
+      background: "#00BFB2!important",
+    },
+    btnCardBlack: {
+      background: "black!important",
+      marginRight: 10,
     },
     cardImgBlack: {
       left: -230,
-      zIndex: 9
+      zIndex: 9,
     },
     cardImgRed: {
-      left: 10
+      left: 10,
     },
     cardImgTiffany: {
-      left: 10
+      left: 10,
     },
     red: {
-      transition: '.3s',
-      '& button:nth-child(2)': {
-        borderRadius: '0px',
-        borderBottom: '2px solid #27AE60',
+      transition: ".3s",
+      "& > img:nth-child(2)": {
+        left: 14,
       },
-      '& button:nth-child(3)': {
-        borderRadius: '0px',
-        borderBottom: 'unset',
-      }
+      "& > img:nth-child(3)": {
+        left: -230,
+      },
+      "& > img:nth-child(1)": {
+        left: 14,
+      },
     },
     rose: {
-      transition: '.3s',
-      '& button:nth-child(1)': {
-        borderRadius: '0px',
-        borderBottom: '2px solid #27AE60',
+      transition: ".3s",
+      "& > img:nth-child(1)": {
+        left: 14,
       },
-      '& button:nth-child(3)': {
-        borderRadius: '0px',
-        borderBottom: 'unset',
-      }
+      "& > img:nth-child(2)": {
+        left: -230,
+      },
     },
     tiffany: {
-      transition: '.3s',
-      '& button:nth-child(4)': {
-        borderRadius: '0px',
-        borderBottom: '2px solid #27AE60',
+      transition: ".3s",
+      "& > img:nth-child(1)": {
+        left: 14,
       },
-      '& button:nth-child(3)': {
-        borderRadius: '0px',
-        borderBottom: 'unset',
-      }
-    },
-    btnCardRose: {
-      '& span': {
-        position: 'relative'
-      }
-    },
-    btnCardRed: {
-      '& span': {
-        position: 'relative',
-      }
-    },
-    btnCardTiffany: {
-      '& span': {
-        position: 'relative'
-      }
+      "& > img:nth-child(4)": {
+        left: -230,
+      },
     },
     radioSelect: {
-      width: '70%',
-      margin: '30px auto',
+      width: "70%",
+      margin: "30px auto",
     },
     [theme.breakpoints.down("xs")]: {
       root: {
@@ -470,37 +494,79 @@ const useStyles = makeStyles((theme: Theme) =>
         marginBottom: 20,
       },
 
-      radioSelect: {
-        width: '100%',
-        margin: '30px auto',
+      changeCardImg: {
+        position: "absolute",
+        margin: "auto",
+        top: 0,
+        transition: ".3s",
+        bottom: 0,
+        width: "170px",
       },
       btnCardBlock: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        '& button:nth-child(3)': {
-          borderRadius: '0px',
-          borderBottom: '2px solid #27AE60',
-        },
-        '& button': {
-          filter: 'drop-shadow(0px 8px 14px rgba(0, 0, 0, 0.15))',
-          marginRight: 10,
-          padding: 0,
-          paddingBottom: 10,
-          '&:last-child': {
-            marginRight: 0,
-          }
-        },
-        '& img': {
-          width: '100%',
-        }
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: 10,
       },
       btnCard: {
-        '&:hover': {
-          transform: 'translateY(-5px)',
-          background: 'unset',
-          opacity: 0.8
-        }
+        width: 18,
+        height: 18,
+        marginRight: 20,
+        borderRadius: "50%",
+        minWidth: "unset",
+        zIndex: 20,
+        transition: ".3s",
+        color: "white",
+        border: "1px solid transparent",
+        "&:hover": {
+          transform: "translateY(-5px)",
+          background: "unset",
+          opacity: 0.8,
+        },
+      },
+      changeCard: {
+        position: "relative",
+        width: "100%",
+        height: 125,
+        margin: "20px auto",
+        filter:
+          "drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))",
+        marginLeft: "0px",
+        borderRadius: 10,
+        transition: ".3s",
+        display: "grid",
+        alignContent: "flex-end",
+        justifyContent: "flex-end",
+        "& > img:nth-child(1)": {
+          left: 10,
+        },
+        "& > img:nth-child(2)": {
+          left: 130,
+        },
+        "& > img:nth-child(3)": {
+          left: 130,
+        },
+        "& > img:nth-child(4)": {
+          left: 130,
+        },
+        "&:before": {
+          content: " '' ",
+          background: "url(card-layer-2.png)",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right",
+          width: "100%",
+          height: "100%",
+          display: "block",
+          filter:
+            "drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))",
+          zIndex: 10,
+          borderRadius: 10,
+          position: "absolute",
+          maskSize: "100% 100%",
+          top: 0,
+          left: 0,
+        },
       },
       timerBox: {
         padding: "24px",
@@ -524,52 +590,64 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       paper: {
         padding: "36px 24px",
-        overflowX: 'hidden'
+        overflowX: "hidden",
       },
 
       cardImgBlack: {
         left: -230,
-        zIndex: 9
+        zIndex: 9,
       },
       cardImgRed: {
-        left: 10
+        left: 10,
       },
       cardImgTiffany: {
-        left: 10
+        left: 10,
       },
 
       red: {
-        transition: '.3s',
-        '& button:nth-child(2)': {
-          borderRadius: '0px',
-          borderBottom: '2px solid #27AE60',
+        transition: ".3s",
+        "& > img:nth-child(1)": {
+          left: 130,
         },
-        '& button:nth-child(3)': {
-          borderRadius: '0px',
-          borderBottom: 'unset',
-        }
+        "& > img:nth-child(2)": {
+          left: 130,
+        },
+        "& > img:nth-child(3)": {
+          left: 10,
+        },
+        "& > img:nth-child(4)": {
+          left: 130,
+        },
       },
       rose: {
-        transition: '.3s',
-        '& button:nth-child(1)': {
-          borderRadius: '0px',
-          borderBottom: '2px solid #27AE60',
+        transition: ".3s",
+        "& > img:nth-child(1)": {
+          left: 130,
         },
-        '& button:nth-child(3)': {
-          borderRadius: '0px',
-          borderBottom: 'unset',
-        }
+        "& > img:nth-child(2)": {
+          left: 14,
+        },
+        "& > img:nth-child(3)": {
+          left: 130,
+        },
+        "& > img:nth-child(4)": {
+          left: 130,
+        },
       },
       tiffany: {
-        transition: '.3s',
-        '& button:nth-child(4)': {
-          borderRadius: '0px',
-          borderBottom: '2px solid #27AE60',
+        transition: ".3s",
+        "& > img:nth-child(1)": {
+          left: 130,
         },
-        '& button:nth-child(3)': {
-          borderRadius: '0px',
-          borderBottom: 'unset',
-        }
+        "& > img:nth-child(2)": {
+          left: 130,
+        },
+        "& > img:nth-child(3)": {
+          left: 130,
+        },
+        "& > img:nth-child(4)": {
+          left: 10,
+        },
       },
     },
   })
@@ -707,7 +785,15 @@ const CardOrder = (props: any) => {
     const order = uuid();
     const nonce = uuidNonce();
     let desc = encodeURIComponent(
-      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}-${cardType === 3 ? 'tiffany' : cardType === 2 ? 'rose' : cardType === 1 ? 'red' : 'black'}-${gift ? 'gift' : 'forme'}`
+      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}-${
+      cardType === 3
+        ? "tiffany"
+        : cardType === 2
+          ? "rose"
+          : cardType === 1
+            ? "red"
+            : "black"
+      }-${gift ? "gift" : "forme"}`
     ).substring(0, 80);
     const merchant = "ironcardpromo";
     const terminal = "90030556";
@@ -1090,6 +1176,82 @@ const CardOrder = (props: any) => {
         <Typography className={classes.box}>
           {t("block_6.title_main")}
         </Typography>
+        <Grid
+          className={`${classes.changeCard} ${
+            cardType === 3
+              ? classes.tiffany
+              : cardType === 2
+                ? classes.rose
+                : cardType === 1
+                  ? classes.red
+                  : ""
+            }`}
+        >
+          <img
+            src="IronCard-second.svg"
+            className={`${classes.changeCardImg} ${classes.cardImgBlack}`}
+          />
+          <img
+            src="rose-card.svg"
+            className={`${classes.changeCardImg} ${classes.cardImgRed}`}
+          />
+          <img
+            src="redCard.svg"
+            className={`${classes.changeCardImg} ${classes.cardImgRed}`}
+          />
+          <img
+            src="tiffanyCard.png"
+            className={`${classes.changeCardImg} ${classes.cardImgRed}`}
+          />
+          {/* <Typography className={classes.cardTextMain}>Выберите свою карту</Typography> */}
+          <Grid className={classes.btnCardBlock}>
+            <Button
+              className={`${classes.btnCardTiffany} ${classes.btnCard}`}
+              onClick={() => setCardType(3)}
+            ></Button>
+            <Button
+              className={`${classes.btnCardRose} ${classes.btnCard}`}
+              onClick={() => setCardType(2)}
+            ></Button>
+            <Button
+              className={`${classes.btnCardRed} ${classes.btnCard}`}
+              onClick={() => setCardType(1)}
+            ></Button>
+            <Button
+              className={`${classes.btnCardBlack} ${classes.btnCard}`}
+              onClick={() => setCardType(0)}
+            ></Button>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Grid
+            container
+            justify="space-between"
+            className={classes.radioSelect}
+          >
+            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+              <BccFormControl>
+                <BccFormControlLabel
+                  control={
+                    <BccRadio checked={!gift} onChange={() => setGift(!gift)} />
+                  }
+                  label="Карта для себя"
+                  labelPlacement="end"
+                />
+              </BccFormControl>
+            </Grid>
+            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+              <BccFormControl>
+                <BccFormControlLabel
+                  control={
+                    <BccRadio checked={gift} onChange={() => setGift(!gift)} />
+                  }
+                  label="Карта в подарок"
+                />
+              </BccFormControl>
+            </Grid>
+          </Grid>
+        </Grid>
         {window.document.location.search === "?success=true" ? (
           <div className={classes.progress}>
             <div className={classes.progressBarSuccess}>
@@ -1112,11 +1274,11 @@ const CardOrder = (props: any) => {
                     }`}
               </span>
               <div className={classes.progressBar}>
-                <span>{step === 3 ? "33" : step === 4 ? "100" : step * 33}%</span>
+                <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
                 <div
                   style={{
                     width: `${
-                      step === 3 ? "33" : step === 4 ? "100" : step * 33
+                      step === 3 ? "50" : step === 4 ? "100" : step * 50
                       }%`,
                   }}
                   className={classes.progressBarInner}
@@ -1132,7 +1294,7 @@ const CardOrder = (props: any) => {
         ) : (
             <form onSubmit={handleSubmit} autoComplete="off">
               {generateForm(step)}
-              {step === 0 ? (
+              {step === 0 || step === 1 ? (
                 <BccFormControlLabel
                   control={
                     <BccCheckbox
@@ -1155,7 +1317,7 @@ const CardOrder = (props: any) => {
                   ""
                 )}
               <Grid container style={{ marginTop: "15px" }} spacing={4}>
-                {step === 0 ? (
+                {step !== 2 ? (
                   <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                     <Grid container spacing={2}>
                       <Grid
@@ -1227,7 +1389,7 @@ const CardOrder = (props: any) => {
             </form>
           )}
       </Paper>
-    </Grid >
+    </Grid>
   );
 };
 
