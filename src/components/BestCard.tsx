@@ -58,6 +58,23 @@ const useStyles = makeStyles((theme: Theme) =>
                 lineHeight: '20px',
                 marginBottom: 10
             },
+
+            cardFeatures: {
+                backgroundColor: "rgb(245 245 245)",
+                borderRadius: 8,
+                margin: "25px 0",
+                color: "#141414",
+                fontSize: 24,
+                padding: "24px 32px",
+                fontWeight: 500,
+                "& > span": {
+                    display: "block",
+                    marginTop: 15,
+                    opacity: 1,
+                    fontWeight: 300,
+                    fontSize: 16,
+                },
+            },
             description: {
                 fontStyle: 'normal',
                 fontWeight: 'normal',
@@ -121,7 +138,27 @@ const useStyles = makeStyles((theme: Theme) =>
                 fontWeight: 'normal',
                 fontSize: '16px',
                 color: '#5B5B5B'
-            }
+            },
+
+            cardFeatures: {
+                backgroundColor: "rgb(0 0 0 / 5%)",
+                borderRadius: 8,
+                margin: "55px 0",
+                color: "#141414",
+                fontSize: 24,
+                padding: "24px 32px",
+                fontWeight: 500,
+                "& > span": {
+                    display: "block",
+                    marginTop: 15,
+                    opacity: 0.7,
+                    fontWeight: 300,
+                    fontSize: 16,
+                },
+            },
+            cardMFeatures: {
+                flexBasis: "49%",
+            },
         },
         [theme.breakpoints.down('xs')]: {
             iconWrap: {
@@ -153,6 +190,7 @@ const BestCard = (props: any) => {
 
     return (
         <Grid container className={classes.root}>
+
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <Typography className={classes.mainTitle}>{t("block_2.title_main")}</Typography>
             </Grid>
@@ -214,6 +252,37 @@ const BestCard = (props: any) => {
                             </Grid>
                         </Grid>
                     </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid container justify="space-between">
+                <Grid
+                    item
+                    xl={6}
+                    lg={6}
+                    md={6}
+                    sm={12}
+                    xs={12}
+                    className={classes.cardMFeatures}
+                >
+                    <div className={classes.cardFeatures}>
+                        {t("header.subtitle8_desc")}
+                        <span>{t("header.subtitle8_1_desc")}</span>
+                    </div>
+                </Grid>
+                <Grid
+                    item
+                    xl={6}
+                    lg={6}
+                    md={6}
+                    sm={12}
+                    xs={12}
+                    className={classes.cardMFeatures}
+                >
+                    <div className={classes.cardFeatures}>
+                        Visa Infinite
+              <span>{t("header.subtitle9_1_desc")}</span>
+                    </div>
                 </Grid>
             </Grid>
         </Grid>

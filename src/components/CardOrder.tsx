@@ -91,6 +91,34 @@ const useStyles = makeStyles((theme: Theme) =>
           opacity: 0.8,
         },
       },
+      btnCardBlock: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '& button:nth-child(3)': {
+          borderRadius: '0px',
+          borderBottom: '2px solid #27AE60',
+        },
+        '& button': {
+          filter: 'drop-shadow(0px 8px 14px rgba(0, 0, 0, 0.15))',
+          marginRight: 10,
+          padding: 0,
+          paddingBottom: 10,
+          '&:last-child': {
+            marginRight: 0,
+          }
+        },
+        '& img': {
+          width: '100%',
+        }
+      },
+      btnCard: {
+        '&:hover': {
+          transform: 'translateY(-5px)',
+          background: 'unset',
+          opacity: 0.8
+        }
+      },
       timerBox: {
         padding: "24px",
         backgroundColor: "black",
@@ -328,71 +356,33 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight: "16px",
     },
     changeCard: {
-      position: 'relative',
-      width: 310,
-      height: 210,
-      margin: '20px auto',
-      filter: 'drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))',
-      marginLeft: '240px',
-      borderRadius: 10,
-      transition: '.3s',
-      display: 'grid',
-      alignContent: 'flex-end',
-      justifyContent: 'center',
-      '&:before': {
-        content: "url(card-layer-2.png)",
-        width: '100%',
-        height: '100%',
-        display: 'block',
-        filter: 'drop-shadow(0 4px 8px rgba(11,31,53,0.08)) drop-shadow(0 1px 2px rgba(11,31,53,0.24))',
-        zIndex: 10,
-        borderRadius: 10,
-        position: 'absolute',
-        maskSize: '100% 100%',
-        top: 0,
-        left: 0,
-      }
+
     },
     changeCardImg: {
-      position: 'absolute',
-      margin: 'auto',
-      top: 0,
-      transition: '.3s',
-      bottom: 0,
+
     },
     btnCardBlock: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom: 30
+      '& button:nth-child(3)': {
+        borderRadius: '0px',
+        borderBottom: '2px solid #27AE60',
+      },
+      '& button': {
+        filter: 'drop-shadow(0px 8px 14px rgba(0, 0, 0, 0.15))',
+        marginRight: 10,
+        padding: 0,
+        paddingBottom: 10,
+        '&:last-child': {
+          marginRight: 0,
+        }
+      },
+      '& img': {
+        width: '100%',
+      }
     },
     btnCard: {
-      width: 50,
-      height: 30,
-      marginRight: 20,
-      borderRadius: 4,
-      minWidth: 'unset',
-      zIndex: 20,
-      transition: '.3s',
-      color: 'white',
-      border: 'unset',
-      lineHeight: 0,
-      '&:last-child': {
-        marginRight: 0
-      },
-      '&:before': {
-        content: "' '",
-        display: 'block',
-        clipPath: 'polygon(0% 0%, 100% 0%, 50% 100%, 0% 100%)',
-        background: '#c8c9c9',
-        width: 22,
-        height: '30.2px',
-        position: 'absolute',
-        top: '-0.5px',
-        left: '0',
-        borderTopLeftRadius: 4,
-        borderBottomLeftRadius: 4
-      },
       '&:hover': {
         transform: 'translateY(-5px)',
         background: 'unset',
@@ -402,22 +392,9 @@ const useStyles = makeStyles((theme: Theme) =>
     cardTextMain: {
       zIndex: 30,
       fontSize: 20,
-      color: '#5f5f5f',
+      color: '#000000',
       fontWeight: 'bold',
       marginBottom: 10
-    },
-    btnCardRed: {
-      background: '#A50020 !important'
-    },
-    btnCardRose: {
-      background: '#D7A3AB!important'
-    },
-    btnCardTiffany: {
-      background: '#00BFB2!important'
-    },
-    btnCardBlack: {
-      background: 'black!important',
-      marginRight: 10
     },
     cardImgBlack: {
       left: -230,
@@ -431,32 +408,50 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     red: {
       transition: '.3s',
-      '& > img:nth-child(2)': {
-        left: 14
+      '& button:nth-child(2)': {
+        borderRadius: '0px',
+        borderBottom: '2px solid #27AE60',
       },
-      '& > img:nth-child(3)': {
-        left: -230
-      },
-      '& > img:nth-child(1)': {
-        left: 14
+      '& button:nth-child(3)': {
+        borderRadius: '0px',
+        borderBottom: 'unset',
       }
     },
     rose: {
       transition: '.3s',
-      '& > img:nth-child(1)': {
-        left: 14
+      '& button:nth-child(1)': {
+        borderRadius: '0px',
+        borderBottom: '2px solid #27AE60',
       },
-      '& > img:nth-child(2)': {
-        left: -230
+      '& button:nth-child(3)': {
+        borderRadius: '0px',
+        borderBottom: 'unset',
       }
     },
     tiffany: {
       transition: '.3s',
-      '& > img:nth-child(1)': {
-        left: 14
+      '& button:nth-child(4)': {
+        borderRadius: '0px',
+        borderBottom: '2px solid #27AE60',
       },
-      '& > img:nth-child(4)': {
-        left: -230
+      '& button:nth-child(3)': {
+        borderRadius: '0px',
+        borderBottom: 'unset',
+      }
+    },
+    btnCardRose: {
+      '& span': {
+        position: 'relative'
+      }
+    },
+    btnCardRed: {
+      '& span': {
+        position: 'relative',
+      }
+    },
+    btnCardTiffany: {
+      '& span': {
+        position: 'relative'
       }
     },
     radioSelect: {
@@ -479,80 +474,32 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '100%',
         margin: '30px auto',
       },
-      changeCardImg: {
-        position: 'absolute',
-        margin: 'auto',
-        top: 0,
-        transition: '.3s',
-        bottom: 0,
-        width: '150px'
-      },
       btnCardBlock: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 10
+        '& button:nth-child(3)': {
+          borderRadius: '0px',
+          borderBottom: '2px solid #27AE60',
+        },
+        '& button': {
+          filter: 'drop-shadow(0px 8px 14px rgba(0, 0, 0, 0.15))',
+          marginRight: 10,
+          padding: 0,
+          paddingBottom: 10,
+          '&:last-child': {
+            marginRight: 0,
+          }
+        },
+        '& img': {
+          width: '100%',
+        }
       },
       btnCard: {
-        width: 18,
-        height: 18,
-        marginRight: 20,
-        borderRadius: '50%',
-        minWidth: 'unset',
-        zIndex: 20,
-        transition: '.3s',
-        color: 'white',
-        border: '1px solid transparent',
         '&:hover': {
           transform: 'translateY(-5px)',
           background: 'unset',
           opacity: 0.8
-        }
-      },
-      changeCard: {
-        position: 'relative',
-        width: '100%',
-        height: 125,
-        margin: '20px auto',
-        filter: 'unset',
-        marginLeft: '0px',
-        borderRadius: 10,
-        transition: '.3s',
-        display: 'grid',
-        alignContent: 'flex-end',
-        justifyContent: 'flex-end',
-        '& > img:nth-child(1)': {
-          left: 'unset',
-          right: '50%'
-        },
-        '& > img:nth-child(2)': {
-          left: 'unset',
-          right: 0
-        },
-        '& > img:nth-child(3)': {
-          left: 'unset',
-          right: 0
-        },
-        '& > img:nth-child(4)': {
-          left: 'unset',
-          right: 0
-        },
-        '&:before': {
-          content: " '' ",
-          background: 'url(card-layer-2.png)',
-          backgroundSize: 'contain',
-          filter: 'unset',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'right',
-          width: '100%',
-          height: '100%',
-          display: 'block',
-          zIndex: 10,
-          borderRadius: 10,
-          position: 'absolute',
-          maskSize: '100% 100%',
-          top: 0,
-          left: 0,
         }
       },
       timerBox: {
@@ -590,61 +537,38 @@ const useStyles = makeStyles((theme: Theme) =>
       cardImgTiffany: {
         left: 10
       },
+
       red: {
         transition: '.3s',
-        '& > img:nth-child(1)': {
-          left: 'unset',
-          right: 0
+        '& button:nth-child(2)': {
+          borderRadius: '0px',
+          borderBottom: '2px solid #27AE60',
         },
-        '& > img:nth-child(2)': {
-          left: 'unset',
-          right: 0
-        },
-        '& > img:nth-child(3)': {
-          left: 'unset',
-          right: '50%'
-        },
-        '& > img:nth-child(4)': {
-          left: 'unset',
-          right: 0
+        '& button:nth-child(3)': {
+          borderRadius: '0px',
+          borderBottom: 'unset',
         }
       },
       rose: {
         transition: '.3s',
-        '& > img:nth-child(1)': {
-          left: 'unset',
-          right: 0
+        '& button:nth-child(1)': {
+          borderRadius: '0px',
+          borderBottom: '2px solid #27AE60',
         },
-        '& > img:nth-child(2)': {
-          left: 'unset',
-          right: '50%'
-        },
-        '& > img:nth-child(3)': {
-          left: 'unset',
-          right: 0
-        },
-        '& > img:nth-child(4)': {
-          left: 'unset',
-          right: 0
+        '& button:nth-child(3)': {
+          borderRadius: '0px',
+          borderBottom: 'unset',
         }
       },
       tiffany: {
         transition: '.3s',
-        '& > img:nth-child(1)': {
-          left: 'unset',
-          right: 0
+        '& button:nth-child(4)': {
+          borderRadius: '0px',
+          borderBottom: '2px solid #27AE60',
         },
-        '& > img:nth-child(2)': {
-          left: 'unset',
-          right: 0
-        },
-        '& > img:nth-child(3)': {
-          left: 'unset',
-          right: 0
-        },
-        '& > img:nth-child(4)': {
-          left: 'unset',
-          right: '50%'
+        '& button:nth-child(3)': {
+          borderRadius: '0px',
+          borderBottom: 'unset',
         }
       },
     },
@@ -783,7 +707,7 @@ const CardOrder = (props: any) => {
     const order = uuid();
     const nonce = uuidNonce();
     let desc = encodeURIComponent(
-      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}-${cardType === 3 ? 'tiffany' : cardType === 2 ? 'rose' : cardType === 1 ? 'red' : 'black'}-${gift ? 'gift' : 'for me'}`
+      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}-${cardType === 3 ? 'tiffany' : cardType === 2 ? 'rose' : cardType === 1 ? 'red' : 'black'}-${gift ? 'gift' : 'forme'}`
     ).substring(0, 80);
     const merchant = "ironcardpromo";
     const terminal = "90030556";
@@ -849,7 +773,7 @@ const CardOrder = (props: any) => {
       setFlag(false);
     } else if (step === 4) {
       setStep(1);
-    } else if (step === 1) generateUrl();
+    } else if (step === 2) generateUrl();
     else {
       step++;
       setStep(step);
@@ -946,7 +870,7 @@ const CardOrder = (props: any) => {
       );
     } else if (step === 3) {
       return code.length > 1;
-    } else if (step === 1) {
+    } else if (step === 2) {
       return (
         checkbox &&
         cardName.length > 1 &&
@@ -991,50 +915,7 @@ const CardOrder = (props: any) => {
                 inputComponent: TextMaskCustom as any,
               }}
             />
-          </>
-        );
-      case 1:
-        return (
-          <>
-            <BccInputText
-              size={isXS ? "small" : "medium"}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="name"
-              value={name}
-              onChange={(e: any) => handleNameChange(e.target.value)}
-              label={t("block_6.subtitle_desc_11")}
-              id="name"
-            />
-            <BccInputText
-              size={isXS ? "small" : "medium"}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              style={{ marginBottom: 0 }}
-              name="cardName"
-              value={cardName}
-              onChange={(e: any) => handleCardNameChange(e.target.value)}
-              label={t("block_6.subtitle_desc_13")}
-              id="cardName"
-            />
-            <span className={classes.hintText}>
-              Укажите точно так же, как и у вас в удостоверении личности на
-              обратной стороне
-            </span>
-            <BccInputText
-              size={isXS ? "small" : "medium"}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="iin"
-              value={iin}
-              onChange={(e: any) => handleIinChange(e.target.value)}
-              label={t("block_6.subtitle_desc_14")}
-              type="number"
-              id="iin"
-            />
+
             <Grid container spacing={2}>
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <BccInputText
@@ -1060,8 +941,101 @@ const CardOrder = (props: any) => {
             </Grid>
           </>
         );
+      case 1:
+        return (
+          <>
+
+            <Grid className={`${classes.changeCard} ${cardType === 3 ? classes.tiffany : cardType === 2 ? classes.rose : cardType === 1 ? classes.red : ''}`}>
+              <Typography className={classes.cardTextMain}>Выберите цвет:</Typography>
+              <Grid className={classes.btnCardBlock}>
+                <Button className={`${classes.btnCardRose} ${classes.btnCard}`} onClick={() => setCardType(2)}>
+                  <img src="rose-ed.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+                </Button>
+
+                <Button className={`${classes.btnCardRed} ${classes.btnCard}`} onClick={() => setCardType(1)}>
+                  <img src="red-ed.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+                </Button>
+                <Button className={`${classes.btnCardBlack} ${classes.btnCard}`} onClick={() => setCardType(0)}>
+                  <img src="black-ed.svg" className={`${classes.changeCardImg} ${classes.cardImgBlack}`} />
+                </Button>
+                <Button
+                  className={`${classes.btnCardTiffany} ${classes.btnCard}`}
+                  onClick={() => setCardType(3)}
+                >
+                  <img src="tiffany-ed.svg" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container justify="space-between" className={classes.radioSelect}>
+                <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                  <BccFormControl>
+                    <BccFormControlLabel
+                      control={
+                        <BccRadio
+                          checked={!gift}
+                          onChange={() => setGift(!gift)}
+                        />
+                      }
+                      label="Карта для себя"
+                      labelPlacement="end"
+                    /></BccFormControl>
+                </Grid>
+                <Grid item xl={6} lg={6} md={6} sm={12} xs={12}><BccFormControl>
+                  <BccFormControlLabel
+                    control={
+                      <BccRadio
+                        checked={gift}
+                        onChange={() => setGift(!gift)}
+                      />
+                    }
+                    label="Карта в подарок"
+                  /></BccFormControl></Grid>
+              </Grid>
+            </Grid>
+          </>
+        );
       case 2:
-        return <>Загрузка...</>;
+        return <>
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            name="name"
+            value={name}
+            onChange={(e: any) => handleNameChange(e.target.value)}
+            label={t("block_6.subtitle_desc_11")}
+            id="name"
+          />
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            style={{ marginBottom: 0 }}
+            name="cardName"
+            value={cardName}
+            onChange={(e: any) => handleCardNameChange(e.target.value)}
+            label={t("block_6.subtitle_desc_13")}
+            id="cardName"
+          />
+          <span className={classes.hintText}>
+            Укажите точно так же, как и у вас в удостоверении личности на
+            обратной стороне
+        </span>
+          <BccInputText
+            size={isXS ? "small" : "medium"}
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            name="iin"
+            value={iin}
+            onChange={(e: any) => handleIinChange(e.target.value)}
+            label={t("block_6.subtitle_desc_14")}
+            type="number"
+            id="iin"
+          /></>;
       case 3:
         return (
           <>
@@ -1098,7 +1072,7 @@ const CardOrder = (props: any) => {
           </>
         );
       default:
-        return <div>nihuya</div>;
+        return <></>;
     }
   };
 
@@ -1116,46 +1090,6 @@ const CardOrder = (props: any) => {
         <Typography className={classes.box}>
           {t("block_6.title_main")}
         </Typography>
-        <Grid className={`${classes.changeCard} ${cardType === 3 ? classes.tiffany : cardType === 2 ? classes.rose : cardType === 1 ? classes.red : ''}`}>
-          <img src="IronCard-second.svg" className={`${classes.changeCardImg} ${classes.cardImgBlack}`} />
-          <img src="rose-card.png" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
-          <img src="redCard.png" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
-          <img src="tiffanyCard.png" className={`${classes.changeCardImg} ${classes.cardImgRed}`} />
-          {/* <Typography className={classes.cardTextMain}>Выберите свою карту</Typography> */}
-          <Grid className={classes.btnCardBlock}>
-            <Button className={`${classes.btnCardTiffany} ${classes.btnCard}`} onClick={() => setCardType(3)}></Button>
-            <Button className={`${classes.btnCardRose} ${classes.btnCard}`} onClick={() => setCardType(2)}></Button>
-            <Button className={`${classes.btnCardRed} ${classes.btnCard}`} onClick={() => setCardType(1)}></Button>
-            <Button className={`${classes.btnCardBlack} ${classes.btnCard}`} onClick={() => setCardType(0)}></Button>
-          </Grid>
-        </Grid>
-        <Grid item>
-          <Grid container justify="space-between" className={classes.radioSelect}>
-            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-              <BccFormControl>
-                <BccFormControlLabel
-                  control={
-                    <BccRadio
-                      checked={!gift}
-                      onChange={() => setGift(!gift)}
-                    />
-                  }
-                  label="Карта для себя"
-                  labelPlacement="end"
-                /></BccFormControl>
-            </Grid>
-            <Grid item xl={6} lg={6} md={6} sm={12} xs={12}><BccFormControl>
-              <BccFormControlLabel
-                control={
-                  <BccRadio
-                    checked={gift}
-                    onChange={() => setGift(!gift)}
-                  />
-                }
-                label="Карта в подарок"
-              /></BccFormControl></Grid>
-          </Grid>
-        </Grid>
         {window.document.location.search === "?success=true" ? (
           <div className={classes.progress}>
             <div className={classes.progressBarSuccess}>
@@ -1178,11 +1112,11 @@ const CardOrder = (props: any) => {
                     }`}
               </span>
               <div className={classes.progressBar}>
-                <span>{step === 3 ? "50" : step === 4 ? "100" : step * 50}%</span>
+                <span>{step === 3 ? "33" : step === 4 ? "100" : step * 33}%</span>
                 <div
                   style={{
                     width: `${
-                      step === 3 ? "50" : step === 4 ? "100" : step * 50
+                      step === 3 ? "33" : step === 4 ? "100" : step * 33
                       }%`,
                   }}
                   className={classes.progressBarInner}
@@ -1198,7 +1132,7 @@ const CardOrder = (props: any) => {
         ) : (
             <form onSubmit={handleSubmit} autoComplete="off">
               {generateForm(step)}
-              {step === 0 || step === 1 ? (
+              {step === 0 ? (
                 <BccFormControlLabel
                   control={
                     <BccCheckbox
@@ -1221,7 +1155,7 @@ const CardOrder = (props: any) => {
                   ""
                 )}
               <Grid container style={{ marginTop: "15px" }} spacing={4}>
-                {step !== 2 ? (
+                {step === 0 ? (
                   <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                     <Grid container spacing={2}>
                       <Grid
