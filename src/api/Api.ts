@@ -10,6 +10,7 @@ export class Api {
 export interface OrderRequest {
   fio?: string;
   phoneNumber?: string;
+  city?: string;
 }
 
 function uuid() {
@@ -20,12 +21,21 @@ function uuid() {
   });
 }
 
+function getUrlParameter(name: string) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+  var results = regex.exec(window.location.search);
+  return results === null
+    ? ""
+    : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 export class CardController {
   order(request: OrderRequest) {
     const config: any = {};
     config.headers = config.headers || {};
     config.headers = {
-      "x-ibm-client-id": "c274fb89-0d53-4304-95e9-130b267cd326"
+      "x-ibm-client-id": "c274fb89-0d53-4304-95e9-130b267cd326",
     };
     config.baseURL = baseURL;
 
@@ -47,19 +57,25 @@ export class CardController {
           organizationName: null,
           email: null,
           callTime: moment().format("HH:mm"), //--------------CallTime
-          date: moment().format("DD-MM-YYYY"), //----------------------DateTime
+          date: moment().format("DD-MM-YYYY"),
+          requestID: uuid(),
+          utm_source: getUrlParameter("utm_source"),
+          utm_medium: getUrlParameter("utm_medium"),
+          utm_campaign: getUrlParameter("utm_campaign"),
+          utm_term: getUrlParameter("utm_term"),
+          utm_content: getUrlParameter("utm_content"),
           productService: {
             productName: "металлическая карта",
             productCode: "0.300.1400.10",
-            productDescription: "премиальная металлическая карта"
-          }
-        }
-      }
+            productDescription: "премиальная металлическая карта",
+          },
+        },
+      },
     };
 
     return axios
       .post(`/protected/callcenter/order`, data, config)
-      .then(r => r.data);
+      .then((r) => r.data);
   }
 }
 

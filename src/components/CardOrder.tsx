@@ -668,7 +668,6 @@ const CardOrder = (props: any) => {
 
   const [name, setName] = React.useState("");
   const [src, setSrc] = React.useState("");
-  const [selectedEmail, setSelectEmail] = React.useState();
   const [phone, setPhone] = React.useState("");
   const [iin, setIin] = React.useState("");
   const [code, setCode] = React.useState("");
@@ -696,16 +695,6 @@ const CardOrder = (props: any) => {
 
   const handleNameChange = (name: string) => {
     setName(name);
-    // setCardName(rus_to_latin(name));
-  };
-
-  const handleSelectEmailChange = (index: number, emailValue: string) => {
-    setSelectEmail(index);
-    let e =
-      email.indexOf("@") !== -1
-        ? email.substring(email.indexOf("@"), -1)
-        : email;
-    setEmail(e + emailValue);
   };
 
   const handleEmailChange = (email: string) => {
@@ -743,15 +732,7 @@ const CardOrder = (props: any) => {
     return res;
   }
 
-  // const localGMT = () => {
-  //   const date = new Date();
-  //   return (-1 * date.getTimezoneOffset()) / 60;
-  // };
-
   const generateUrl = () => {
-    // const hex1 = "690B5589573ACB3608DB7395A319B175";
-    // const hex2 = "02BBF98BB3411445D15498E2DC22E3E1";
-    // const xor = XOR_hex(hex1, hex2);
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
     const order = uuid();
     const nonce = uuidNonce();
@@ -837,6 +818,21 @@ const CardOrder = (props: any) => {
     }
   };
 
+  function getUrlParameter(name: string) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    var results = regex.exec(window.location.search);
+    return results === null
+      ? ""
+      : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+  const formatPhoneNumber = () => {
+    let res = phone;
+    if (phone.slice(0, 1) === "8") res = "7" + phone.slice(1);
+    return res.replace(/\(|\)| /g, "");
+  };
+
   const BccCheckbox = withStyles({
     root: {
       color: "#D8D8D8",
@@ -846,15 +842,6 @@ const CardOrder = (props: any) => {
     },
     checked: {},
   })((props: any) => <Checkbox {...props} />);
-
-  function getUrlParameter(name: string) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-    var results = regex.exec(window.location.search);
-    return results === null
-      ? ""
-      : decodeURIComponent(results[1].replace(/\+/g, " "));
-  }
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -871,6 +858,7 @@ const CardOrder = (props: any) => {
 
       formData.append("TELEPHONE", phone);
       formData.append("NAME", name);
+      formData.append("BRANCH", city);
       formData.append("SYSTEM_TITLE", "#IronCard");
       formData.append("SYSTEM_POST_EVENT", "NEW_USER");
       formData.append("SYSTEM_LINK", "https://www.bcc.kz/ironcard");
@@ -893,7 +881,11 @@ const CardOrder = (props: any) => {
         }
       );
       api.card
-        .order({ fio: name, phoneNumber: phone })
+        .order({
+          fio: name,
+          phoneNumber: formatPhoneNumber(),
+          city: city,
+        })
         .then((m: any) => {
           props.send();
           handleNameChange("");
