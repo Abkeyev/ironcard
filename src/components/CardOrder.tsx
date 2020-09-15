@@ -852,7 +852,7 @@ const CardOrder = (props: any) => {
         }
       );
       api.card
-        .order({ fio: name, phoneNumber: formatPhoneNumber() })
+        .order({ fio: name, phoneNumber: formatPhoneNumber(), city: city })
         .then((m: any) => {
           props.send();
           handleNameChange("");
