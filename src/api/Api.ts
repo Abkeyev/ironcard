@@ -21,15 +21,6 @@ function uuid() {
   });
 }
 
-function getUrlParameter(name: string) {
-  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-  var results = regex.exec(window.location.search);
-  return results === null
-    ? ""
-    : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
 export class CardController {
   order(request: OrderRequest) {
     const config: any = {};
@@ -57,13 +48,7 @@ export class CardController {
           organizationName: null,
           email: null,
           callTime: moment().format("HH:mm"), //--------------CallTime
-          date: moment().format("DD-MM-YYYY"),
-          requestID: uuid(),
-          utm_source: getUrlParameter("utm_source"),
-          utm_medium: getUrlParameter("utm_medium"),
-          utm_campaign: getUrlParameter("utm_campaign"),
-          utm_term: getUrlParameter("utm_term"),
-          utm_content: getUrlParameter("utm_content"),
+          date: moment().format("DD-MM-YYYY"), //----------------------DateTime
           productService: {
             productName: "металлическая карта",
             productCode: "0.300.1400.10",

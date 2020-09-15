@@ -3,24 +3,24 @@ import { Grid, Button, Typography, Table, TableBody, TableRow, TableCell } from 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { paddingDownSm, rootSmXl } from './helper/DefaultStyle';
 import { EmojiObjects, ArrowDropDown, ArrowDropUp, Error } from '@material-ui/icons';
-import NumberFormat from 'react-number-format'; 
+import NumberFormat from 'react-number-format';
 import ReactGA from 'react-ga';
- 
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        [theme.breakpoints.down('sm')]: {            
+        [theme.breakpoints.down('sm')]: {
             mainRoot: {
                 background: '#FAFAFA'
             },
             root: {
                 padding: paddingDownSm
-            },                     
+            },
             title: {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: 20,
                 color: '#141414'
-            },    
+            },
             subTitle: {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 '&:hover, &:active': {
                     backgroundColor: '#FFCF87',
                     opacity: 0.8,
-                  }                
+                }
             },
             tabButton: {
                 width: 140,
@@ -134,7 +134,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 fontStyle: 'normal',
                 fontWeight: 'normal',
                 fontSize: 36,
-                color: '#FFCF87'            
+                color: '#FFCF87'
             },
             tableBlockLeftCommisionText: {
                 fontStyle: 'normal',
@@ -182,20 +182,20 @@ const useStyles = makeStyles((theme: Theme) =>
             img: {
                 width: 165,
                 height: 242,
-                marginTop:25
+                marginTop: 25
             }
         },
         [theme.breakpoints.between('sm', 'xl')]: {
             mainRoot: {
                 background: '#FAFAFA'
             },
-            ...rootSmXl,                
+            ...rootSmXl,
             title: {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: 40,
                 color: '#141414'
-            },    
+            },
             subTitle: {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
@@ -223,7 +223,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 '&:hover, &:active': {
                     backgroundColor: '#FFCF87',
                     opacity: 0.8,
-                  }                
+                }
             },
             tabButton: {
                 width: '181px',
@@ -310,7 +310,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 fontStyle: 'normal',
                 fontWeight: 'normal',
                 fontSize: 72,
-                color: '#FFCF87'            
+                color: '#FFCF87'
             },
             tableBlockLeftCommisionText: {
                 fontStyle: 'normal',
@@ -360,7 +360,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 '&::-webkit-scrollbar-thumb': {
                     backgroundColor: '#A6A6A6'
                 },
-                '&::-webkit-scrollbar-track': {                
+                '&::-webkit-scrollbar-track': {
                     backgroundColor: '#E4E4E4'
                 }
             },
@@ -392,7 +392,7 @@ const GoodAnyTimeWhere = () => {
     const toggleNote = (val: boolean) => {
 
         setShowNote(val);
-        
+
         ReactGA.event({
             category: 'BccCard',
             action: 'to_uncover'
@@ -408,12 +408,12 @@ const GoodAnyTimeWhere = () => {
     const totalMothSum = (index: number) => {
         let result = 0;
         items.forEach(val => {
-            result += (val.beginMonth-1) < index && index < (val.beginMonth + val.installment) ? val.price/val.installment : 0;
+            result += (val.beginMonth - 1) < index && index < (val.beginMonth + val.installment) ? val.price / val.installment : 0;
         });
         return result;
     }
 
-    return(
+    return (
         <Grid className={classes.mainRoot}>
             <Grid container className={classes.root} spacing={2}>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -431,7 +431,7 @@ const GoodAnyTimeWhere = () => {
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.tabButtonsBlock}>
                     <Typography className={classes.subTitle}>Умная рассрочка до 12 месяцев</Typography>
-                    <Typography className={classes.subTitleDesc}>Управление в StarBanking 24/7</Typography>
+                    <Typography className={classes.subTitleDesc}>Управление в BCC.KZ 24/7</Typography>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.tableBlock}>
                     <Grid container>
@@ -446,60 +446,60 @@ const GoodAnyTimeWhere = () => {
                             <Table>
                                 <TableBody>
                                     <TableRow>
-                                        { monthArr.map((m, i) => 
+                                        {monthArr.map((m, i) =>
                                             <TableCell key={i} className={classes.tableCell}>
                                                 <Typography className={classes.tableMoth}>{m}</Typography>
                                                 <Typography className={classes.tableTotalPrice}>
-                                                    <NumberFormat 
-                                                        value={totalMothSum(i)} 
+                                                    <NumberFormat
+                                                        value={totalMothSum(i)}
                                                         thousandSeparator={" "}
-                                                        displayType="text"/> ₸
+                                                        displayType="text" /> ₸
                                                 </Typography>
                                             </TableCell>
                                         )}
                                     </TableRow>
-                                    {items.map((val, i) => 
-                                        <TableRow key={i} style={ i%2===0 ? { backgroundColor: '#FAFAFA' }: {}}>
-                                        {monthArr.map((m, index) =>
-                                            <TableCell key={index} className={classes.tableCell}>
-                                                {
-                                                    (val.beginMonth-1) <= index && 
-                                                    (
-                                                        (val.beginMonth-1) < index  
-                                                        ?
-                                                        ( index < val.beginMonth + val.installment &&
-                                                            <Typography className={classes.tableTd}>
-                                                                <NumberFormat 
-                                                                    value={val.price/val.installment} 
-                                                                    thousandSeparator={" "}
-                                                                    displayType="text"/> ₸
+                                    {items.map((val, i) =>
+                                        <TableRow key={i} style={i % 2 === 0 ? { backgroundColor: '#FAFAFA' } : {}}>
+                                            {monthArr.map((m, index) =>
+                                                <TableCell key={index} className={classes.tableCell}>
+                                                    {
+                                                        (val.beginMonth - 1) <= index &&
+                                                        (
+                                                            (val.beginMonth - 1) < index
+                                                                ?
+                                                                (index < val.beginMonth + val.installment &&
+                                                                    <Typography className={classes.tableTd}>
+                                                                        <NumberFormat
+                                                                            value={val.price / val.installment}
+                                                                            thousandSeparator={" "}
+                                                                            displayType="text" /> ₸
                                                             </Typography>
-                                                        )
-                                                        :                                                     
-                                                        <Grid container>
-                                                            <Grid item xl={false} lg={false} md={false} sm={false} xs={false}>
-                                                                <img src={val.img} alt={val.name} />
-                                                            </Grid>
-                                                            <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
-                                                                <Typography className={classes.tableProductName}>{val.name}</Typography>
-                                                                <Typography className={classes.tableProductPrice}>
-                                                                    <NumberFormat 
-                                                                        value={val.price} 
-                                                                        thousandSeparator={" "}
-                                                                        displayType="text"/> ₸
+                                                                )
+                                                                :
+                                                                <Grid container>
+                                                                    <Grid item xl={false} lg={false} md={false} sm={false} xs={false}>
+                                                                        <img src={val.img} alt={val.name} />
+                                                                    </Grid>
+                                                                    <Grid item xl={true} lg={true} md={true} sm={true} xs={true}>
+                                                                        <Typography className={classes.tableProductName}>{val.name}</Typography>
+                                                                        <Typography className={classes.tableProductPrice}>
+                                                                            <NumberFormat
+                                                                                value={val.price}
+                                                                                thousandSeparator={" "}
+                                                                                displayType="text" /> ₸
                                                                 </Typography>
-                                                            </Grid>
-                                                        </Grid>  
-                                                    )
-                                                }                                            
-                                            </TableCell>
-                                        )}
+                                                                    </Grid>
+                                                                </Grid>
+                                                        )
+                                                    }
+                                                </TableCell>
+                                            )}
                                         </TableRow>
-                                    )}                                
+                                    )}
                                 </TableBody>
                             </Table>
                         </Grid>
-                    </Grid>                    
+                    </Grid>
                 </Grid>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                     <Grid container>
@@ -508,41 +508,41 @@ const GoodAnyTimeWhere = () => {
                                 <Grid item xl={9} lg={9} md={9} sm={9} xs={12}>
                                     <Grid container direction="row">
                                         <Grid item sm={false} xs={false}>
-                                            <EmojiObjects className={classes.noteIcons}/>
+                                            <EmojiObjects className={classes.noteIcons} />
                                             <span className={classes.noteBold}>Подсказка:</span>&nbsp;&nbsp;
                                         </Grid>
                                         <Grid item sm={true} xs={true}>
-                                            <span className={classes.note}>Активируйте режим рассрочки в StarBanking и оплачивайте покупки по частям</span>
+                                            <span className={classes.note}>Активируйте режим рассрочки в BCC.KZ и оплачивайте покупки по частям</span>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid item xl={3} lg={3} md={3} sm={3} xs={12} className={classes.note}>
-                                    { isShowNote 
-                                        ? 
-                                        <div className={classes.noteShow}>Скрыть <ArrowDropUp className={classes.noteIcons}/></div>
+                                    {isShowNote
+                                        ?
+                                        <div className={classes.noteShow}>Скрыть <ArrowDropUp className={classes.noteIcons} /></div>
                                         :
-                                        <div className={classes.noteShow}>Расскрыть <ArrowDropDown className={classes.noteIcons}/></div>
-                                    }                                
+                                        <div className={classes.noteShow}>Расскрыть <ArrowDropDown className={classes.noteIcons} /></div>
+                                    }
                                 </Grid>
                             </Grid>
                         </Grid>
                         {isShowNote &&
-                        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}  className={classes.noteDetailBlock}>
-                            <Grid container>
-                                <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
-                                    <Typography className={classes.noteBold}>Режим рассрочки</Typography>
-                                    <Typography className={classes.noteDetail}>1. Выберите #картукарту из списка ваших доступных счетов.</Typography>
-                                    <Typography className={classes.noteDetail}>2. Нажмите на кнопку “Рассрочка”. В обычном состоянии режим рассрочки выключен, что и показывает статус “Off”.</Typography>
-                                    <Typography className={classes.noteDetail}>3. Включите режим рассрочки, сдвинув ползунок направо.</Typography>
-                                    <Typography className={classes.noteDetail}>4. С включенным режимом рассрочки все ваши покупки по #картекарте будут делиться на равные части без комиссий в сети партнеров.</Typography>
-                                </Grid>
-                                <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
-                                    <Grid container justify="center">
-                                        <img className={classes.img} src="star_mobile_banking.gif" alt="star_mobile_banking" />
+                            <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.noteDetailBlock}>
+                                <Grid container>
+                                    <Grid item xl={7} lg={7} md={7} sm={12} xs={12}>
+                                        <Typography className={classes.noteBold}>Режим рассрочки</Typography>
+                                        <Typography className={classes.noteDetail}>1. Выберите #картукарту из списка ваших доступных счетов.</Typography>
+                                        <Typography className={classes.noteDetail}>2. Нажмите на кнопку “Рассрочка”. В обычном состоянии режим рассрочки выключен, что и показывает статус “Off”.</Typography>
+                                        <Typography className={classes.noteDetail}>3. Включите режим рассрочки, сдвинув ползунок направо.</Typography>
+                                        <Typography className={classes.noteDetail}>4. С включенным режимом рассрочки все ваши покупки по #картекарте будут делиться на равные части без комиссий в сети партнеров.</Typography>
+                                    </Grid>
+                                    <Grid item xl={5} lg={5} md={5} sm={12} xs={12}>
+                                        <Grid container justify="center">
+                                            <img className={classes.img} src="star_mobile_banking.gif" alt="star_mobile_banking" />
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
                         }
                         <Grid item xl={12} lg={12} md={12} sm={12} xs={12} className={classes.noteBlock}>
                             <Grid container direction="row" alignItems="center">
@@ -555,7 +555,7 @@ const GoodAnyTimeWhere = () => {
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>        
+        </Grid>
     )
 }
 
