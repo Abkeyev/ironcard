@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid, Typography, MenuItem } from "@material-ui/core";
+import { Grid, MenuItem } from "@material-ui/core";
 import {
   makeStyles,
   createStyles,
@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import MaskedInput from "react-maskedinput";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -624,7 +625,6 @@ const CardOrder = (props: any) => {
   const [phone, setPhone] = React.useState("");
   const [iin, setIin] = React.useState("");
   const [code, setCode] = React.useState("");
-  const [email, setEmail] = React.useState("");
   const [city, setCity] = React.useState("");
   const [checkbox, setCheckbox] = React.useState(true);
   const [flag, setFlag] = React.useState(false);
@@ -666,21 +666,6 @@ const CardOrder = (props: any) => {
     });
   }
 
-  function XOR_hex(a: string, b: string) {
-    var res = "",
-      l = Math.max(a.length, b.length);
-    for (var i = 0; i < l; i += 4)
-      res =
-        (
-          "000" +
-          (
-            parseInt(a.slice(-i - 4, -i || a.length), 16) ^
-            parseInt(b.slice(-i - 4, -i || b.length), 16)
-          ).toString(16)
-        ).slice(-4) + res;
-    return res;
-  }
-
   const generateUrl = () => {
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
     const order = uuid();
@@ -698,7 +683,7 @@ const CardOrder = (props: any) => {
     ).substring(0, 80);
     const merchant = "ironcardpromo";
     const terminal = "90030556";
-    // const terminal = "88888881";
+
     const nameOnCard = cardName.replace(/ /g, "-");
 
     let datetime = new Date().toLocaleString("ru-RU", {
@@ -767,6 +752,12 @@ const CardOrder = (props: any) => {
     setSrc(url);
   };
 
+  const formatPhoneNumber = () => {
+    let res = phone;
+    if (phone.slice(0, 1) === "8") res = "7" + phone.slice(1);
+    return res.replace(/\(|\)| /g, "");
+  };
+
   const handleCityChange = (city: string) => {
     setCity(city);
   };
@@ -804,21 +795,6 @@ const CardOrder = (props: any) => {
     }
   };
 
-  function getUrlParameter(name: string) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-    var results = regex.exec(window.location.search);
-    return results === null
-      ? ""
-      : decodeURIComponent(results[1].replace(/\+/g, " "));
-  }
-
-  const formatPhoneNumber = () => {
-    let res = phone;
-    if (phone.slice(0, 1) === "8") res = "7" + phone.slice(1);
-    return res.replace(/\(|\)| /g, "");
-  };
-
   const BccCheckbox = withStyles({
     root: {
       color: "#D8D8D8",
@@ -828,6 +804,15 @@ const CardOrder = (props: any) => {
     },
     checked: {},
   })((props: any) => <Checkbox {...props} />);
+
+  function getUrlParameter(name: string) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    var results = regex.exec(window.location.search);
+    return results === null
+      ? ""
+      : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -867,7 +852,7 @@ const CardOrder = (props: any) => {
         }
       );
       api.card
-        .order({ fio: name, phoneNumber: formatPhoneNumber(), city: city })
+        .order({ fio: name, phoneNumber: formatPhoneNumber() })
         .then((m: any) => {
           props.send();
           handleNameChange("");
@@ -946,7 +931,6 @@ const CardOrder = (props: any) => {
                 inputComponent: TextMaskCustom as any,
               }}
             />
-
             <Grid container spacing={2}>
               <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                 <BccInputText
