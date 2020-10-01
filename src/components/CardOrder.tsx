@@ -666,12 +666,95 @@ const CardOrder = (props: any) => {
     });
   }
 
+  function transliterate(word: any) {
+    let answer = "";
+
+    let a: any = {
+      Ё: "YO",
+      Й: "I",
+      Ц: "TS",
+      У: "U",
+      К: "K",
+      Е: "E",
+      Н: "N",
+      Г: "G",
+      Ш: "SH",
+      Щ: "SCH",
+      З: "Z",
+      Х: "H",
+      Ъ: "'",
+      ё: "yo",
+      й: "i",
+      ц: "ts",
+      у: "u",
+      к: "k",
+      е: "e",
+      н: "n",
+      г: "g",
+      ш: "sh",
+      щ: "sch",
+      з: "z",
+      х: "h",
+      ъ: "'",
+      Ф: "F",
+      Ы: "I",
+      В: "V",
+      А: "a",
+      П: "P",
+      Р: "R",
+      О: "O",
+      Л: "L",
+      Д: "D",
+      Ж: "ZH",
+      Э: "E",
+      ф: "f",
+      ы: "i",
+      в: "v",
+      а: "a",
+      п: "p",
+      р: "r",
+      о: "o",
+      л: "l",
+      д: "d",
+      ж: "zh",
+      э: "e",
+      Я: "Ya",
+      Ч: "CH",
+      С: "S",
+      М: "M",
+      И: "I",
+      Т: "T",
+      Ь: "'",
+      Б: "B",
+      Ю: "YU",
+      я: "ya",
+      ч: "ch",
+      с: "s",
+      м: "m",
+      и: "i",
+      т: "t",
+      ь: "'",
+      б: "b",
+      ю: "yu",
+    };
+    for (let i in word) {
+      if (word.hasOwnProperty(i)) {
+        if (a[word[i]] === undefined) {
+          answer += word[i];
+        } else {
+          answer += a[word[i]];
+        }
+      }
+    }
+    return answer;
+  }
+
   const generateUrl = () => {
     const xor = "4ee6d5f37a804cd5bc980f369ca1851d";
     const order = uuid();
     const nonce = uuidNonce();
     let desc = encodeURIComponent(
-      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${city}-${
+      `${phone.replace(/\+|\(|\)| /g, "")}-${iin}-${transliterate(city)}-${
         cardType === 3
           ? "tiffany"
           : cardType === 2
@@ -708,6 +791,7 @@ const CardOrder = (props: any) => {
 
       formData.append("TELEPHONE", phone);
       formData.append("NAME", name);
+      formData.append("IIN", iin);
       formData.append("BRANCH", city);
       formData.append("SYSTEM_TITLE", "#IronCard");
       formData.append("SYSTEM_POST_EVENT", "NEW_USER");
@@ -882,7 +966,10 @@ const CardOrder = (props: any) => {
   const isValid = () => {
     if (step === 0) {
       return (
-        checkbox && name.length > 1 && phone.replace("_", "").length === 16
+        checkbox &&
+        name.length > 1 &&
+        phone.replace("_", "").length === 16 &&
+        city !== ""
       );
     } else if (step === 3) {
       return code.length > 1;
@@ -892,7 +979,8 @@ const CardOrder = (props: any) => {
         cardName.length > 1 &&
         city.length > 1 &&
         iin.length === 12 &&
-        phone.replace("_", "").length === 16
+        phone.replace("_", "").length === 16 &&
+        city !== ""
       );
     } else {
       return true;
@@ -946,7 +1034,7 @@ const CardOrder = (props: any) => {
                 >
                   {CityList.map((c: any) => {
                     return (
-                      <MenuItem key={c.code} value={c.code}>
+                      <MenuItem key={c.value} value={c.value}>
                         {c.value}
                       </MenuItem>
                     );
@@ -1107,7 +1195,7 @@ const CardOrder = (props: any) => {
                 >
                   {CityList.map((c: any) => {
                     return (
-                      <MenuItem key={c.code} value={c.code}>
+                      <MenuItem key={c.value} value={c.value}>
                         {c.value}
                       </MenuItem>
                     );
