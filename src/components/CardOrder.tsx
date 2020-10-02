@@ -913,6 +913,7 @@ const CardOrder = (props: any) => {
 
       formData.append("TELEPHONE", phone);
       formData.append("NAME", name);
+      formData.append("IIN", iin);
       formData.append("BRANCH", city);
       formData.append("SYSTEM_TITLE", "#IronCard");
       formData.append("SYSTEM_POST_EVENT", "NEW_USER");
