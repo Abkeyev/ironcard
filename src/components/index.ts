@@ -1,5 +1,6 @@
 export { default as Header } from './Header';
 export { default as FixedHeader } from './FixedHeader';
+export { default as Banners } from './Banners';
 export { default as BestCard } from './BestCard';
 export { default as Benefits } from './Benefits';
 export { default as CalculatorCashback } from './CalculatorCashback';

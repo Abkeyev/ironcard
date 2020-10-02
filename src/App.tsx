@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Header,
+  Banners,
   BestCard,
   CardOrder,
   FixedHeader,
@@ -50,6 +51,7 @@ function App() {
         scrollToOrder={scrollToOrderRef}
       />
       <FixedHeader scrollToOrder={scrollToOrderRef} />
+      <Banners />
       <BestCard />
       <Benefits />
       <CardConditions scrollToOrder={scrollToOrderRef} />
