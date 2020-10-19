@@ -317,7 +317,6 @@ const useStyles = makeStyles((theme: Theme) =>
     [theme.breakpoints.between("sm", "xl")]: {
       mainRoot: {
         backgroundSize: "auto",
-        backgroundColor: "#111111",
       },
       ...rootSmXl,
       logo_img: {
@@ -340,58 +339,6 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       conColor: {
         display: 'block'
-      },
-      topCard: {
-        backgroundImage: 'url(banner-black.png)',
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'contain',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor: '#2D2A2A',
-        height: '100vh',
-        width: '100%'
-      },
-      bottomCard: {
-        background: 'white'
-      },
-      bannerRed: {
-        backgroundImage: 'url(banner-red.png)',
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'contain',
-        backgroundColor: '#991E1E',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        height: '100vh',
-        '& div > div': {
-          display: 'flex',
-          alignItems: 'center'
-        }
-      },
-      bannerRose: {
-        backgroundImage: 'url(banner-rose.png)',
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'contain',
-        backgroundColor: '#DDB5B5',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        height: '100vh',
-        '& div > div': {
-          display: 'flex',
-          alignItems: 'center'
-        }
-      },
-      bannerTiffany: {
-        backgroundImage: 'url(banner-tif.png)',
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'contain',
-        backgroundColor: '#22B7B7',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        height: '100vh',
-        '& div > div': {
-          display: 'flex',
-          alignItems: 'center'
-        }
       },
       cardDescriptionBlock: {
         marginTop: "80px",
@@ -567,18 +514,141 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: 32,
         paddingLeft: 0,
       },
+
+
+
+      rootCarousel: {
+        width: '100vw',
+      },
+      rootCarouselInner: {
+        maxWidth: 1280,
+        margin: "0 auto",
+        padding: '200px 0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      },
+      carousel: {
+        width: '100vw',
+        boxSizing: 'border-box',
+        position: 'relative',
+        '&:after': {
+          content: ' '
+        },
+        '&:before': {
+          content: ' '
+        }
+      },
+      cardImage: {
+        '& img': {
+          width: 300
+        }
+      },
+      innerCarousel: {
+        display: 'flex',
+        width: 'calc((100vw - 0px) * 4)',
+        justifyContent: 'space-between',
+        zIndex: 2,
+        position: 'relative',
+        transition: 'transform 500ms ease',
+        // transform: 'translateX(calc(-100vw + 180px))',
+        '& > a': {
+          display: 'block',
+          width: 'calc(100vw - 200px)',
+          '& > img': {
+            borderRadius: 6,
+            width: '100%',
+            padding: '0 10px',
+            boxSizing: 'border-box'
+          }
+        }
+      },
+      leftArrow: {
+        position: 'absolute',
+        backgroundColor: 'rgb(255 255 255 / 0%)',
+        width: '100px',
+        zIndex: 3,
+        left: 0,
+        top: 0,
+        bottom: 0,
+        transition: '0.3s',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '&:before': {
+          content: "' '",
+          border: 'solid white',
+          borderWidth: '0 3px 3px 0',
+          display: 'inline-block',
+          padding: 8,
+          transform: 'rotate(135deg)'
+        },
+        '&:hover': {
+          backgroundColor: 'rgb(255 255 255 / 10%)',
+        }
+      },
+      rightArrow: {
+        position: 'absolute',
+        backgroundColor: 'rgb(255 255 255 / 0%)',
+        width: '100px',
+        zIndex: 3,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        transition: '0.3s',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '&:before': {
+          content: "' '",
+          border: 'solid white',
+          borderWidth: '0 3px 3px 0',
+          display: 'inline-block',
+          padding: 8,
+          transform: 'rotate(-45deg)'
+        },
+        '&:hover': {
+          backgroundColor: 'rgb(255 255 255 / 10%)',
+        }
+      },
+      banner: {
+        display: 'block',
+        position: 'relative',
+        '& > a': {
+          display: 'block',
+          '& > img': {
+            width: '100%'
+          }
+        }
+      },
+      blackCard: {
+        backgroundColor: '#111111'
+      },
+      redCard: {
+        backgroundColor: '#991E1E'
+      },
+      roseCard: {
+        backgroundColor: '#DDB5B5'
+      },
+      tiffCard: {
+        backgroundColor: '#22B7B7'
+      }
+
+
     },
     select: {
-      color: "white",
+      color: "#111111",
       "&:before": {
-        borderColor: "white",
+        borderColor: "#111111",
       },
       "&:after": {
-        borderColor: "white",
+        borderColor: "#111111",
       },
     },
     icon: {
-      fill: "white",
+      fill: "#111111",
     },
   })
 );
@@ -586,6 +656,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Header = (props: any) => {
   const classes = useStyles({});
   const { t, i18n } = useTranslation();
+  const [carousel, setCarousel] = React.useState(0);
 
   const handleLangChange = (lang: any) => {
     props.changeLang(lang);
@@ -599,6 +670,22 @@ const Header = (props: any) => {
     props.scrollToOrder();
   };
 
+  const carouselMove = (isLeft: boolean) => {
+    if (isLeft) {
+      if (carousel === 0) {
+        setCarousel(3)
+      } else {
+        setCarousel(carousel - 1)
+      }
+    } else {
+      if (carousel === 3) {
+        setCarousel(0)
+      } else {
+        setCarousel(carousel + 1)
+      }
+    }
+  }
+
   return (
     <Grid container className={classes.mainRoot}>
 
@@ -610,7 +697,7 @@ const Header = (props: any) => {
                 <div className={classes.logo_div}>
                   <img
                     className={classes.logo_img}
-                    src="logo-bcc.svg"
+                    src="green-logo.svg"
                     alt="logo-bcc"
                   />
                 </div>
@@ -640,69 +727,131 @@ const Header = (props: any) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-            <Grid container className={classes.cardDescriptionBlock}>
-              <Grid
-                item
-                xl={12}
-                lg={12}
-                md={12}
-                sm={12}
-                xs={12}
-                style={{ zIndex: 5 }}
-              >
-                <Typography className={classes.cardTitle}>
-                  {t("header.title")}
-                  <br />
-                  {t("header.title_2")}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                xl={12}
-                lg={12}
-                md={12}
-                sm={12}
-                xs={12}
-                style={{ zIndex: 5 }}
-              >
-                <Typography className={classes.cardWhatYourWant}>
-                  {t("header.subtitle_desc")}
-                </Typography>
-              </Grid>
-              <Grid className={classes.changeHeaderImg}>
-                <img src="black-ed.svg" className={classes.changeCardImg} />
-              </Grid>
-              <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                <Grid container className={classes.orderWrap}>
-                  <Grid item container className={classes.orderInner}>
-
-                    <Grid
-                      item
-                      xl={12}
-                      lg={12}
-                      md={12}
-                      sm={12}
-                      xs={12}
-                      style={{ zIndex: 3 }}
-                    >
-                      <Button
-                        onClick={(e: any) => eventGAOrderCard()}
-                        variant="contained"
-                        className={classes.buttonOrderCard}
-                      >
-                        {t("header.button_main")}
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
         </Grid>
+
+        <div className={classes.carousel} id="secondHeader">
+          <div className={classes.leftArrow} onClick={() => carouselMove(true)}></div>
+          <div className={classes.rightArrow} onClick={() => carouselMove(false)}></div>
+          <div className={classes.innerCarousel} style={{ transform: `translateX(calc((-100vw + 0px) * ${carousel}))` }}>
+            <div className={`${classes.rootCarousel} ${classes.blackCard}`} style={{ transform: carousel === 3 ? 'translateX(calc((100vw - 0px) * 4))' : '' }}>
+
+
+              <div className={classes.rootCarouselInner}>
+                <div>
+                  <Typography className={classes.cardTitle}>
+                    Карта, соответствующая
+                <br />
+                вашему образу жизни
+              </Typography>
+
+                  <Typography className={classes.cardWhatYourWant}>
+                    {t("header.subtitle_desc")}
+                  </Typography>
+
+                  <Button
+                    onClick={(e: any) => eventGAOrderCard()}
+                    variant="contained"
+                    className={classes.buttonOrderCard}
+                  >
+                    {t("header.button_main")}
+                  </Button>
+                </div>
+                <div className={classes.cardImage}>
+                  <img src="images/black-ed.svg" />
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div className={`${classes.rootCarousel} ${classes.redCard}`}>
+              <div className={classes.rootCarouselInner}>
+                <div>
+                  <Typography className={classes.cardTitle}>
+                    Больше привилегий
+                <br />
+                для ваших впечатлений
+              </Typography>
+
+                  <Typography className={classes.cardWhatYourWant}>
+                    {t("header.subtitle_desc")}
+                  </Typography>
+
+                  <Button
+                    onClick={(e: any) => eventGAOrderCard()}
+                    variant="contained"
+                    className={classes.buttonOrderCard}
+                  >
+                    {t("header.button_main")}
+                  </Button>
+                </div>
+                <div className={classes.cardImage}>
+                  <img src="images/red-ed.svg" />
+                </div>
+              </div>
+            </div>
+
+            <div className={`${classes.rootCarousel} ${classes.roseCard}`}>
+              <div className={classes.rootCarouselInner}>
+                <div>
+                  <Typography className={classes.cardTitle}>
+                    Откройте новый
+                <br />
+                уровень комфорта
+              </Typography>
+
+                  <Typography className={classes.cardWhatYourWant}>
+                    {t("header.subtitle_desc")}
+                  </Typography>
+
+                  <Button
+                    onClick={(e: any) => eventGAOrderCard()}
+                    variant="contained"
+                    className={classes.buttonOrderCard}
+                  >
+                    {t("header.button_main")}
+                  </Button>
+                </div>
+                <div className={classes.cardImage}>
+                  <img src="images/rose-ed.svg" />
+                </div>
+              </div>
+            </div>
+            <div className={`${classes.rootCarousel} ${classes.tiffCard}`} style={{ transform: carousel === 0 ? 'translateX(calc((-100vw + 0px) * 4))' : '' }}>
+              <div className={classes.rootCarouselInner}>
+                <div>
+                  <Typography className={classes.cardTitle}>
+                    С #IronCard вы
+                <br />
+                всегда в приоритете
+              </Typography>
+
+                  <Typography className={classes.cardWhatYourWant}>
+                    {t("header.subtitle_desc")}
+                  </Typography>
+
+                  <Button
+                    onClick={(e: any) => eventGAOrderCard()}
+                    variant="contained"
+                    className={classes.buttonOrderCard}
+                  >
+                    {t("header.button_main")}
+                  </Button>
+                </div>
+                <div className={classes.cardImage}>
+                  <img src="images/tiffany-ed.svg" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </Grid>
 
-      <Grid container className={classes.bannerRed} id="secondHeader">
+
+      {/* <Grid container className={classes.bannerRed} id="secondHeader">
         <Grid container className={classes.root}>
 
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -717,9 +866,9 @@ const Header = (props: any) => {
                 style={{ zIndex: 5 }}
               >
                 <Typography className={classes.cardTitle}>
-                  Первоклассная сталь
+                  Больше привилегий
                 <br />
-                как для острых мечей
+                для ваших впечатлений
                 </Typography>
               </Grid>
 
@@ -744,9 +893,9 @@ const Header = (props: any) => {
                 style={{ zIndex: 5 }}
               >
                 <Typography className={classes.cardTitle}>
-                  Современные технологии
+                  Откройте новый
                 <br />
-                для комфорта
+                уровень комфорта
                 </Typography>
               </Grid>
 
@@ -772,9 +921,9 @@ const Header = (props: any) => {
                 style={{ zIndex: 5 }}
               >
                 <Typography className={classes.cardTitle}>
-                  15 грамм
+                  С #IronCard вы
                 <br />
-                нержавеющей стали
+                всегда в приоритете
                 </Typography>
               </Grid>
 
@@ -782,7 +931,7 @@ const Header = (props: any) => {
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> */}
 
     </Grid>
   );
